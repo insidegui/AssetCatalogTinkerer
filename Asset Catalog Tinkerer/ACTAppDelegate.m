@@ -10,6 +10,8 @@
 
 #import "ACTMainWC.h"
 
+// I try to keep my app delegate pretty clean, the real work is done inside window or view controllers
+
 @interface ACTAppDelegate ()
 
 @property (nonatomic, strong) ACTMainWC *mainWC;
@@ -38,10 +40,12 @@
     [self.mainWC launchSavePanel];
 }
 
+/*! creates an instance of the main window controller and shows it's window */
 - (void)initializeInterface
 {
     self.mainWC = [[ACTMainWC alloc] init];
     [self.mainWC showWindow:nil];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(mainWindowClosed) name:NSWindowWillCloseNotification object:self.mainWC.window];
 }
 

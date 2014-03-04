@@ -1,0 +1,411 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		DDE887C618C56EB1002D52A6 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDE887C518C56EB1002D52A6 /* Cocoa.framework */; };
+		DDE887D018C56EB1002D52A6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DDE887CE18C56EB1002D52A6 /* InfoPlist.strings */; };
+		DDE887D218C56EB1002D52A6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DDE887D118C56EB1002D52A6 /* main.m */; };
+		DDE887D618C56EB1002D52A6 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = DDE887D418C56EB1002D52A6 /* Credits.rtf */; };
+		DDE887D918C56EB1002D52A6 /* ACTAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DDE887D818C56EB1002D52A6 /* ACTAppDelegate.m */; };
+		DDE887DC18C56EB1002D52A6 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = DDE887DA18C56EB1002D52A6 /* MainMenu.xib */; };
+		DDE887DE18C56EB1002D52A6 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DDE887DD18C56EB1002D52A6 /* Images.xcassets */; };
+		DDE887FA18C56EE9002D52A6 /* CoreUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDE887F918C56EE9002D52A6 /* CoreUI.framework */; };
+		DDE8884218C57B0A002D52A6 /* ACTMainWC.m in Sources */ = {isa = PBXBuildFile; fileRef = DDE8884018C57B0A002D52A6 /* ACTMainWC.m */; };
+		DDE8884318C57B0A002D52A6 /* ACTMainWC.xib in Resources */ = {isa = PBXBuildFile; fileRef = DDE8884118C57B0A002D52A6 /* ACTMainWC.xib */; };
+		DDE8884818C57B31002D52A6 /* GRAssetCatalogReader.m in Sources */ = {isa = PBXBuildFile; fileRef = DDE8884718C57B31002D52A6 /* GRAssetCatalogReader.m */; };
+		DDE8884B18C57FAB002D52A6 /* ACTAssetsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DDE8884A18C57FAB002D52A6 /* ACTAssetsTableViewController.m */; };
+		DDE888C318C5A05F002D52A6 /* GUI7Kit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDE888C218C5A05F002D52A6 /* GUI7Kit.framework */; };
+		DDE888C418C5A06B002D52A6 /* GUI7Kit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = DDE888C218C5A05F002D52A6 /* GUI7Kit.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		DDE888BC18C59E75002D52A6 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				DDE888C418C5A06B002D52A6 /* GUI7Kit.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		DDE887C218C56EB1002D52A6 /* Asset Catalog Tinkerer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Asset Catalog Tinkerer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DDE887C518C56EB1002D52A6 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		DDE887C818C56EB1002D52A6 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		DDE887C918C56EB1002D52A6 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		DDE887CA18C56EB1002D52A6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		DDE887CD18C56EB1002D52A6 /* Asset Catalog Tinkerer-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Asset Catalog Tinkerer-Info.plist"; sourceTree = "<group>"; };
+		DDE887CF18C56EB1002D52A6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		DDE887D118C56EB1002D52A6 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		DDE887D318C56EB1002D52A6 /* Asset Catalog Tinkerer-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Asset Catalog Tinkerer-Prefix.pch"; sourceTree = "<group>"; };
+		DDE887D518C56EB1002D52A6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		DDE887D718C56EB1002D52A6 /* ACTAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ACTAppDelegate.h; sourceTree = "<group>"; };
+		DDE887D818C56EB1002D52A6 /* ACTAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ACTAppDelegate.m; sourceTree = "<group>"; };
+		DDE887DB18C56EB1002D52A6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		DDE887DD18C56EB1002D52A6 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		DDE887E418C56EB1002D52A6 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		DDE887F918C56EE9002D52A6 /* CoreUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreUI.framework; path = ../../../../System/Library/PrivateFrameworks/CoreUI.framework; sourceTree = "<group>"; };
+		DDE887FB18C56EF9002D52A6 /* CoreUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoreUI.h; sourceTree = "<group>"; };
+		DDE8883F18C57B0A002D52A6 /* ACTMainWC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ACTMainWC.h; path = "Window Controllers/ACTMainWC.h"; sourceTree = "<group>"; };
+		DDE8884018C57B0A002D52A6 /* ACTMainWC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ACTMainWC.m; path = "Window Controllers/ACTMainWC.m"; sourceTree = "<group>"; };
+		DDE8884118C57B0A002D52A6 /* ACTMainWC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ACTMainWC.xib; path = "Window Controllers/ACTMainWC.xib"; sourceTree = "<group>"; };
+		DDE8884618C57B31002D52A6 /* GRAssetCatalogReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GRAssetCatalogReader.h; path = Models/GRAssetCatalogReader.h; sourceTree = "<group>"; };
+		DDE8884718C57B31002D52A6 /* GRAssetCatalogReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GRAssetCatalogReader.m; path = Models/GRAssetCatalogReader.m; sourceTree = "<group>"; };
+		DDE8884918C57FAB002D52A6 /* ACTAssetsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ACTAssetsTableViewController.h; path = "View Controllers/ACTAssetsTableViewController.h"; sourceTree = "<group>"; };
+		DDE8884A18C57FAB002D52A6 /* ACTAssetsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ACTAssetsTableViewController.m; path = "View Controllers/ACTAssetsTableViewController.m"; sourceTree = "<group>"; };
+		DDE888C218C5A05F002D52A6 /* GUI7Kit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GUI7Kit.framework; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		DDE887BF18C56EB1002D52A6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DDE887C618C56EB1002D52A6 /* Cocoa.framework in Frameworks */,
+				DDE888C318C5A05F002D52A6 /* GUI7Kit.framework in Frameworks */,
+				DDE887FA18C56EE9002D52A6 /* CoreUI.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		DDE887B918C56EB1002D52A6 = {
+			isa = PBXGroup;
+			children = (
+				DDE887CB18C56EB1002D52A6 /* Asset Catalog Tinkerer */,
+				DDE887C418C56EB1002D52A6 /* Frameworks */,
+				DDE887C318C56EB1002D52A6 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		DDE887C318C56EB1002D52A6 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DDE887C218C56EB1002D52A6 /* Asset Catalog Tinkerer.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		DDE887C418C56EB1002D52A6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				DDE888C218C5A05F002D52A6 /* GUI7Kit.framework */,
+				DDE887F918C56EE9002D52A6 /* CoreUI.framework */,
+				DDE887C518C56EB1002D52A6 /* Cocoa.framework */,
+				DDE887E418C56EB1002D52A6 /* XCTest.framework */,
+				DDE887C718C56EB1002D52A6 /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		DDE887C718C56EB1002D52A6 /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				DDE887C818C56EB1002D52A6 /* AppKit.framework */,
+				DDE887C918C56EB1002D52A6 /* CoreData.framework */,
+				DDE887CA18C56EB1002D52A6 /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		DDE887CB18C56EB1002D52A6 /* Asset Catalog Tinkerer */ = {
+			isa = PBXGroup;
+			children = (
+				DDE8884518C57B1E002D52A6 /* Models */,
+				DDE8884418C57B0D002D52A6 /* Window Controllers */,
+				DDE887D718C56EB1002D52A6 /* ACTAppDelegate.h */,
+				DDE887D818C56EB1002D52A6 /* ACTAppDelegate.m */,
+				DDE887DA18C56EB1002D52A6 /* MainMenu.xib */,
+				DDE887DD18C56EB1002D52A6 /* Images.xcassets */,
+				DDE887CC18C56EB1002D52A6 /* Supporting Files */,
+			);
+			path = "Asset Catalog Tinkerer";
+			sourceTree = "<group>";
+		};
+		DDE887CC18C56EB1002D52A6 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				DDE887CD18C56EB1002D52A6 /* Asset Catalog Tinkerer-Info.plist */,
+				DDE887CE18C56EB1002D52A6 /* InfoPlist.strings */,
+				DDE887D118C56EB1002D52A6 /* main.m */,
+				DDE887D318C56EB1002D52A6 /* Asset Catalog Tinkerer-Prefix.pch */,
+				DDE887D418C56EB1002D52A6 /* Credits.rtf */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		DDE8884418C57B0D002D52A6 /* Window Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				DDE8884C18C57FAF002D52A6 /* View Controllers */,
+				DDE8883F18C57B0A002D52A6 /* ACTMainWC.h */,
+				DDE8884018C57B0A002D52A6 /* ACTMainWC.m */,
+				DDE8884118C57B0A002D52A6 /* ACTMainWC.xib */,
+			);
+			name = "Window Controllers";
+			sourceTree = "<group>";
+		};
+		DDE8884518C57B1E002D52A6 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				DDE887FB18C56EF9002D52A6 /* CoreUI.h */,
+				DDE8884618C57B31002D52A6 /* GRAssetCatalogReader.h */,
+				DDE8884718C57B31002D52A6 /* GRAssetCatalogReader.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		DDE8884C18C57FAF002D52A6 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				DDE8884918C57FAB002D52A6 /* ACTAssetsTableViewController.h */,
+				DDE8884A18C57FAB002D52A6 /* ACTAssetsTableViewController.m */,
+			);
+			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		DDE887C118C56EB1002D52A6 /* Asset Catalog Tinkerer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DDE887F318C56EB1002D52A6 /* Build configuration list for PBXNativeTarget "Asset Catalog Tinkerer" */;
+			buildPhases = (
+				DDE887BE18C56EB1002D52A6 /* Sources */,
+				DDE887BF18C56EB1002D52A6 /* Frameworks */,
+				DDE887C018C56EB1002D52A6 /* Resources */,
+				DDE888BC18C59E75002D52A6 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Asset Catalog Tinkerer";
+			productName = "Asset Catalog Tinkerer";
+			productReference = DDE887C218C56EB1002D52A6 /* Asset Catalog Tinkerer.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		DDE887BA18C56EB1002D52A6 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0500;
+				ORGANIZATIONNAME = "Guilherme Rambo";
+			};
+			buildConfigurationList = DDE887BD18C56EB1002D52A6 /* Build configuration list for PBXProject "Asset Catalog Tinkerer" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = DDE887B918C56EB1002D52A6;
+			productRefGroup = DDE887C318C56EB1002D52A6 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				DDE887C118C56EB1002D52A6 /* Asset Catalog Tinkerer */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		DDE887C018C56EB1002D52A6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DDE887D018C56EB1002D52A6 /* InfoPlist.strings in Resources */,
+				DDE8884318C57B0A002D52A6 /* ACTMainWC.xib in Resources */,
+				DDE887DE18C56EB1002D52A6 /* Images.xcassets in Resources */,
+				DDE887D618C56EB1002D52A6 /* Credits.rtf in Resources */,
+				DDE887DC18C56EB1002D52A6 /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		DDE887BE18C56EB1002D52A6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DDE8884818C57B31002D52A6 /* GRAssetCatalogReader.m in Sources */,
+				DDE8884B18C57FAB002D52A6 /* ACTAssetsTableViewController.m in Sources */,
+				DDE8884218C57B0A002D52A6 /* ACTMainWC.m in Sources */,
+				DDE887D918C56EB1002D52A6 /* ACTAppDelegate.m in Sources */,
+				DDE887D218C56EB1002D52A6 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		DDE887CE18C56EB1002D52A6 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DDE887CF18C56EB1002D52A6 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		DDE887D418C56EB1002D52A6 /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DDE887D518C56EB1002D52A6 /* en */,
+			);
+			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+		DDE887DA18C56EB1002D52A6 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DDE887DB18C56EB1002D52A6 /* Base */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		DDE887F118C56EB1002D52A6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SYMROOT = build;
+			};
+			name = Debug;
+		};
+		DDE887F218C56EB1002D52A6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				SDKROOT = macosx;
+				SYMROOT = build;
+			};
+			name = Release;
+		};
+		DDE887F418C56EB1002D52A6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks",
+					"/Users/inside/Desktop/Asset\\ Catalog\\ Tinkerer",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Asset Catalog Tinkerer/Asset Catalog Tinkerer-Prefix.pch";
+				INFOPLIST_FILE = "Asset Catalog Tinkerer/Asset Catalog Tinkerer-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		DDE887F518C56EB1002D52A6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks",
+					"/Users/inside/Desktop/Asset\\ Catalog\\ Tinkerer",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Asset Catalog Tinkerer/Asset Catalog Tinkerer-Prefix.pch";
+				INFOPLIST_FILE = "Asset Catalog Tinkerer/Asset Catalog Tinkerer-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		DDE887BD18C56EB1002D52A6 /* Build configuration list for PBXProject "Asset Catalog Tinkerer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DDE887F118C56EB1002D52A6 /* Debug */,
+				DDE887F218C56EB1002D52A6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DDE887F318C56EB1002D52A6 /* Build configuration list for PBXNativeTarget "Asset Catalog Tinkerer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DDE887F418C56EB1002D52A6 /* Debug */,
+				DDE887F518C56EB1002D52A6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = DDE887BA18C56EB1002D52A6 /* Project object */;
+}

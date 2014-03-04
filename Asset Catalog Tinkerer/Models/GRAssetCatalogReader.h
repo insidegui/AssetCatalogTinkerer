@@ -11,8 +11,12 @@
 @interface GRAssetCatalogReader : NSObject
 
 /*!
- @method imagesFromBundle:
- @abstract Gets all the imagens contained inside the Assets.car file of the specified bundle
+ @method imagesFromBundle:catalogName:
+ @abstract Gets all the imagens contained inside an asset catalog
+ @param bundle
+ The owner of the asset catalog, usually an app bundle
+ @param name
+ The name of the asset catalog (without the extension), usually "Assets"
  @result An NSArray containing a dictionary for each image, the dictionary has a "name" key (NSString) and an "image" key (NSImage)
  */
 + (NSArray *)imagesFromBundle:(NSBundle *)bundle catalogName:(NSString *)name;

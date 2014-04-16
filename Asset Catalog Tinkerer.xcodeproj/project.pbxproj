@@ -19,8 +19,6 @@
 		DDE8884318C57B0A002D52A6 /* ACTMainWC.xib in Resources */ = {isa = PBXBuildFile; fileRef = DDE8884118C57B0A002D52A6 /* ACTMainWC.xib */; };
 		DDE8884818C57B31002D52A6 /* GRAssetCatalogReader.m in Sources */ = {isa = PBXBuildFile; fileRef = DDE8884718C57B31002D52A6 /* GRAssetCatalogReader.m */; };
 		DDE8884B18C57FAB002D52A6 /* ACTAssetsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DDE8884A18C57FAB002D52A6 /* ACTAssetsTableViewController.m */; };
-		DDE888C318C5A05F002D52A6 /* GUI7Kit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDE888C218C5A05F002D52A6 /* GUI7Kit.framework */; };
-		DDE888C418C5A06B002D52A6 /* GUI7Kit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = DDE888C218C5A05F002D52A6 /* GUI7Kit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -30,7 +28,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				DDE888C418C5A06B002D52A6 /* GUI7Kit.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -61,7 +58,6 @@
 		DDE8884718C57B31002D52A6 /* GRAssetCatalogReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GRAssetCatalogReader.m; path = Models/GRAssetCatalogReader.m; sourceTree = "<group>"; };
 		DDE8884918C57FAB002D52A6 /* ACTAssetsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ACTAssetsTableViewController.h; path = "View Controllers/ACTAssetsTableViewController.h"; sourceTree = "<group>"; };
 		DDE8884A18C57FAB002D52A6 /* ACTAssetsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ACTAssetsTableViewController.m; path = "View Controllers/ACTAssetsTableViewController.m"; sourceTree = "<group>"; };
-		DDE888C218C5A05F002D52A6 /* GUI7Kit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GUI7Kit.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,7 +66,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				DDE887C618C56EB1002D52A6 /* Cocoa.framework in Frameworks */,
-				DDE888C318C5A05F002D52A6 /* GUI7Kit.framework in Frameworks */,
 				DDE887FA18C56EE9002D52A6 /* CoreUI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -98,7 +93,6 @@
 		DDE887C418C56EB1002D52A6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				DDE888C218C5A05F002D52A6 /* GUI7Kit.framework */,
 				DDE887F918C56EE9002D52A6 /* CoreUI.framework */,
 				DDE887C518C56EB1002D52A6 /* Cocoa.framework */,
 				DDE887E418C56EB1002D52A6 /* XCTest.framework */,
@@ -357,7 +351,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks",
-					"/Users/inside/Desktop/Asset\\ Catalog\\ Tinkerer",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Asset Catalog Tinkerer/Asset Catalog Tinkerer-Prefix.pch";
@@ -375,7 +368,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks",
-					"/Users/inside/Desktop/Asset\\ Catalog\\ Tinkerer",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Asset Catalog Tinkerer/Asset Catalog Tinkerer-Prefix.pch";
@@ -404,6 +396,7 @@
 				DDE887F518C56EB1002D52A6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

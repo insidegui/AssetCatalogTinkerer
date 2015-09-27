@@ -48,24 +48,23 @@
         filename = [NSString stringWithFormat:@"%@.png", namedImage.name];
     }
     
-    NSImage *img = [self createImageFromNamedImage:namedImage];
-
-    [outputImages addObject:@{
-            @"name" : namedImage.name,
-            @"image" : img,
-            @"filename": filename
-    }];
-}
-
-+ (NSImage *)createImageFromNamedImage:(CUINamedImage *)namedImage
-{
     NSBitmapImageRep *imageRep = [[NSBitmapImageRep alloc] initWithCGImage:namedImage.image];
     imageRep.size = namedImage.size;
     
     NSData *pngData = [imageRep representationUsingType:NSPNGFileType properties:@{NSImageInterlaced:@(NO)}];
-    if (!pngData.length) return nil;
-    
-    return [[NSImage alloc] initWithData:pngData];
+    if (!pngData.length) {
+        NSLog(@"Unable to get PNG data from image named %@", namedImage.name);
+        return;
+    }
+
+    NSImage *img = [[NSImage alloc] initWithData:pngData];
+
+    [outputImages addObject:@{
+            @"name" : namedImage.name,
+            @"image" : img,
+            @"filename": filename,
+            @"png": pngData
+    }];
 }
 
 @end

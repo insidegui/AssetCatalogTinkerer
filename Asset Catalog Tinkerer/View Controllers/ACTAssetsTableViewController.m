@@ -60,7 +60,7 @@
 {
     NSTableCellView *cellView = [self.tableView makeViewWithIdentifier:@"nameCell" owner:self.tableView];
     
-    cellView.textField.stringValue = self.items[row][@"name"];
+    cellView.textField.stringValue = self.items[row][@"filename"];
     
     return cellView;
 }
@@ -76,16 +76,13 @@
 {
     [pboard clearContents];
     
-    NSImage *lastImage = self.items[rowIndexes.lastIndex][@"image"];
-    [pboard setData:[lastImage TIFFRepresentation] forType:NSPasteboardTypeTIFF];
-    
     NSMutableArray *files = [[NSMutableArray alloc] initWithCapacity:rowIndexes.count];
     for (NSDictionary *item in [self.items objectsAtIndexes:rowIndexes]) {
-        NSString *name = item[@"name"];
-        NSImage *image = item[@"image"];
+        NSString *filename = item[@"filename"];
+        NSData *data = item[@"png"];
         
-        NSURL *tempURL = [NSURL fileURLWithPath:[NSString pathWithComponents:@[NSTemporaryDirectory(), [name stringByAppendingPathExtension:@"tif"]]]];
-        [[image TIFFRepresentation] writeToURL:tempURL atomically:YES];
+        NSURL *tempURL = [NSURL fileURLWithPath:[NSString pathWithComponents:@[NSTemporaryDirectory(), filename]]];
+        [data writeToURL:tempURL atomically:YES];
         
         [files addObject:tempURL.path];
     }

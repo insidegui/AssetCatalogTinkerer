@@ -138,19 +138,20 @@
     // writes all images asynchronously
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         uint64_t completed = 0;
-        
+
         for (NSDictionary *item in self.assetsController.items) {
-            // assemble the path for the image
-            NSImage *image = item[@"image"];
-            NSMutableArray *pathComponents = [[savePanel.URL pathComponents] mutableCopy];
-            [pathComponents addObject:[item[@"name"] stringByAppendingPathExtension:@"tif"]];
-            
-            // write tiff version of the image to disk
-            [[image TIFFRepresentation] writeToFile:[NSString pathWithComponents:pathComponents] atomically:YES];
-            
-            // update progress
-            completed++;
-            [exportProgress setCompletedUnitCount:completed];
+            @autoreleasepool {
+                // assemble the path for the image
+                NSMutableArray *pathComponents = [[savePanel.URL pathComponents] mutableCopy];
+                [pathComponents addObject:item[@"filename"]];
+                
+                // write tiff version of the image to disk
+                [item[@"png"] writeToFile:[NSString pathWithComponents:pathComponents] atomically:YES];
+                
+                // update progress
+                completed++;
+                [exportProgress setCompletedUnitCount:completed];
+            }
         }
         
         // remove the progress

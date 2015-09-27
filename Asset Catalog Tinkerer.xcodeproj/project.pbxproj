@@ -17,7 +17,6 @@
 		DDE887FA18C56EE9002D52A6 /* CoreUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDE887F918C56EE9002D52A6 /* CoreUI.framework */; };
 		DDE8884218C57B0A002D52A6 /* ACTMainWC.m in Sources */ = {isa = PBXBuildFile; fileRef = DDE8884018C57B0A002D52A6 /* ACTMainWC.m */; };
 		DDE8884318C57B0A002D52A6 /* ACTMainWC.xib in Resources */ = {isa = PBXBuildFile; fileRef = DDE8884118C57B0A002D52A6 /* ACTMainWC.xib */; };
-		DDE8884818C57B31002D52A6 /* GRAssetCatalogReader.m in Sources */ = {isa = PBXBuildFile; fileRef = DDE8884718C57B31002D52A6 /* GRAssetCatalogReader.m */; };
 		DDE8884B18C57FAB002D52A6 /* ACTAssetsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DDE8884A18C57FAB002D52A6 /* ACTAssetsTableViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -54,8 +53,6 @@
 		DDE8883F18C57B0A002D52A6 /* ACTMainWC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ACTMainWC.h; path = "Window Controllers/ACTMainWC.h"; sourceTree = "<group>"; };
 		DDE8884018C57B0A002D52A6 /* ACTMainWC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ACTMainWC.m; path = "Window Controllers/ACTMainWC.m"; sourceTree = "<group>"; };
 		DDE8884118C57B0A002D52A6 /* ACTMainWC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ACTMainWC.xib; path = "Window Controllers/ACTMainWC.xib"; sourceTree = "<group>"; };
-		DDE8884618C57B31002D52A6 /* GRAssetCatalogReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GRAssetCatalogReader.h; path = Models/GRAssetCatalogReader.h; sourceTree = "<group>"; };
-		DDE8884718C57B31002D52A6 /* GRAssetCatalogReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GRAssetCatalogReader.m; path = Models/GRAssetCatalogReader.m; sourceTree = "<group>"; };
 		DDE8884918C57FAB002D52A6 /* ACTAssetsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ACTAssetsTableViewController.h; path = "View Controllers/ACTAssetsTableViewController.h"; sourceTree = "<group>"; };
 		DDE8884A18C57FAB002D52A6 /* ACTAssetsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ACTAssetsTableViewController.m; path = "View Controllers/ACTAssetsTableViewController.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -114,7 +111,7 @@
 		DDE887CB18C56EB1002D52A6 /* Asset Catalog Tinkerer */ = {
 			isa = PBXGroup;
 			children = (
-				DDE8884518C57B1E002D52A6 /* Models */,
+				DDE8884518C57B1E002D52A6 /* CoreUI Headers */,
 				DDE8884418C57B0D002D52A6 /* Window Controllers */,
 				DDE887D718C56EB1002D52A6 /* ACTAppDelegate.h */,
 				DDE887D818C56EB1002D52A6 /* ACTAppDelegate.m */,
@@ -148,14 +145,12 @@
 			name = "Window Controllers";
 			sourceTree = "<group>";
 		};
-		DDE8884518C57B1E002D52A6 /* Models */ = {
+		DDE8884518C57B1E002D52A6 /* CoreUI Headers */ = {
 			isa = PBXGroup;
 			children = (
 				DDE887FB18C56EF9002D52A6 /* CUICatalog.h */,
-				DDE8884618C57B31002D52A6 /* GRAssetCatalogReader.h */,
-				DDE8884718C57B31002D52A6 /* GRAssetCatalogReader.m */,
 			);
-			name = Models;
+			name = "CoreUI Headers";
 			sourceTree = "<group>";
 		};
 		DDE8884C18C57FAF002D52A6 /* View Controllers */ = {
@@ -235,7 +230,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DDE8884818C57B31002D52A6 /* GRAssetCatalogReader.m in Sources */,
 				DDE8884B18C57FAB002D52A6 /* ACTAssetsTableViewController.m in Sources */,
 				DDE8884218C57B0A002D52A6 /* ACTMainWC.m in Sources */,
 				DDE887D918C56EB1002D52A6 /* ACTAppDelegate.m in Sources */,

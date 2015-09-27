@@ -8,7 +8,7 @@
 
 #import "ACTMainWC.h"
 
-#import "GRAssetCatalogReader.h"
+#import "CUICatalog.h"
 
 #import "ACTAssetsTableViewController.h"
 
@@ -19,6 +19,8 @@
 
 @property (strong) IBOutlet NSView *failView;
 @property (weak) IBOutlet NSScrollView *scrollView;
+@property (nonatomic, strong) NSMutableArray *images;
+@property (strong) CUICatalog *catalog;
 
 @end
 
@@ -44,13 +46,23 @@
 - (void)launchOpenPanel
 {
     NSOpenPanel *openPanel = [NSOpenPanel openPanel];
-    openPanel.allowedFileTypes = @[@"app",@"car"];
+    openPanel.allowedFileTypes = @[@"app",@"car",@"framework",@"bundle",@"plugin"];
     openPanel.title = @"Select application bundle or asset catalog file";
     openPanel.prompt = @"View";
     openPanel.treatsFilePackagesAsDirectories = YES;
     openPanel.canChooseDirectories = YES;
+    [openPanel beginSheetModalForWindow:self.window completionHandler:^(NSInteger result) {
+        if (!result) return;
+
+        [self handleOpeningFileAtURL:openPanel.URL];
+    }];
+}
+
+- (NSMutableArray *)images
+{
+    if (!_images) _images = [NSMutableArray new];
     
-    if ([openPanel runModal] == NSFileHandlingPanelOKButton) [self handleOpeningFileAtURL:openPanel.URL];
+    return _images;
 }
 
 - (void)handleOpeningFileAtURL:(NSURL *)URL
@@ -75,17 +87,58 @@
         return [self showFailure];
     }
     
-    // this uses our convenience class to get a collection of images from the bundle
-    NSArray *images = [GRAssetCatalogReader imagesFromCatalogAtURL:[NSURL fileURLWithPath:catalogPath]];
+    NSError *catalogError;
+    self.catalog = [[CUICatalog alloc] initWithURL:[NSURL fileURLWithPath:catalogPath] error:&catalogError];
+    if (catalogError) {
+        [[NSAlert alertWithError:catalogError] runModal];
+        [self showFailure];
+        return;
+    }
+    
+    if (!self.catalog.allImageNames.count) {
+        NSRunAlertPanel(@"No images", @"The asset catalog contains no images", @"OK", nil, nil);
+        return [self showFailure];
+    }
+    
+    for (NSString *imageName in self.catalog.allImageNames) {
+        for (CUINamedImage *namedImage in [self.catalog imagesWithName:imageName]) {
+            @autoreleasepool {
+                if (namedImage == nil) continue;
+                
+                NSString *filename;
+                if (namedImage.scale > 1.0) {
+                    filename = [NSString stringWithFormat:@"%@@%.0fx.png", namedImage.name, namedImage.scale];
+                } else {
+                    filename = [NSString stringWithFormat:@"%@.png", namedImage.name];
+                }
+                
+                NSBitmapImageRep *imageRep = [[NSBitmapImageRep alloc] initWithCGImage:namedImage.image];
+                imageRep.size = namedImage.size;
+                
+                NSData *pngData = [imageRep representationUsingType:NSPNGFileType properties:@{NSImageInterlaced:@(NO)}];
+                if (!pngData.length) {
+                    NSLog(@"Unable to get PNG data from image named %@", namedImage.name);
+                    continue;
+                }
+                
+                [self.images addObject:@{
+                                         @"name" : namedImage.name,
+                                         @"image" : [[NSImage alloc] initWithData:pngData],
+                                         @"filename": filename,
+                                         @"png": pngData
+                                         }];
+            }
+        }
+    }
     
     // we've got no images for some reason (the console will usually contain some information from CoreUI as to why)
-    if (!images.count) {
+    if (!self.images.count) {
         NSRunAlertPanel(@"Failed to load images", @"The asset catalog is invalid or not present", @"Ok", nil, nil);
         return [self showFailure];
     }
     
     // set tableview controller's items
-    self.assetsController.items = images;
+    self.assetsController.items = self.images;
     
     // hide any previously displayed error
     [self hideFailure];
@@ -115,7 +168,7 @@
 
 - (void)launchSavePanel
 {
-    if (!self.assetsController.items.count) return;
+    if (!self.images.count) return;
     
     // our save panel is actually an open panel so the user can choose directories
     NSOpenPanel *savePanel = [NSOpenPanel openPanel];
@@ -129,7 +182,7 @@
     if ([savePanel runModal] != NSFileHandlingPanelOKButton) return;
     
     // the progress is not really used right now but can be usefull in the future to display some sort of UI
-    NSProgress *exportProgress = [NSProgress progressWithTotalUnitCount:self.assetsController.items.count];
+    NSProgress *exportProgress = [NSProgress progressWithTotalUnitCount:self.images.count];
     exportProgress.kind = NSProgressKindFile;
     [exportProgress setUserInfoObject:NSProgressFileOperationKindCopying forKey:NSProgressFileOperationKindKey];
     [exportProgress setUserInfoObject:savePanel.URL forKey:NSProgressFileURLKey];
@@ -139,7 +192,7 @@
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         uint64_t completed = 0;
 
-        for (NSDictionary *item in self.assetsController.items) {
+        for (NSDictionary *item in self.images) {
             @autoreleasepool {
                 // assemble the path for the image
                 NSMutableArray *pathComponents = [[savePanel.URL pathComponents] mutableCopy];

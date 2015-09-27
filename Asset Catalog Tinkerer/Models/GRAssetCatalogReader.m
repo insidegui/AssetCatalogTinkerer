@@ -8,67 +8,64 @@
 
 #import "GRAssetCatalogReader.h"
 
-#import "CoreUI.h"
+#import "CUICatalog.h"
 
 @implementation GRAssetCatalogReader
 
-+ (NSArray *)imagesFromBundle:(NSBundle *)bundle catalogName:(NSString *)name
++ (NSArray *)imagesFromCatalogAtURL:(NSURL *)catalogURL
 {
-    if (!bundle) return @[];
+    NSError *catalogError;
+    CUICatalog *catalog = [[CUICatalog alloc] initWithURL:catalogURL error:&catalogError];
     
-    // initializes the CUICatalog for the specified bundle
-    CUICatalog *catalog = [[CUICatalog alloc] initWithName:name fromBundle:bundle];
+    if (catalogError) {
+        NSLog(@"CoreUI error: %@", catalogError);
+        return nil;
+    }
     
-    NSArray *renditionNames = [[[catalog _themeStore] themeStore] allRenditionNames];
+    NSMutableArray *outputImages = [[NSMutableArray alloc] initWithCapacity:catalog.allImageNames.count];
     
-    // prepare output
-    NSMutableArray *outputImages = [[NSMutableArray alloc] initWithCapacity:renditionNames.count];
-    
-    // gets all the images from the catalog and stores them inside a dictionary inside the output array
-    for (NSString *rendition in renditionNames) {
-        CGImageRef idiom0image = NULL;
-        for (NSUInteger idiom = 0; idiom < 10; idiom++) {
-            // images with idiom 0 (universal) will be returned also for other idioms
-            // store image with idiom 0 and add only images that differs
-            CUINamedImage *image = [catalog imageWithName:rendition scaleFactor:2.0 deviceIdiom:idiom];
-
-            if (idiom == 0)
-                idiom0image = image.image;
-            else if (idiom0image == image.image)
-                continue;
-
-            [self addImage:image withIdiom:idiom to:outputImages];
+    for (NSString *name in catalog.allImageNames) {
+        NSArray *images = [catalog imagesWithName:name];
+        for (CUINamedImage *namedImage in images) {
+            @autoreleasepool {
+                [self addImage:namedImage to:outputImages];
+            }
         }
     }
     
     return [outputImages copy];
 }
 
-+ (NSString *)lookupIdiom:(NSUInteger)idiom
-{
-    switch (idiom) {
-        case 0:
-            return @"universal";
-        case 1:
-            return @"iphone";
-        case 2:
-            return @"ipad";
-        default:
-            return [@(idiom) stringValue];
-    }
-}
-
-+ (void)addImage:(CUINamedImage *)namedImage withIdiom:(NSUInteger)idiom to:(NSMutableArray *)outputImages
++ (void)addImage:(CUINamedImage *)namedImage to:(NSMutableArray *)outputImages
 {
     if (namedImage == nil)
         return;
 
-    NSImage *img = [[NSImage alloc] initWithCGImage:namedImage.image size:namedImage.size];
+    NSString *filename;
+    if (namedImage.scale > 1.0) {
+        filename = [NSString stringWithFormat:@"%@@%.0fx.png", namedImage.name, namedImage.scale];
+    } else {
+        filename = [NSString stringWithFormat:@"%@.png", namedImage.name];
+    }
+    
+    NSImage *img = [self createImageFromNamedImage:namedImage];
 
     [outputImages addObject:@{
-            @"name" : idiom == 0 ? namedImage.name : [NSString stringWithFormat:@"%@~%@", namedImage.name, [self lookupIdiom:idiom]],
-            @"image" : img
+            @"name" : namedImage.name,
+            @"image" : img,
+            @"filename": filename
     }];
+}
+
++ (NSImage *)createImageFromNamedImage:(CUINamedImage *)namedImage
+{
+    NSBitmapImageRep *imageRep = [[NSBitmapImageRep alloc] initWithCGImage:namedImage.image];
+    imageRep.size = namedImage.size;
+    
+    NSData *pngData = [imageRep representationUsingType:NSPNGFileType properties:@{NSImageInterlaced:@(NO)}];
+    if (!pngData.length) return nil;
+    
+    return [[NSImage alloc] initWithData:pngData];
 }
 
 @end

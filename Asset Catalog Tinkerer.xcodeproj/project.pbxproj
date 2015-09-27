@@ -50,7 +50,7 @@
 		DDE887DD18C56EB1002D52A6 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		DDE887E418C56EB1002D52A6 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		DDE887F918C56EE9002D52A6 /* CoreUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreUI.framework; path = ../../../../System/Library/PrivateFrameworks/CoreUI.framework; sourceTree = "<group>"; };
-		DDE887FB18C56EF9002D52A6 /* CoreUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoreUI.h; sourceTree = "<group>"; };
+		DDE887FB18C56EF9002D52A6 /* CUICatalog.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CUICatalog.h; sourceTree = "<group>"; };
 		DDE8883F18C57B0A002D52A6 /* ACTMainWC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ACTMainWC.h; path = "Window Controllers/ACTMainWC.h"; sourceTree = "<group>"; };
 		DDE8884018C57B0A002D52A6 /* ACTMainWC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ACTMainWC.m; path = "Window Controllers/ACTMainWC.m"; sourceTree = "<group>"; };
 		DDE8884118C57B0A002D52A6 /* ACTMainWC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ACTMainWC.xib; path = "Window Controllers/ACTMainWC.xib"; sourceTree = "<group>"; };
@@ -151,7 +151,7 @@
 		DDE8884518C57B1E002D52A6 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				DDE887FB18C56EF9002D52A6 /* CoreUI.h */,
+				DDE887FB18C56EF9002D52A6 /* CUICatalog.h */,
 				DDE8884618C57B31002D52A6 /* GRAssetCatalogReader.h */,
 				DDE8884718C57B31002D52A6 /* GRAssetCatalogReader.m */,
 			);

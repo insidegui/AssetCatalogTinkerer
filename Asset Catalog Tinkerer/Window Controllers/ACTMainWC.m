@@ -56,57 +56,27 @@
 - (void)handleOpeningFileAtURL:(NSURL *)URL
 {
     self.fileURL = URL;
-    self.window.title = [URL.path lastPathComponent];
-    
-    // this will hold the bundle
-    NSBundle *targetBundle = nil;
-    
-    // default asset catalog file name
-    NSString *catalogName = @"Assets";
+
+    NSString *catalogPath = nil;
     
     // we need to figure out if the user selected an app bundle or a specific .car file
-    if ([URL.pathExtension isEqualToString:@"app"]) {
-        // selected app bundle
-        targetBundle = [NSBundle bundleWithURL:URL];
+    NSBundle *bundle = [NSBundle bundleWithURL:URL];
+    if (!bundle) {
+        catalogPath = URL.path;
+        self.window.title = catalogPath.lastPathComponent;
     } else {
-        // here the user selected a specific .car file, now we need to figure out the bundle it belongs to
-        NSArray *components = [URL pathComponents];
-        
-        // see if the bundle is a framework bundle
-        NSString *frameworkComponent = [[components filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"self contains[cd] '.framework'"]] lastObject];
-        NSMutableArray *distilledComponents;
-        if (frameworkComponent) {
-            // framework bundle
-            distilledComponents = [[URL.path componentsSeparatedByString:frameworkComponent] mutableCopy];
-            [distilledComponents removeLastObject];
-            [distilledComponents addObject:frameworkComponent];
-        } else {
-            // app bundle
-            NSString *appComponent = [[components filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"self contains[cd] '.app'"]] lastObject];
-            distilledComponents = [[URL.path componentsSeparatedByString:appComponent] mutableCopy];
-            [distilledComponents removeLastObject];
-            [distilledComponents addObject:appComponent];
-        }
-        
-        // finally, assemble the final path and get the bundle
-        NSString *bundlePath = [NSString pathWithComponents:distilledComponents];
-        targetBundle = [NSBundle bundleWithPath:bundlePath];
-        
-        // get the asset catalog file name
-        catalogName = [[components lastObject] stringByDeletingPathExtension];
-        
-        // set the title to the bundle's file name
-        self.window.title = [bundlePath lastPathComponent];
+        catalogPath = [bundle pathForResource:@"Assets" ofType:@"car"];
+        self.window.title = [NSString stringWithFormat:@"%@ | %@", bundle.bundlePath.lastPathComponent, catalogPath.lastPathComponent];
     }
     
     // bundle is nil for some reason
-    if (!targetBundle) {
-        NSRunAlertPanel(@"Unable to find bundle", @"The bundle could not be found", @"Ok", nil, nil);
+    if (!catalogPath) {
+        NSRunAlertPanel(@"Unable to find asset catalog path", @"The bundle doesn't have an Assets.car file", @"OK", nil, nil);
         return [self showFailure];
     }
     
     // this uses our convenience class to get a collection of images from the bundle
-    NSArray *images = [GRAssetCatalogReader imagesFromBundle:targetBundle catalogName:catalogName];
+    NSArray *images = [GRAssetCatalogReader imagesFromCatalogAtURL:[NSURL fileURLWithPath:catalogPath]];
     
     // we've got no images for some reason (the console will usually contain some information from CoreUI as to why)
     if (!images.count) {

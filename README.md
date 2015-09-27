@@ -8,15 +8,11 @@ How to use
 
 Download this repo, open the project in Xcode, build and run.
 
-When the app launches you get an open panel, you can use It to open an app bundle or a .car file inside a bundle (app or framework).
+When the app launches you get an open panel, you can use It to open a bundle (app, framework, etc) or a .car file.
 
 Once the asset catalog is loaded, you can drag individual assets out or export the entire catalog to a directory.
 
 ![screenshot](https://raw.github.com/insidegui/AssetCatalogTinkerer/master/screenshot.png)
-
-## Shameless plug
-
-Check out my blog: [CocoaSnippets.io](http://cocoasnippets.io)
 
 ## Contributing
 

@@ -27,14 +27,41 @@
 
 @end
 
+@class CUIThemeRendition, CUIRenditionKey;
+
+
+@interface CUINamedLookup : NSObject
+
+@property(copy, nonatomic) NSString *name;
+@property(readonly, nonatomic) BOOL representsOnDemandContent;
+
+- (void)setRepresentsOnDemandContent:(BOOL)onDemand;
+- (id)renditionKey;
+- (NSString *)renditionName;
+- (id)initWithName:(NSString *)name usingRenditionKey:(NSString *)key fromTheme:(unsigned long long)theme;
+
+@end
+
+
+@interface CUINamedLayerStack : CUINamedLookup
+
+@property(retain, nonatomic) NSArray *layers;
+@property(readonly, nonatomic) struct CGImage *radiosityImage;
+@property(readonly, nonatomic) struct CGImage *flattenedImage;
+@property(readonly, nonatomic) struct CGSize size;
+
+@end
+
+
 @interface CUICatalog : NSObject
+
+@property (nonatomic, readonly) NSArray *allImageNames;
 
 + (instancetype)systemUICatalog;
 + (instancetype)defaultUICatalog;
 
 - (instancetype)initWithURL:(NSURL *)url error:(NSError **)outError;
-
-@property (nonatomic, readonly) NSArray *allImageNames;
+- (CUINamedLayerStack *)layerStackWithName:(NSString *)name;
 - (NSArray *)imagesWithName:(NSString *)name;
 
 @end

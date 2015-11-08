@@ -105,22 +105,42 @@
             @autoreleasepool {
                 if (namedImage == nil) continue;
                 
-                NSString *filename;
-                if (namedImage.scale > 1.0) {
-                    filename = [NSString stringWithFormat:@"%@@%.0fx.png", namedImage.name, namedImage.scale];
+                NSData *pngData;
+                 NSString *filename;
+                if ([namedImage isKindOfClass:[CUINamedLayerStack class]]) {
+                    CUINamedLayerStack *namedLayerStack = (CUINamedLayerStack *)namedImage;
+                    if (namedLayerStack.flattenedImage == nil) {
+                        continue;
+                    }
+                    
+                    filename = namedLayerStack.renditionName;
+                    
+                    NSBitmapImageRep *imageRep = [[NSBitmapImageRep alloc] initWithCGImage:namedLayerStack.flattenedImage];
+                    imageRep.size = namedImage.size;
+                    
+                    pngData = [imageRep representationUsingType:NSPNGFileType properties:@{NSImageInterlaced:@(NO)}];
+                    if (!pngData.length) {
+                        NSLog(@"Unable to get PNG data from image named %@", namedImage.name);
+                        continue;
+                    }
+                    
                 } else {
-                    filename = [NSString stringWithFormat:@"%@.png", namedImage.name];
+                   
+                    if (namedImage.scale > 1.0) {
+                        filename = [NSString stringWithFormat:@"%@@%.0fx.png", namedImage.name, namedImage.scale];
+                    } else {
+                        filename = [NSString stringWithFormat:@"%@.png", namedImage.name];
+                    }
+                    
+                    NSBitmapImageRep *imageRep = [[NSBitmapImageRep alloc] initWithCGImage:namedImage.image];
+                    imageRep.size = namedImage.size;
+                    
+                    pngData = [imageRep representationUsingType:NSPNGFileType properties:@{NSImageInterlaced:@(NO)}];
+                    if (!pngData.length) {
+                        NSLog(@"Unable to get PNG data from image named %@", namedImage.name);
+                        continue;
+                    }
                 }
-                
-                NSBitmapImageRep *imageRep = [[NSBitmapImageRep alloc] initWithCGImage:namedImage.image];
-                imageRep.size = namedImage.size;
-                
-                NSData *pngData = [imageRep representationUsingType:NSPNGFileType properties:@{NSImageInterlaced:@(NO)}];
-                if (!pngData.length) {
-                    NSLog(@"Unable to get PNG data from image named %@", namedImage.name);
-                    continue;
-                }
-                
                 [self.images addObject:@{
                                          @"name" : namedImage.name,
                                          @"image" : [[NSImage alloc] initWithData:pngData],

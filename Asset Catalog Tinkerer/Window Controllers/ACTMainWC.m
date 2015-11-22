@@ -9,6 +9,7 @@
 #import "ACTMainWC.h"
 
 #import "CUICatalog.h"
+#import "CoreUI+TV.h"
 
 #import "ACTAssetsTableViewController.h"
 
@@ -106,13 +107,24 @@
                 if (namedImage == nil) continue;
                 
                 NSString *filename;
-                if (namedImage.scale > 1.0) {
-                    filename = [NSString stringWithFormat:@"%@@%.0fx.png", namedImage.name, namedImage.scale];
-                } else {
+                CGImageRef image;
+                
+                if ([namedImage isKindOfClass:[CUINamedLayerStack class]]) {
+                    CUINamedLayerStack *stack = (CUINamedLayerStack *)namedImage;
+                    if (!stack.layers.count) continue;
+                    
                     filename = [NSString stringWithFormat:@"%@.png", namedImage.name];
+                    image = stack.flattenedImage;
+                } else {
+                    if (namedImage.scale > 1.0) {
+                        filename = [NSString stringWithFormat:@"%@@%.0fx.png", namedImage.name, namedImage.scale];
+                    } else {
+                        filename = [NSString stringWithFormat:@"%@.png", namedImage.name];
+                    }
+                    image = namedImage.image;
                 }
                 
-                NSBitmapImageRep *imageRep = [[NSBitmapImageRep alloc] initWithCGImage:namedImage.image];
+                NSBitmapImageRep *imageRep = [[NSBitmapImageRep alloc] initWithCGImage:image];
                 imageRep.size = namedImage.size;
                 
                 NSData *pngData = [imageRep representationUsingType:NSPNGFileType properties:@{NSImageInterlaced:@(NO)}];

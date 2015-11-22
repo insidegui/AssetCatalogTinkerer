@@ -33,6 +33,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		DD8FB5841C02409E0040FEF6 /* CoreUI+TV.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CoreUI+TV.h"; sourceTree = "<group>"; };
 		DDE887C218C56EB1002D52A6 /* Asset Catalog Tinkerer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Asset Catalog Tinkerer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DDE887C518C56EB1002D52A6 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		DDE887C818C56EB1002D52A6 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -149,6 +150,7 @@
 			isa = PBXGroup;
 			children = (
 				DDE887FB18C56EF9002D52A6 /* CUICatalog.h */,
+				DD8FB5841C02409E0040FEF6 /* CoreUI+TV.h */,
 			);
 			name = "CoreUI Headers";
 			sourceTree = "<group>";

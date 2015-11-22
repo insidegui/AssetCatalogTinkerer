@@ -54,7 +54,7 @@
     openPanel.canChooseDirectories = YES;
     [openPanel beginSheetModalForWindow:self.window completionHandler:^(NSInteger result) {
         if (!result) return;
-
+        
         [self handleOpeningFileAtURL:openPanel.URL];
     }];
 }
@@ -69,7 +69,7 @@
 - (void)handleOpeningFileAtURL:(NSURL *)URL
 {
     self.fileURL = URL;
-
+    
     NSString *catalogPath = nil;
     
     // we need to figure out if the user selected an app bundle or a specific .car file
@@ -203,7 +203,7 @@
     // writes all images asynchronously
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         uint64_t completed = 0;
-
+        
         for (NSDictionary *item in self.images) {
             @autoreleasepool {
                 // assemble the path for the image
@@ -222,7 +222,7 @@
         // remove the progress
         [exportProgress unpublish];
     });
-
+    
 }
 
 @end

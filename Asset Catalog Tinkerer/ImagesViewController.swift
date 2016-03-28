@@ -13,6 +13,9 @@ class ImagesViewController: NSViewController {
     var loadProgress = 0.0 {
         didSet {
             progressBar.progress = loadProgress
+            if loadProgress >= 0.99 && error == nil {
+                hideStatus()
+            }
         }
     }
     
@@ -21,7 +24,7 @@ class ImagesViewController: NSViewController {
             guard let error = error else { return }
             
             loadProgress = 1.0
-            showError(error)
+            showStatus(error.localizedDescription)
         }
     }
     
@@ -39,6 +42,7 @@ class ImagesViewController: NSViewController {
 
         view.layer?.backgroundColor = NSColor.whiteColor().CGColor
         buildUI()
+        showStatus("Loading images")
     }
     
     // MARK: - UI
@@ -53,7 +57,7 @@ class ImagesViewController: NSViewController {
         return p
     }()
     
-    private lazy var errorLabel: NSTextField = {
+    private lazy var statusLabel: NSTextField = {
         let l = NSTextField(frame: NSZeroRect)
         
         l.translatesAutoresizingMaskIntoConstraints = false
@@ -164,18 +168,28 @@ class ImagesViewController: NSViewController {
         })
     }
     
-    private func showError(error: NSError) {
-        if errorLabel.superview == nil {
-            view.addSubview(errorLabel)
-            errorLabel.centerYAnchor.constraintEqualToAnchor(view.centerYAnchor).active = true
-            errorLabel.centerXAnchor.constraintEqualToAnchor(view.centerXAnchor).active = true
+    private func showStatus(status: String) {
+        if statusLabel.superview == nil {
+            view.addSubview(statusLabel)
+            statusLabel.centerYAnchor.constraintEqualToAnchor(view.centerYAnchor).active = true
+            statusLabel.centerXAnchor.constraintEqualToAnchor(view.centerXAnchor).active = true
         }
         
-        errorLabel.stringValue = error.localizedDescription
+        statusLabel.stringValue = status
+        statusLabel.hidden = false
         NSAnimationContext.runAnimationGroup({ ctx in
             ctx.duration = 0.4
-            self.errorLabel.animator().alphaValue = 1.0
+            self.statusLabel.animator().alphaValue = 1.0
             }, completionHandler: nil)
+    }
+    
+    private func hideStatus() {
+        NSAnimationContext.runAnimationGroup({ ctx in
+            ctx.duration = 0.4
+            self.statusLabel.animator().alphaValue = 0.0
+            }, completionHandler: {
+                self.statusLabel.hidden = true
+        })
     }
     
     // MARK: - Export

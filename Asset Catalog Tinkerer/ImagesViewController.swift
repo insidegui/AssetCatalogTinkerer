@@ -18,7 +18,10 @@ class ImagesViewController: NSViewController {
     
     var error: NSError? = nil {
         didSet {
+            guard let error = error else { return }
             
+            loadProgress = 1.0
+            NSAlert(error: error).runModal()
         }
     }
     
@@ -26,6 +29,7 @@ class ImagesViewController: NSViewController {
     
     var images = [[String: NSObject]]() {
         didSet {
+            loadProgress = 1.0
             dataProvider.images = images
         }
     }

@@ -21,7 +21,7 @@ class ImagesViewController: NSViewController {
             guard let error = error else { return }
             
             loadProgress = 1.0
-            NSAlert(error: error).runModal()
+            showError(error)
         }
     }
     
@@ -51,6 +51,24 @@ class ImagesViewController: NSViewController {
         p.progress = 0.0
         
         return p
+    }()
+    
+    private lazy var errorLabel: NSTextField = {
+        let l = NSTextField(frame: NSZeroRect)
+        
+        l.translatesAutoresizingMaskIntoConstraints = false
+        l.bordered = false
+        l.bezeled = false
+        l.editable = false
+        l.selectable = false
+        l.drawsBackground = false
+        l.font = NSFont.systemFontOfSize(12.0, weight: NSFontWeightMedium)
+        l.textColor = NSColor.secondaryLabelColor()
+        l.lineBreakMode = .ByTruncatingTail
+        
+        l.alphaValue = 0.0
+        
+        return l
     }()
     
     private lazy var scrollView: NSScrollView = {
@@ -144,6 +162,20 @@ class ImagesViewController: NSViewController {
             }, completionHandler: {
                 self.exportProgressView.hidden = true
         })
+    }
+    
+    private func showError(error: NSError) {
+        if errorLabel.superview == nil {
+            view.addSubview(errorLabel)
+            errorLabel.centerYAnchor.constraintEqualToAnchor(view.centerYAnchor).active = true
+            errorLabel.centerXAnchor.constraintEqualToAnchor(view.centerXAnchor).active = true
+        }
+        
+        errorLabel.stringValue = error.localizedDescription
+        NSAnimationContext.runAnimationGroup({ ctx in
+            ctx.duration = 0.4
+            self.errorLabel.animator().alphaValue = 1.0
+            }, completionHandler: nil)
     }
     
     // MARK: - Export

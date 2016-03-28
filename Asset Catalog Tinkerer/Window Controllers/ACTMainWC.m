@@ -55,7 +55,7 @@
     [openPanel beginSheetModalForWindow:self.window completionHandler:^(NSInteger result) {
         if (!result) return;
         
-        [self handleOpeningFileAtURL:openPanel.URL];
+        [self openFileAtURL:openPanel.URL];
     }];
 }
 
@@ -66,8 +66,10 @@
     return _images;
 }
 
-- (void)handleOpeningFileAtURL:(NSURL *)URL
+- (void)openFileAtURL:(NSURL *)URL
 {
+    [[NSDocumentController sharedDocumentController] noteNewRecentDocumentURL:URL];
+    
     self.fileURL = URL;
     
     NSString *catalogPath = nil;
@@ -82,78 +84,97 @@
         self.window.title = [NSString stringWithFormat:@"%@ | %@", bundle.bundlePath.lastPathComponent, catalogPath.lastPathComponent];
     }
     
-    // bundle is nil for some reason
-    if (!catalogPath) {
-        NSRunAlertPanel(@"Unable to find asset catalog path", @"The bundle doesn't have an Assets.car file", @"OK", nil, nil);
-        return [self showFailure];
-    }
-    
-    NSError *catalogError;
-    self.catalog = [[CUICatalog alloc] initWithURL:[NSURL fileURLWithPath:catalogPath] error:&catalogError];
-    if (catalogError) {
-        [[NSAlert alertWithError:catalogError] runModal];
-        [self showFailure];
-        return;
-    }
-    
-    if (!self.catalog.allImageNames.count) {
-        NSRunAlertPanel(@"No images", @"The asset catalog contains no images", @"OK", nil, nil);
-        return [self showFailure];
-    }
-    
-    for (NSString *imageName in self.catalog.allImageNames) {
-        for (CUINamedImage *namedImage in [self.catalog imagesWithName:imageName]) {
-            @autoreleasepool {
-                if (namedImage == nil) continue;
-                
-                NSString *filename;
-                CGImageRef image;
-                
-                if ([namedImage isKindOfClass:[CUINamedLayerStack class]]) {
-                    CUINamedLayerStack *stack = (CUINamedLayerStack *)namedImage;
-                    if (!stack.layers.count) continue;
+    dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), ^{
+        // bundle is nil for some reason
+        if (!catalogPath) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                NSRunAlertPanel(@"Unable to find asset catalog path", @"The bundle doesn't have an Assets.car file", @"OK", nil, nil);
+                [self showFailure];
+            });
+            
+            return;
+        }
+        
+        NSError *catalogError;
+        self.catalog = [[CUICatalog alloc] initWithURL:[NSURL fileURLWithPath:catalogPath] error:&catalogError];
+        if (catalogError) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [[NSAlert alertWithError:catalogError] runModal];
+                [self showFailure];
+            });
+            
+            return;
+        }
+        
+        if (!self.catalog.allImageNames.count) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                NSRunAlertPanel(@"No images", @"The asset catalog contains no images", @"OK", nil, nil);
+                [self showFailure];
+            });
+            
+            return;
+        }
+        
+        for (NSString *imageName in self.catalog.allImageNames) {
+            for (CUINamedImage *namedImage in [self.catalog imagesWithName:imageName]) {
+                @autoreleasepool {
+                    if (namedImage == nil) continue;
                     
-                    filename = [NSString stringWithFormat:@"%@.png", namedImage.name];
-                    image = stack.flattenedImage;
-                } else {
-                    if (namedImage.scale > 1.0) {
-                        filename = [NSString stringWithFormat:@"%@@%.0fx.png", namedImage.name, namedImage.scale];
-                    } else {
+                    NSString *filename;
+                    CGImageRef image;
+                    
+                    if ([namedImage isKindOfClass:[CUINamedLayerStack class]]) {
+                        CUINamedLayerStack *stack = (CUINamedLayerStack *)namedImage;
+                        if (!stack.layers.count) continue;
+                        
                         filename = [NSString stringWithFormat:@"%@.png", namedImage.name];
+                        image = stack.flattenedImage;
+                    } else {
+                        if (namedImage.scale > 1.0) {
+                            filename = [NSString stringWithFormat:@"%@@%.0fx.png", namedImage.name, namedImage.scale];
+                        } else {
+                            filename = [NSString stringWithFormat:@"%@.png", namedImage.name];
+                        }
+                        image = namedImage.image;
                     }
-                    image = namedImage.image;
+                    
+                    NSBitmapImageRep *imageRep = [[NSBitmapImageRep alloc] initWithCGImage:image];
+                    imageRep.size = namedImage.size;
+                    
+                    NSData *pngData = [imageRep representationUsingType:NSPNGFileType properties:@{NSImageInterlaced:@(NO)}];
+                    if (!pngData.length) {
+                        NSLog(@"Unable to get PNG data from image named %@", namedImage.name);
+                        continue;
+                    }
+                    
+                    [self.images addObject:@{
+                                             @"name" : namedImage.name,
+                                             @"image" : [[NSImage alloc] initWithData:pngData],
+                                             @"filename": filename,
+                                             @"png": pngData
+                                             }];
                 }
-                
-                NSBitmapImageRep *imageRep = [[NSBitmapImageRep alloc] initWithCGImage:image];
-                imageRep.size = namedImage.size;
-                
-                NSData *pngData = [imageRep representationUsingType:NSPNGFileType properties:@{NSImageInterlaced:@(NO)}];
-                if (!pngData.length) {
-                    NSLog(@"Unable to get PNG data from image named %@", namedImage.name);
-                    continue;
-                }
-                
-                [self.images addObject:@{
-                                         @"name" : namedImage.name,
-                                         @"image" : [[NSImage alloc] initWithData:pngData],
-                                         @"filename": filename,
-                                         @"png": pngData
-                                         }];
             }
         }
-    }
-    
-    // we've got no images for some reason (the console will usually contain some information from CoreUI as to why)
-    if (!self.images.count) {
-        NSRunAlertPanel(@"Failed to load images", @"The asset catalog is invalid or not present", @"Ok", nil, nil);
-        return [self showFailure];
-    }
-    
-    // set tableview controller's items
-    self.assetsController.items = self.images;
-    
-    // hide any previously displayed error
-    [self hideFailure];
+        
+        // we've got no images for some reason (the console will usually contain some information from CoreUI as to why)
+        if (!self.images.count) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                NSRunAlertPanel(@"Failed to load images", @"The asset catalog is invalid or not present", @"Ok", nil, nil);
+                [self showFailure];
+            });
+            
+            return;
+        }
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            // set tableview controller's items
+            self.assetsController.items = self.images;
+            
+            // hide any previously displayed error
+            [self hideFailure];
+        });
+    });
 }
 
 // shows an alert icon

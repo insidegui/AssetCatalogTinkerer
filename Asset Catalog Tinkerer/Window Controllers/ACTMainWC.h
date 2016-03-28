@@ -13,4 +13,6 @@
 - (void)launchOpenPanel;
 - (void)launchSavePanel;
 
+- (void)openFileAtURL:(NSURL *)URL;
+
 @end

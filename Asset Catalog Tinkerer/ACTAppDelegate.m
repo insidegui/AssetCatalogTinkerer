@@ -14,45 +14,50 @@
 
 @interface ACTAppDelegate ()
 
-@property (nonatomic, strong) ACTMainWC *mainWC;
+@property (nonatomic, strong) NSMutableArray *windowControllers;
 
 @end
 
 @implementation ACTAppDelegate
 
+- (NSMutableArray *)windowControllers
+{
+    if (!_windowControllers) _windowControllers = [NSMutableArray new];
+    
+    return _windowControllers;
+}
+
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-    [self initializeInterface];
-    
-    [self.mainWC.window center];
-    [self.mainWC launchOpenPanel];
+    [self openAction:nil];
 }
 
 - (IBAction)openAction:(id)sender {
-    if (!self.mainWC) [self initializeInterface];
-    
-    [self.mainWC launchOpenPanel];
+    ACTMainWC *controller = [self makeWindowController];
+    [controller launchOpenPanel];
 }
 
 - (IBAction)exportImagesAction:(id)sender {
-    if (!self.mainWC) return;
-    
-    [self.mainWC launchSavePanel];
+    [[[NSApp keyWindow] windowController] launchSavePanel];
 }
 
 /*! creates an instance of the main window controller and shows it's window */
-- (void)initializeInterface
+- (ACTMainWC *)makeWindowController
 {
-    self.mainWC = [[ACTMainWC alloc] init];
-    [self.mainWC showWindow:nil];
+    ACTMainWC *controller = [[ACTMainWC alloc] init];
+    [self.windowControllers addObject:controller];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(mainWindowClosed) name:NSWindowWillCloseNotification object:self.mainWC.window];
+    [controller showWindow:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(windowControllerClosedWindow:) name:NSWindowWillCloseNotification object:controller.window];
+    
+    return controller;
 }
 
-- (void)mainWindowClosed
+- (void)windowControllerClosedWindow:(NSNotification *)note
 {
-    self.mainWC = nil;
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [self.windowControllers removeObject:[note.object windowController]];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NSWindowWillCloseNotification object:[note.object windowController]];
 }
 
 @end

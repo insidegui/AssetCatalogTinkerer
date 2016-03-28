@@ -36,6 +36,7 @@ class QuickLookableCollectionView: NSCollectionView {
         guard selectionIndexPaths.count > 0 else { return }
         
         quickLookHandler.pasteboard = NSPasteboard(name: "CollectionViewQuickLook")
+        quickLookHandler.collectionView = self
         
         let panel = QLPreviewPanel.sharedPreviewPanel()
         
@@ -54,10 +55,12 @@ class QuickLookableCollectionView: NSCollectionView {
     override func beginPreviewPanelControl(panel: QLPreviewPanel!) {
         writeSelectionToQuickLookPasteboard()
         
+        panel.delegate = quickLookHandler
         panel.dataSource = quickLookHandler
     }
     
     override func endPreviewPanelControl(panel: QLPreviewPanel!) {
+        panel.delegate = nil
         panel.dataSource = nil
     }
     
@@ -68,20 +71,44 @@ class QuickLookableCollectionView: NSCollectionView {
     
 }
 
-@objc private class QuickLookableCollectionViewPreviewHandler: NSObject, QLPreviewPanelDataSource {
+@objc private class QuickLookableCollectionViewPreviewHandler: NSObject, QLPreviewPanelDataSource, QLPreviewPanelDelegate {
     
     var pasteboard: NSPasteboard!
+    var collectionView: QuickLookableCollectionView!
+    
+    var previewItems: [NSURL] {
+        guard let items = pasteboard.propertyListForType(NSFilenamesPboardType) as? [String] else { return [] }
+        
+        return items.map { NSURL(fileURLWithPath: $0) }
+    }
     
     @objc private func numberOfPreviewItemsInPreviewPanel(panel: QLPreviewPanel!) -> Int {
-        guard let items = pasteboard.pasteboardItems else { return 0 }
-        
-        return items.count
+        return previewItems.count
     }
     
     @objc private func previewPanel(panel: QLPreviewPanel!, previewItemAtIndex index: Int) -> QLPreviewItem! {
-        guard let items = pasteboard.propertyListForType(NSFilenamesPboardType) as? [String] else { return nil }
+        guard previewItems.count > 0 else { return nil }
         
-        return NSURL(fileURLWithPath: items[index])
+        return previewItems[index]
+    }
+    
+    @objc private func previewPanel(panel: QLPreviewPanel!, handleEvent event: NSEvent!) -> Bool {
+        if event.type == NSEventType.KeyDown {
+            collectionView.keyDown(event)
+            return true
+        }
+        
+        return false
+    }
+    
+    @objc private func previewPanel(panel: QLPreviewPanel!, sourceFrameOnScreenForPreviewItem item: QLPreviewItem!) -> NSRect {
+        let combinedRect = collectionView.selectionIndexes.map { return collectionView.frameForItemAtIndex($0) }.reduce(NSZeroRect) { NSUnionRect($0, $1) }
+        
+        var preliminaryRect = collectionView.enclosingScrollView!.convertRect(combinedRect, toView: nil)
+        preliminaryRect.origin.y += collectionView.enclosingScrollView!.contentView.bounds.origin.y
+        let rect = collectionView.window?.convertRectToScreen(preliminaryRect)
+        
+        return rect ?? NSZeroRect
     }
     
 }

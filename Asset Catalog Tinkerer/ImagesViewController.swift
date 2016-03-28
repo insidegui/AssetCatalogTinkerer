@@ -85,8 +85,8 @@ class ImagesViewController: NSViewController {
         return s
     }()
     
-    private lazy var collectionView: NSCollectionView = {
-        let c = NSCollectionView(frame: NSZeroRect)
+    private lazy var collectionView: QuickLookableCollectionView = {
+        let c = QuickLookableCollectionView(frame: NSZeroRect)
         
         c.selectable = true
         c.allowsMultipleSelection = true

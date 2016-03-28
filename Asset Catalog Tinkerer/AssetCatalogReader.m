@@ -146,9 +146,13 @@ NSString * const kAssetCatalogReaderErrorDomain = @"br.com.guilhermerambo.AssetC
                         continue;
                     }
                     
+                    NSImage *originalImage = [[NSImage alloc] initWithData:pngData];
+                    NSImage *thumbnail = [self constrainImage:[[NSImage alloc] initWithData:pngData] toSize:self.thumbnailSize];
+                    
                     [self.mutableImages addObject:@{
                                              @"name" : namedImage.name,
-                                             @"image" : [[NSImage alloc] initWithData:pngData],
+                                             @"image" : originalImage,
+                                             @"thumbnail": thumbnail,
                                              @"filename": filename,
                                              @"png": pngData
                                              }];
@@ -174,6 +178,33 @@ NSString * const kAssetCatalogReaderErrorDomain = @"br.com.guilhermerambo.AssetC
             callback();
         });
     });
+}
+
+- (NSImage *)constrainImage:(NSImage *)image toSize:(NSSize)size
+{
+    if (image.size.width <= size.width && image.size.height <= size.height) return [image copy];
+    
+    int newWidth, newHeight = 0;
+    double rw = image.size.width / size.width;
+    double rh = image.size.height / size.height;
+    
+    if (rw > rh)
+    {
+        newHeight = round(image.size.height / rw);
+        newWidth = size.width;
+    }
+    else
+    {
+        newWidth = round(image.size.width / rh);
+        newHeight = size.height;
+    }
+    
+    NSImage *newImage = [[NSImage alloc] initWithSize:NSMakeSize(newWidth, newHeight)];
+    [newImage lockFocus];
+    [image drawInRect:NSMakeRect(0, 0, newWidth, newHeight) fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0];
+    [newImage unlockFocus];
+    
+    return newImage;
 }
 
 @end

@@ -93,7 +93,7 @@ class ImageCollectionViewItem: NSCollectionViewItem {
     
     private func updateUI() {
         guard let imageData = image where viewLoaded else { return }
-        guard let image = imageData["image"] as? NSImage else { return }
+        guard let image = imageData["thumbnail"] as? NSImage else { return }
         let name = imageData["name"] as! String
         let filename = imageData["filename"] as! String
         

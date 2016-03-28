@@ -36,6 +36,7 @@ class AssetCatalogDocument: NSDocument {
 
     override func readFromURL(url: NSURL, ofType typeName: String) throws {
         reader = AssetCatalogReader(fileURL: url)
+        reader.thumbnailSize = NSSize(width: 138.0, height: 138.0)
         
         reader.readWithCompletionHandler(didFinishReading, progressHandler: updateProgress)
     }

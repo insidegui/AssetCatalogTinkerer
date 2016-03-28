@@ -26,6 +26,27 @@
 			<key>NSDocumentClass</key>
 			<string>$(PRODUCT_MODULE_NAME).AssetCatalogDocument</string>
 		</dict>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>app</string>
+				<string>framework</string>
+				<string>bundle</string>
+				<string>plugin</string>
+			</array>
+			<key>CFBundleTypeName</key>
+			<string>Bundle</string>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>com.apple.bundle</string>
+			</array>
+			<key>LSTypeIsPackage</key>
+			<integer>1</integer>
+			<key>NSDocumentClass</key>
+			<string>$(PRODUCT_MODULE_NAME).AssetCatalogDocument</string>
+		</dict>
 	</array>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>

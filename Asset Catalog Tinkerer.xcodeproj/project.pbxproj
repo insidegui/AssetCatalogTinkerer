@@ -19,6 +19,7 @@
 		DDC06BAC1CA8CB6200B6A9F3 /* ImagesCollectionViewDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC06BAB1CA8CB6200B6A9F3 /* ImagesCollectionViewDataProvider.swift */; };
 		DDC06BB01CA8CFB900B6A9F3 /* ImageCollectionViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC06BAE1CA8CFB900B6A9F3 /* ImageCollectionViewItem.swift */; };
 		DDC06BB11CA8CFB900B6A9F3 /* ImageCollectionViewItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = DDC06BAF1CA8CFB900B6A9F3 /* ImageCollectionViewItem.xib */; };
+		DDDDE5C91CA96EF400B353D3 /* DocumentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDDE5C81CA96EF400B353D3 /* DocumentController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		DDC06BAB1CA8CB6200B6A9F3 /* ImagesCollectionViewDataProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagesCollectionViewDataProvider.swift; sourceTree = "<group>"; };
 		DDC06BAE1CA8CFB900B6A9F3 /* ImageCollectionViewItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewItem.swift; sourceTree = "<group>"; };
 		DDC06BAF1CA8CFB900B6A9F3 /* ImageCollectionViewItem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImageCollectionViewItem.xib; sourceTree = "<group>"; };
+		DDDDE5C81CA96EF400B353D3 /* DocumentController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocumentController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +97,7 @@
 		DDC06B891CA8BD1100B6A9F3 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				DDDDE5C81CA96EF400B353D3 /* DocumentController.swift */,
 				DDC06B791CA8BCF300B6A9F3 /* AssetCatalogDocument.swift */,
 				DDC06B8A1CA8BD6000B6A9F3 /* Asset Catalog Tinkerer-Bridging-Header.h */,
 				DDC06B8B1CA8BD6000B6A9F3 /* AssetCatalogReader.h */,
@@ -230,6 +233,7 @@
 				DDC06BA41CA8C9B100B6A9F3 /* GridLayout.swift in Sources */,
 				DDC06B941CA8C4FC00B6A9F3 /* ProgressBar.swift in Sources */,
 				DDC06B7A1CA8BCF300B6A9F3 /* AssetCatalogDocument.swift in Sources */,
+				DDDDE5C91CA96EF400B353D3 /* DocumentController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

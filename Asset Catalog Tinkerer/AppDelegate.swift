@@ -11,7 +11,12 @@ import Cocoa
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
 
-
+    private var documentController: DocumentController!
+    
+    func applicationWillFinishLaunching(notification: NSNotification) {
+        // The first NSDocumentController initialized becomes the sharedDocumentController
+        documentController = DocumentController()
+    }
 
     func applicationDidFinishLaunching(aNotification: NSNotification) {
         // Insert code here to initialize your application

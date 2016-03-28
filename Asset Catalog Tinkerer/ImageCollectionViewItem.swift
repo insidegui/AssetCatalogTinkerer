@@ -95,10 +95,11 @@ class ImageCollectionViewItem: NSCollectionViewItem {
         guard let imageData = image where viewLoaded else { return }
         guard let image = imageData["image"] as? NSImage else { return }
         let name = imageData["name"] as! String
+        let filename = imageData["filename"] as! String
         
         catalogImageView.image = image
         nameLabel.stringValue = name
-        view.toolTip = name
+        view.toolTip = filename
     }
     
 }

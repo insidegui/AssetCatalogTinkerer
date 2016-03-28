@@ -7,174 +7,159 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		DDE887C618C56EB1002D52A6 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDE887C518C56EB1002D52A6 /* Cocoa.framework */; };
-		DDE887D018C56EB1002D52A6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DDE887CE18C56EB1002D52A6 /* InfoPlist.strings */; };
-		DDE887D218C56EB1002D52A6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DDE887D118C56EB1002D52A6 /* main.m */; };
-		DDE887D618C56EB1002D52A6 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = DDE887D418C56EB1002D52A6 /* Credits.rtf */; };
-		DDE887D918C56EB1002D52A6 /* ACTAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DDE887D818C56EB1002D52A6 /* ACTAppDelegate.m */; };
-		DDE887DC18C56EB1002D52A6 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = DDE887DA18C56EB1002D52A6 /* MainMenu.xib */; };
-		DDE887DE18C56EB1002D52A6 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DDE887DD18C56EB1002D52A6 /* Images.xcassets */; };
-		DDE887FA18C56EE9002D52A6 /* CoreUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDE887F918C56EE9002D52A6 /* CoreUI.framework */; };
-		DDE8884218C57B0A002D52A6 /* ACTMainWC.m in Sources */ = {isa = PBXBuildFile; fileRef = DDE8884018C57B0A002D52A6 /* ACTMainWC.m */; };
-		DDE8884318C57B0A002D52A6 /* ACTMainWC.xib in Resources */ = {isa = PBXBuildFile; fileRef = DDE8884118C57B0A002D52A6 /* ACTMainWC.xib */; };
-		DDE8884B18C57FAB002D52A6 /* ACTAssetsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DDE8884A18C57FAB002D52A6 /* ACTAssetsTableViewController.m */; };
+		DDC06B761CA8BCF300B6A9F3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC06B751CA8BCF300B6A9F3 /* AppDelegate.swift */; };
+		DDC06B781CA8BCF300B6A9F3 /* ImagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC06B771CA8BCF300B6A9F3 /* ImagesViewController.swift */; };
+		DDC06B7A1CA8BCF300B6A9F3 /* AssetCatalogDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC06B791CA8BCF300B6A9F3 /* AssetCatalogDocument.swift */; };
+		DDC06B7C1CA8BCF300B6A9F3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DDC06B7B1CA8BCF300B6A9F3 /* Assets.xcassets */; };
+		DDC06B7F1CA8BCF300B6A9F3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DDC06B7D1CA8BCF300B6A9F3 /* Main.storyboard */; };
+		DDC06B8D1CA8BD6000B6A9F3 /* AssetCatalogReader.m in Sources */ = {isa = PBXBuildFile; fileRef = DDC06B8C1CA8BD6000B6A9F3 /* AssetCatalogReader.m */; };
+		DDC06B911CA8BDE900B6A9F3 /* CoreUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDC06B901CA8BDE900B6A9F3 /* CoreUI.framework */; };
+		DDC06B941CA8C4FC00B6A9F3 /* ProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC06B931CA8C4FC00B6A9F3 /* ProgressBar.swift */; };
+		DDC06BA41CA8C9B100B6A9F3 /* GridLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC06BA31CA8C9B100B6A9F3 /* GridLayout.swift */; };
+		DDC06BAC1CA8CB6200B6A9F3 /* ImagesCollectionViewDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC06BAB1CA8CB6200B6A9F3 /* ImagesCollectionViewDataProvider.swift */; };
+		DDC06BB01CA8CFB900B6A9F3 /* ImageCollectionViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC06BAE1CA8CFB900B6A9F3 /* ImageCollectionViewItem.swift */; };
+		DDC06BB11CA8CFB900B6A9F3 /* ImageCollectionViewItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = DDC06BAF1CA8CFB900B6A9F3 /* ImageCollectionViewItem.xib */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXCopyFilesBuildPhase section */
-		DDE888BC18C59E75002D52A6 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
-
 /* Begin PBXFileReference section */
-		DD8FB5841C02409E0040FEF6 /* CoreUI+TV.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CoreUI+TV.h"; sourceTree = "<group>"; };
-		DDE887C218C56EB1002D52A6 /* Asset Catalog Tinkerer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Asset Catalog Tinkerer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		DDE887C518C56EB1002D52A6 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
-		DDE887C818C56EB1002D52A6 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
-		DDE887C918C56EB1002D52A6 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
-		DDE887CA18C56EB1002D52A6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		DDE887CD18C56EB1002D52A6 /* Asset Catalog Tinkerer-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Asset Catalog Tinkerer-Info.plist"; sourceTree = "<group>"; };
-		DDE887CF18C56EB1002D52A6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		DDE887D118C56EB1002D52A6 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		DDE887D318C56EB1002D52A6 /* Asset Catalog Tinkerer-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Asset Catalog Tinkerer-Prefix.pch"; sourceTree = "<group>"; };
-		DDE887D518C56EB1002D52A6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
-		DDE887D718C56EB1002D52A6 /* ACTAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ACTAppDelegate.h; sourceTree = "<group>"; };
-		DDE887D818C56EB1002D52A6 /* ACTAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ACTAppDelegate.m; sourceTree = "<group>"; };
-		DDE887DB18C56EB1002D52A6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		DDE887DD18C56EB1002D52A6 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		DDE887E418C56EB1002D52A6 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		DDE887F918C56EE9002D52A6 /* CoreUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreUI.framework; path = ../../../../System/Library/PrivateFrameworks/CoreUI.framework; sourceTree = "<group>"; };
-		DDE887FB18C56EF9002D52A6 /* CUICatalog.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CUICatalog.h; sourceTree = "<group>"; };
-		DDE8883F18C57B0A002D52A6 /* ACTMainWC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ACTMainWC.h; path = "Window Controllers/ACTMainWC.h"; sourceTree = "<group>"; };
-		DDE8884018C57B0A002D52A6 /* ACTMainWC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ACTMainWC.m; path = "Window Controllers/ACTMainWC.m"; sourceTree = "<group>"; };
-		DDE8884118C57B0A002D52A6 /* ACTMainWC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ACTMainWC.xib; path = "Window Controllers/ACTMainWC.xib"; sourceTree = "<group>"; };
-		DDE8884918C57FAB002D52A6 /* ACTAssetsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ACTAssetsTableViewController.h; path = "View Controllers/ACTAssetsTableViewController.h"; sourceTree = "<group>"; };
-		DDE8884A18C57FAB002D52A6 /* ACTAssetsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ACTAssetsTableViewController.m; path = "View Controllers/ACTAssetsTableViewController.m"; sourceTree = "<group>"; };
+		DDC06B721CA8BCF300B6A9F3 /* Asset Catalog Tinkerer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Asset Catalog Tinkerer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DDC06B751CA8BCF300B6A9F3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		DDC06B771CA8BCF300B6A9F3 /* ImagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesViewController.swift; sourceTree = "<group>"; };
+		DDC06B791CA8BCF300B6A9F3 /* AssetCatalogDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetCatalogDocument.swift; sourceTree = "<group>"; };
+		DDC06B7B1CA8BCF300B6A9F3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		DDC06B7E1CA8BCF300B6A9F3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		DDC06B801CA8BCF300B6A9F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DDC06B871CA8BD0D00B6A9F3 /* CoreUI+TV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CoreUI+TV.h"; sourceTree = "<group>"; };
+		DDC06B881CA8BD0D00B6A9F3 /* CUICatalog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CUICatalog.h; sourceTree = "<group>"; };
+		DDC06B8A1CA8BD6000B6A9F3 /* Asset Catalog Tinkerer-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Asset Catalog Tinkerer-Bridging-Header.h"; sourceTree = "<group>"; };
+		DDC06B8B1CA8BD6000B6A9F3 /* AssetCatalogReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssetCatalogReader.h; sourceTree = "<group>"; };
+		DDC06B8C1CA8BD6000B6A9F3 /* AssetCatalogReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssetCatalogReader.m; sourceTree = "<group>"; };
+		DDC06B901CA8BDE900B6A9F3 /* CoreUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreUI.framework; path = ../../../../../../System/Library/PrivateFrameworks/CoreUI.framework; sourceTree = "<group>"; };
+		DDC06B931CA8C4FC00B6A9F3 /* ProgressBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressBar.swift; sourceTree = "<group>"; };
+		DDC06BA31CA8C9B100B6A9F3 /* GridLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridLayout.swift; sourceTree = "<group>"; };
+		DDC06BAB1CA8CB6200B6A9F3 /* ImagesCollectionViewDataProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagesCollectionViewDataProvider.swift; sourceTree = "<group>"; };
+		DDC06BAE1CA8CFB900B6A9F3 /* ImageCollectionViewItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewItem.swift; sourceTree = "<group>"; };
+		DDC06BAF1CA8CFB900B6A9F3 /* ImageCollectionViewItem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImageCollectionViewItem.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		DDE887BF18C56EB1002D52A6 /* Frameworks */ = {
+		DDC06B6F1CA8BCF300B6A9F3 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DDE887C618C56EB1002D52A6 /* Cocoa.framework in Frameworks */,
-				DDE887FA18C56EE9002D52A6 /* CoreUI.framework in Frameworks */,
+				DDC06B911CA8BDE900B6A9F3 /* CoreUI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		DDE887B918C56EB1002D52A6 = {
+		DDC06B691CA8BCF300B6A9F3 = {
 			isa = PBXGroup;
 			children = (
-				DDE887CB18C56EB1002D52A6 /* Asset Catalog Tinkerer */,
-				DDE887C418C56EB1002D52A6 /* Frameworks */,
-				DDE887C318C56EB1002D52A6 /* Products */,
+				DDC06B901CA8BDE900B6A9F3 /* CoreUI.framework */,
+				DDC06B741CA8BCF300B6A9F3 /* Asset Catalog Tinkerer */,
+				DDC06B731CA8BCF300B6A9F3 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		DDE887C318C56EB1002D52A6 /* Products */ = {
+		DDC06B731CA8BCF300B6A9F3 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				DDE887C218C56EB1002D52A6 /* Asset Catalog Tinkerer.app */,
+				DDC06B721CA8BCF300B6A9F3 /* Asset Catalog Tinkerer.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		DDE887C418C56EB1002D52A6 /* Frameworks */ = {
+		DDC06B741CA8BCF300B6A9F3 /* Asset Catalog Tinkerer */ = {
 			isa = PBXGroup;
 			children = (
-				DDE887F918C56EE9002D52A6 /* CoreUI.framework */,
-				DDE887C518C56EB1002D52A6 /* Cocoa.framework */,
-				DDE887E418C56EB1002D52A6 /* XCTest.framework */,
-				DDE887C718C56EB1002D52A6 /* Other Frameworks */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		DDE887C718C56EB1002D52A6 /* Other Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				DDE887C818C56EB1002D52A6 /* AppKit.framework */,
-				DDE887C918C56EB1002D52A6 /* CoreData.framework */,
-				DDE887CA18C56EB1002D52A6 /* Foundation.framework */,
-			);
-			name = "Other Frameworks";
-			sourceTree = "<group>";
-		};
-		DDE887CB18C56EB1002D52A6 /* Asset Catalog Tinkerer */ = {
-			isa = PBXGroup;
-			children = (
-				DDE8884518C57B1E002D52A6 /* CoreUI Headers */,
-				DDE8884418C57B0D002D52A6 /* Window Controllers */,
-				DDE887D718C56EB1002D52A6 /* ACTAppDelegate.h */,
-				DDE887D818C56EB1002D52A6 /* ACTAppDelegate.m */,
-				DDE887DA18C56EB1002D52A6 /* MainMenu.xib */,
-				DDE887DD18C56EB1002D52A6 /* Images.xcassets */,
-				DDE887CC18C56EB1002D52A6 /* Supporting Files */,
+				DDC06BB31CA8DC0C00B6A9F3 /* Resources */,
+				DDC06B861CA8BD0D00B6A9F3 /* Private Headers */,
+				DDC06B8E1CA8BD6500B6A9F3 /* Bootstrap */,
+				DDC06B891CA8BD1100B6A9F3 /* Core */,
+				DDC06B8F1CA8BD6F00B6A9F3 /* UI */,
 			);
 			path = "Asset Catalog Tinkerer";
 			sourceTree = "<group>";
 		};
-		DDE887CC18C56EB1002D52A6 /* Supporting Files */ = {
+		DDC06B861CA8BD0D00B6A9F3 /* Private Headers */ = {
 			isa = PBXGroup;
 			children = (
-				DDE887CD18C56EB1002D52A6 /* Asset Catalog Tinkerer-Info.plist */,
-				DDE887CE18C56EB1002D52A6 /* InfoPlist.strings */,
-				DDE887D118C56EB1002D52A6 /* main.m */,
-				DDE887D318C56EB1002D52A6 /* Asset Catalog Tinkerer-Prefix.pch */,
-				DDE887D418C56EB1002D52A6 /* Credits.rtf */,
+				DDC06B871CA8BD0D00B6A9F3 /* CoreUI+TV.h */,
+				DDC06B881CA8BD0D00B6A9F3 /* CUICatalog.h */,
 			);
-			name = "Supporting Files";
+			path = "Private Headers";
+			sourceTree = SOURCE_ROOT;
+		};
+		DDC06B891CA8BD1100B6A9F3 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				DDC06B791CA8BCF300B6A9F3 /* AssetCatalogDocument.swift */,
+				DDC06B8A1CA8BD6000B6A9F3 /* Asset Catalog Tinkerer-Bridging-Header.h */,
+				DDC06B8B1CA8BD6000B6A9F3 /* AssetCatalogReader.h */,
+				DDC06B8C1CA8BD6000B6A9F3 /* AssetCatalogReader.m */,
+			);
+			name = Core;
 			sourceTree = "<group>";
 		};
-		DDE8884418C57B0D002D52A6 /* Window Controllers */ = {
+		DDC06B8E1CA8BD6500B6A9F3 /* Bootstrap */ = {
 			isa = PBXGroup;
 			children = (
-				DDE8884C18C57FAF002D52A6 /* View Controllers */,
-				DDE8883F18C57B0A002D52A6 /* ACTMainWC.h */,
-				DDE8884018C57B0A002D52A6 /* ACTMainWC.m */,
-				DDE8884118C57B0A002D52A6 /* ACTMainWC.xib */,
+				DDC06B751CA8BCF300B6A9F3 /* AppDelegate.swift */,
 			);
-			name = "Window Controllers";
+			name = Bootstrap;
 			sourceTree = "<group>";
 		};
-		DDE8884518C57B1E002D52A6 /* CoreUI Headers */ = {
+		DDC06B8F1CA8BD6F00B6A9F3 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				DDE887FB18C56EF9002D52A6 /* CUICatalog.h */,
-				DD8FB5841C02409E0040FEF6 /* CoreUI+TV.h */,
+				DDC06B921CA8C4F500B6A9F3 /* Views */,
+				DDC06BAB1CA8CB6200B6A9F3 /* ImagesCollectionViewDataProvider.swift */,
+				DDC06B771CA8BCF300B6A9F3 /* ImagesViewController.swift */,
 			);
-			name = "CoreUI Headers";
+			name = UI;
 			sourceTree = "<group>";
 		};
-		DDE8884C18C57FAF002D52A6 /* View Controllers */ = {
+		DDC06B921CA8C4F500B6A9F3 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				DDE8884918C57FAB002D52A6 /* ACTAssetsTableViewController.h */,
-				DDE8884A18C57FAB002D52A6 /* ACTAssetsTableViewController.m */,
+				DDC06BA21CA8C9AA00B6A9F3 /* CollectionView */,
+				DDC06B931CA8C4FC00B6A9F3 /* ProgressBar.swift */,
 			);
-			name = "View Controllers";
+			name = Views;
+			sourceTree = "<group>";
+		};
+		DDC06BA21CA8C9AA00B6A9F3 /* CollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				DDC06BA31CA8C9B100B6A9F3 /* GridLayout.swift */,
+				DDC06BAE1CA8CFB900B6A9F3 /* ImageCollectionViewItem.swift */,
+			);
+			name = CollectionView;
+			sourceTree = "<group>";
+		};
+		DDC06BB31CA8DC0C00B6A9F3 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				DDC06B801CA8BCF300B6A9F3 /* Info.plist */,
+				DDC06B7D1CA8BCF300B6A9F3 /* Main.storyboard */,
+				DDC06BAF1CA8CFB900B6A9F3 /* ImageCollectionViewItem.xib */,
+				DDC06B7B1CA8BCF300B6A9F3 /* Assets.xcassets */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		DDE887C118C56EB1002D52A6 /* Asset Catalog Tinkerer */ = {
+		DDC06B711CA8BCF300B6A9F3 /* Asset Catalog Tinkerer */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = DDE887F318C56EB1002D52A6 /* Build configuration list for PBXNativeTarget "Asset Catalog Tinkerer" */;
+			buildConfigurationList = DDC06B831CA8BCF300B6A9F3 /* Build configuration list for PBXNativeTarget "Asset Catalog Tinkerer" */;
 			buildPhases = (
-				DDE887BE18C56EB1002D52A6 /* Sources */,
-				DDE887BF18C56EB1002D52A6 /* Frameworks */,
-				DDE887C018C56EB1002D52A6 /* Resources */,
-				DDE888BC18C59E75002D52A6 /* CopyFiles */,
+				DDC06B6E1CA8BCF300B6A9F3 /* Sources */,
+				DDC06B6F1CA8BCF300B6A9F3 /* Frameworks */,
+				DDC06B701CA8BCF300B6A9F3 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -182,19 +167,26 @@
 			);
 			name = "Asset Catalog Tinkerer";
 			productName = "Asset Catalog Tinkerer";
-			productReference = DDE887C218C56EB1002D52A6 /* Asset Catalog Tinkerer.app */;
+			productReference = DDC06B721CA8BCF300B6A9F3 /* Asset Catalog Tinkerer.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		DDE887BA18C56EB1002D52A6 /* Project object */ = {
+		DDC06B6A1CA8BCF300B6A9F3 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0700;
+				LastSwiftUpdateCheck = 0730;
+				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = "Guilherme Rambo";
+				TargetAttributes = {
+					DDC06B711CA8BCF300B6A9F3 = {
+						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = 8C7439RJLG;
+					};
+				};
 			};
-			buildConfigurationList = DDE887BD18C56EB1002D52A6 /* Build configuration list for PBXProject "Asset Catalog Tinkerer" */;
+			buildConfigurationList = DDC06B6D1CA8BCF300B6A9F3 /* Build configuration list for PBXProject "Asset Catalog Tinkerer" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -202,79 +194,67 @@
 				en,
 				Base,
 			);
-			mainGroup = DDE887B918C56EB1002D52A6;
-			productRefGroup = DDE887C318C56EB1002D52A6 /* Products */;
+			mainGroup = DDC06B691CA8BCF300B6A9F3;
+			productRefGroup = DDC06B731CA8BCF300B6A9F3 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				DDE887C118C56EB1002D52A6 /* Asset Catalog Tinkerer */,
+				DDC06B711CA8BCF300B6A9F3 /* Asset Catalog Tinkerer */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		DDE887C018C56EB1002D52A6 /* Resources */ = {
+		DDC06B701CA8BCF300B6A9F3 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DDE887D018C56EB1002D52A6 /* InfoPlist.strings in Resources */,
-				DDE8884318C57B0A002D52A6 /* ACTMainWC.xib in Resources */,
-				DDE887DE18C56EB1002D52A6 /* Images.xcassets in Resources */,
-				DDE887D618C56EB1002D52A6 /* Credits.rtf in Resources */,
-				DDE887DC18C56EB1002D52A6 /* MainMenu.xib in Resources */,
+				DDC06BB11CA8CFB900B6A9F3 /* ImageCollectionViewItem.xib in Resources */,
+				DDC06B7C1CA8BCF300B6A9F3 /* Assets.xcassets in Resources */,
+				DDC06B7F1CA8BCF300B6A9F3 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		DDE887BE18C56EB1002D52A6 /* Sources */ = {
+		DDC06B6E1CA8BCF300B6A9F3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DDE8884B18C57FAB002D52A6 /* ACTAssetsTableViewController.m in Sources */,
-				DDE8884218C57B0A002D52A6 /* ACTMainWC.m in Sources */,
-				DDE887D918C56EB1002D52A6 /* ACTAppDelegate.m in Sources */,
-				DDE887D218C56EB1002D52A6 /* main.m in Sources */,
+				DDC06B781CA8BCF300B6A9F3 /* ImagesViewController.swift in Sources */,
+				DDC06BB01CA8CFB900B6A9F3 /* ImageCollectionViewItem.swift in Sources */,
+				DDC06B8D1CA8BD6000B6A9F3 /* AssetCatalogReader.m in Sources */,
+				DDC06B761CA8BCF300B6A9F3 /* AppDelegate.swift in Sources */,
+				DDC06BAC1CA8CB6200B6A9F3 /* ImagesCollectionViewDataProvider.swift in Sources */,
+				DDC06BA41CA8C9B100B6A9F3 /* GridLayout.swift in Sources */,
+				DDC06B941CA8C4FC00B6A9F3 /* ProgressBar.swift in Sources */,
+				DDC06B7A1CA8BCF300B6A9F3 /* AssetCatalogDocument.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		DDE887CE18C56EB1002D52A6 /* InfoPlist.strings */ = {
+		DDC06B7D1CA8BCF300B6A9F3 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				DDE887CF18C56EB1002D52A6 /* en */,
+				DDC06B7E1CA8BCF300B6A9F3 /* Base */,
 			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		DDE887D418C56EB1002D52A6 /* Credits.rtf */ = {
-			isa = PBXVariantGroup;
-			children = (
-				DDE887D518C56EB1002D52A6 /* en */,
-			);
-			name = Credits.rtf;
-			sourceTree = "<group>";
-		};
-		DDE887DA18C56EB1002D52A6 /* MainMenu.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				DDE887DB18C56EB1002D52A6 /* Base */,
-			);
-			name = MainMenu.xib;
+			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		DDE887F118C56EB1002D52A6 /* Debug */ = {
+		DDC06B811CA8BCF300B6A9F3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
@@ -283,37 +263,43 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
 				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
-				SYMROOT = build;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
-		DDE887F218C56EB1002D52A6 /* Release */ = {
+		DDC06B821CA8BCF300B6A9F3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
@@ -322,82 +308,88 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COPY_PHASE_STRIP = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
-				SYMROOT = build;
 			};
 			name = Release;
 		};
-		DDE887F418C56EB1002D52A6 /* Debug */ = {
+		DDC06B841CA8BCF300B6A9F3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "Developer ID Application";
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks",
 				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Asset Catalog Tinkerer/Asset Catalog Tinkerer-Prefix.pch";
-				INFOPLIST_FILE = "Asset Catalog Tinkerer/Asset Catalog Tinkerer-Info.plist";
-				PRODUCT_BUNDLE_IDENTIFIER = "br.com.guilhermerambo.${PRODUCT_NAME:rfc1034identifier}";
+				INFOPLIST_FILE = "Asset Catalog Tinkerer/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "br.com.guilhermerambo.Asset-Catalog-Tinkerer";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = app;
+				SWIFT_OBJC_BRIDGING_HEADER = "Asset Catalog Tinkerer/Asset Catalog Tinkerer-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
-		DDE887F518C56EB1002D52A6 /* Release */ = {
+		DDC06B851CA8BCF300B6A9F3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "Developer ID Application";
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks",
 				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Asset Catalog Tinkerer/Asset Catalog Tinkerer-Prefix.pch";
-				INFOPLIST_FILE = "Asset Catalog Tinkerer/Asset Catalog Tinkerer-Info.plist";
-				PRODUCT_BUNDLE_IDENTIFIER = "br.com.guilhermerambo.${PRODUCT_NAME:rfc1034identifier}";
+				INFOPLIST_FILE = "Asset Catalog Tinkerer/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "br.com.guilhermerambo.Asset-Catalog-Tinkerer";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = app;
+				SWIFT_OBJC_BRIDGING_HEADER = "Asset Catalog Tinkerer/Asset Catalog Tinkerer-Bridging-Header.h";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		DDE887BD18C56EB1002D52A6 /* Build configuration list for PBXProject "Asset Catalog Tinkerer" */ = {
+		DDC06B6D1CA8BCF300B6A9F3 /* Build configuration list for PBXProject "Asset Catalog Tinkerer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				DDE887F118C56EB1002D52A6 /* Debug */,
-				DDE887F218C56EB1002D52A6 /* Release */,
+				DDC06B811CA8BCF300B6A9F3 /* Debug */,
+				DDC06B821CA8BCF300B6A9F3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		DDE887F318C56EB1002D52A6 /* Build configuration list for PBXNativeTarget "Asset Catalog Tinkerer" */ = {
+		DDC06B831CA8BCF300B6A9F3 /* Build configuration list for PBXNativeTarget "Asset Catalog Tinkerer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				DDE887F418C56EB1002D52A6 /* Debug */,
-				DDE887F518C56EB1002D52A6 /* Release */,
+				DDC06B841CA8BCF300B6A9F3 /* Debug */,
+				DDC06B851CA8BCF300B6A9F3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = DDE887BA18C56EB1002D52A6 /* Project object */;
+	rootObject = DDC06B6A1CA8BCF300B6A9F3 /* Project object */;
 }

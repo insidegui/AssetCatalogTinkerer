@@ -3,6 +3,8 @@ Asset Catalog Tinkerer
 
 An app that lets you open `.car` files and browse/extract their images.
 
+[⬇ Download Latest Release](https://github.com/insidegui/AssetCatalogTinkerer/raw/master/releases/AssetCatalogTinkerer_latest.zip)
+
 How to use
 ==========
 

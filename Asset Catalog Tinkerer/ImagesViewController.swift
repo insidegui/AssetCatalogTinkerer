@@ -144,6 +144,12 @@ class ImagesViewController: NSViewController {
     
     // MARK: - Export
     
+    func copy(sender: AnyObject) {
+        guard collectionView.selectionIndexPaths.count > 0 else { return }
+        
+        dataProvider.collectionView(collectionView, writeItemsAtIndexPaths: collectionView.selectionIndexPaths, toPasteboard: NSPasteboard.generalPasteboard())
+    }
+    
     @IBAction func exportAllImages(sender: NSMenuItem) {
         imagesToExport = images
         launchExportPanel()
@@ -204,8 +210,12 @@ class ImagesViewController: NSViewController {
     }
     
     override func validateMenuItem(menuItem: NSMenuItem) -> Bool {
+        if NSStringFromSelector(menuItem.action) == "copy:" {
+            return collectionView.selectionIndexPaths.count > 0
+        }
+        
         guard let semanticMenuItem = MenuItemTags(rawValue: menuItem.tag) else {
-            return super.validateMenuItem(menuItem)
+            return false
         }
         
         switch semanticMenuItem {

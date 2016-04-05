@@ -147,7 +147,7 @@ NSString * const kAssetCatalogReaderErrorDomain = @"br.com.guilhermerambo.AssetC
                     }
                     
                     NSImage *originalImage = [[NSImage alloc] initWithData:pngData];
-                    NSImage *thumbnail = [self constrainImage:[[NSImage alloc] initWithData:pngData] toSize:self.thumbnailSize];
+                    NSImage *thumbnail = [self constrainImage:originalImage toSize:self.thumbnailSize];
                     
                     [self.mutableImages addObject:@{
                                              @"name" : namedImage.name,
@@ -184,18 +184,18 @@ NSString * const kAssetCatalogReaderErrorDomain = @"br.com.guilhermerambo.AssetC
 {
     if (image.size.width <= size.width && image.size.height <= size.height) return [image copy];
     
-    int newWidth, newHeight = 0;
+    CGFloat newWidth, newHeight = 0;
     double rw = image.size.width / size.width;
     double rh = image.size.height / size.height;
     
     if (rw > rh)
     {
-        newHeight = round(image.size.height / rw);
+        newHeight = MAX(roundl(image.size.height / rw), 1);
         newWidth = size.width;
     }
     else
     {
-        newWidth = round(image.size.width / rh);
+        newWidth = MAX(roundl(image.size.width / rh), 1);
         newHeight = size.height;
     }
     

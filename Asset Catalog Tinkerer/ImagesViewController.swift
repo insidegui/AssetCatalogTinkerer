@@ -15,6 +15,7 @@ class ImagesViewController: NSViewController {
             progressBar.progress = loadProgress
             if loadProgress >= 0.99 && error == nil {
                 hideStatus()
+                showSpinner()
             }
         }
     }
@@ -34,6 +35,7 @@ class ImagesViewController: NSViewController {
         didSet {
             loadProgress = 1.0
             dataProvider.images = images
+            hideSpinner()
         }
     }
     
@@ -42,7 +44,7 @@ class ImagesViewController: NSViewController {
 
         view.layer?.backgroundColor = NSColor.whiteColor().CGColor
         buildUI()
-        showStatus("Loading images")
+        showStatus("Extracting Images...")
     }
     
     // MARK: - UI
@@ -53,6 +55,18 @@ class ImagesViewController: NSViewController {
         p.translatesAutoresizingMaskIntoConstraints = false
         p.tintColor = NSColor(calibratedRed:0, green:0.495, blue:1, alpha:1)
         p.progress = 0.0
+        
+        return p
+    }()
+    
+    private lazy var spinner: NSProgressIndicator = {
+        let p = NSProgressIndicator(frame: NSZeroRect)
+        
+        p.translatesAutoresizingMaskIntoConstraints = false
+        p.controlSize = .RegularControlSize
+        p.style = .SpinningStyle
+        p.displayedWhenStopped = false
+        p.indeterminate = true
         
         return p
     }()
@@ -118,6 +132,20 @@ class ImagesViewController: NSViewController {
         
         return vfxView
     }()
+    
+    private func showSpinner() {
+        if spinner.superview == nil {
+            view.addSubview(spinner)
+            spinner.centerYAnchor.constraintEqualToAnchor(view.centerYAnchor).active = true
+            spinner.centerXAnchor.constraintEqualToAnchor(view.centerXAnchor).active = true
+        }
+        
+        spinner.startAnimation(nil)
+    }
+    
+    private func hideSpinner() {
+        spinner.stopAnimation(nil)
+    }
     
     private func buildUI() {
         scrollView.frame = view.bounds

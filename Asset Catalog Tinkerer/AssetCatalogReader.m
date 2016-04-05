@@ -101,13 +101,14 @@ NSString * const kAssetCatalogReaderErrorDomain = @"br.com.guilhermerambo.AssetC
         totalItemCount = self.catalog.allImageNames.count;
         
         for (NSString *imageName in self.catalog.allImageNames) {
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                double loadedFraction = (double)loadedItemCount / (double)totalItemCount;
+                if (progressCallback) progressCallback(loadedFraction);
+            });
+            
             for (CUINamedImage *namedImage in [self.catalog imagesWithName:imageName]) {
                 if (self.cancelled) return;
-                
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    double loadedFraction = (double)loadedItemCount / (double)totalItemCount;
-                    if (progressCallback) progressCallback(loadedFraction);
-                });
                 
                 @autoreleasepool {
                     if (namedImage == nil) {

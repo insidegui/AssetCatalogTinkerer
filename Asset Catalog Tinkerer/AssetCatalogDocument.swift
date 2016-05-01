@@ -46,7 +46,9 @@ class AssetCatalogDocument: NSDocument {
     }
     
     private func didFinishReading() {
-        if let error = self.reader.error {
+        guard !reader.cancelled else { return }
+        
+        if let error = reader.error {
             imagesViewController.error = error
         } else {
             imagesViewController.images = reader.images

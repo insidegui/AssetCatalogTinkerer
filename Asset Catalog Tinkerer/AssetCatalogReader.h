@@ -21,4 +21,6 @@
 
 - (void)cancelReading;
 
+@property (nonatomic, assign) BOOL cancelled;
+
 @end

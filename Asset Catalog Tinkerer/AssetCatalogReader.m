@@ -18,7 +18,6 @@ NSString * const kAssetCatalogReaderErrorDomain = @"br.com.guilhermerambo.AssetC
 @property (nonatomic, copy) NSURL *fileURL;
 @property (nonatomic, strong) CUICatalog *catalog;
 @property (nonatomic, strong) NSMutableArray <NSDictionary <NSString *, NSObject *> *> *mutableImages;
-@property (nonatomic, assign) BOOL cancelled;
 
 @end
 

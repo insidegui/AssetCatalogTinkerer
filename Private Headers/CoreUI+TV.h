@@ -9,7 +9,7 @@
 #ifndef CoreUI_TV_h
 #define CoreUI_TV_h
 
-#import "CUICatalog.h"
+#import "CoreUI.h"
 
 @interface CUINamedLayerStack : CUINamedImage
 

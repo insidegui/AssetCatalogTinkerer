@@ -8,7 +8,7 @@
 
 #import "AssetCatalogReader.h"
 
-#import "CUICatalog.h"
+#import "CoreUI.h"
 #import "CoreUI+TV.h"
 
 NSString * const kAssetCatalogReaderErrorDomain = @"br.com.guilhermerambo.AssetCatalogReader";
@@ -89,13 +89,9 @@ NSString * const kAssetCatalogReaderErrorDomain = @"br.com.guilhermerambo.AssetC
             return;
         }
         
-        if (!self.catalog.allImageNames.count) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                self.error = [NSError errorWithDomain:kAssetCatalogReaderErrorDomain code:0 userInfo:@{NSLocalizedDescriptionKey: @"The asset catalog contains no images"}];
-                callback();
-            });
-            
-            return;
+        if (!self.catalog.allImageNames.count || ![self.catalog respondsToSelector:@selector(imagesWithName:)]) {
+            // CAR is a theme file not an asset catalog
+            return [self readThemeStoreWithCompletionHandler:callback progressHandler:progressCallback];
         }
         
         totalItemCount = self.catalog.allImageNames.count;
@@ -178,6 +174,62 @@ NSString * const kAssetCatalogReaderErrorDomain = @"br.com.guilhermerambo.AssetC
         dispatch_async(dispatch_get_main_queue(), ^{
             callback();
         });
+    });
+}
+
+- (void)readThemeStoreWithCompletionHandler:(void (^__nonnull)())callback progressHandler:(void (^__nullable)(double progress))progressCallback
+{
+    __block uint64 totalItemCount = [self.catalog _themeStore].themeStore.allAssetKeys.count;
+    __block uint64 loadedItemCount = 0;
+    
+    [[self.catalog _themeStore].themeStore.allAssetKeys enumerateObjectsWithOptions:0 usingBlock:^(CUIRenditionKey * _Nonnull key, NSUInteger idx, BOOL * _Nonnull stop) {
+        if (self.cancelled) return;
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            double loadedFraction = (double)loadedItemCount / (double)totalItemCount;
+            if (progressCallback) progressCallback(loadedFraction);
+        });
+        
+        @try {
+            CUIThemeRendition *rendition = [[self.catalog _themeStore] renditionWithKey:key.keyList];
+            
+            NSString *filename = [NSString stringWithFormat:@"%@-%@.png", rendition.name.stringByDeletingPathExtension, presentationStateNameForPresentationState(key.themeState)];
+            
+            if (rendition.unslicedImage) {
+                NSBitmapImageRep *imageRep = [[NSBitmapImageRep alloc] initWithCGImage:rendition.unslicedImage];
+                imageRep.size = NSMakeSize(CGImageGetWidth(rendition.unslicedImage), CGImageGetHeight(rendition.unslicedImage));
+                
+                NSData *pngData = [imageRep representationUsingType:NSPNGFileType properties:@{NSImageInterlaced:@(NO)}];
+                if (!pngData.length) {
+                    NSLog(@"Unable to get PNG data from rendition named %@", rendition.name);
+                    loadedItemCount++;
+                    return;
+                }
+                
+                NSImage *originalImage = [[NSImage alloc] initWithData:pngData];
+                NSImage *thumbnail = [self constrainImage:originalImage toSize:self.thumbnailSize];
+                
+                if (self.cancelled) return;
+                
+                [self.mutableImages addObject:@{
+                                                @"name" : rendition.name,
+                                                @"image" : originalImage,
+                                                @"thumbnail": thumbnail,
+                                                @"filename": filename,
+                                                @"png": pngData
+                                                }];
+            } else {
+                NSLog(@"The rendition %@ doesn't have an image, It is probably an effect or material.", rendition.name);
+            }
+            
+            loadedItemCount++;
+        } @catch (NSException *exception) {
+            NSLog(@"Exception while reading theme store: %@", exception);
+        }
+    }];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        callback();
     });
 }
 

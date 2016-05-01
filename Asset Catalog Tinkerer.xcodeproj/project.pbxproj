@@ -32,7 +32,7 @@
 		DDC06B7E1CA8BCF300B6A9F3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		DDC06B801CA8BCF300B6A9F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DDC06B871CA8BD0D00B6A9F3 /* CoreUI+TV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CoreUI+TV.h"; sourceTree = "<group>"; };
-		DDC06B881CA8BD0D00B6A9F3 /* CUICatalog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CUICatalog.h; sourceTree = "<group>"; };
+		DDC06B881CA8BD0D00B6A9F3 /* CoreUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreUI.h; sourceTree = "<group>"; };
 		DDC06B8A1CA8BD6000B6A9F3 /* Asset Catalog Tinkerer-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Asset Catalog Tinkerer-Bridging-Header.h"; sourceTree = "<group>"; };
 		DDC06B8B1CA8BD6000B6A9F3 /* AssetCatalogReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssetCatalogReader.h; sourceTree = "<group>"; };
 		DDC06B8C1CA8BD6000B6A9F3 /* AssetCatalogReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssetCatalogReader.m; sourceTree = "<group>"; };
@@ -91,7 +91,7 @@
 			isa = PBXGroup;
 			children = (
 				DDC06B871CA8BD0D00B6A9F3 /* CoreUI+TV.h */,
-				DDC06B881CA8BD0D00B6A9F3 /* CUICatalog.h */,
+				DDC06B881CA8BD0D00B6A9F3 /* CoreUI.h */,
 			);
 			path = "Private Headers";
 			sourceTree = SOURCE_ROOT;

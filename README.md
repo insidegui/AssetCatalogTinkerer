@@ -14,9 +14,11 @@ Once you have an asset catalog opened, you can drag individual assets out or exp
 
 ![screenshot](https://raw.github.com/insidegui/AssetCatalogTinkerer/master/screenshot.png)
 
-## Important info
+## Supported file types
 
-There are multiple types of `car` files, this app only works for Asset Catalog Files which contain images, like the ones you create in Xcode.
+Since version 2.2, Asset Catalog Tinkerer can now read "theme store" files, not only catalog files. "Theme store" files contain assets for UI components, you can find examples of them in `/System/Library/CoreServices/SystemAppearance.bundle`.
+
+![screenshot2](https://raw.github.com/insidegui/AssetCatalogTinkerer/master/screenshot_themestore.png)
 
 ## Contributing
 

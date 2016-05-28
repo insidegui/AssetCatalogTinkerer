@@ -110,10 +110,15 @@ NSString * const kAssetCatalogReaderErrorDomain = @"br.com.guilhermerambo.AssetC
                         loadedItemCount++;
                         continue;
                     }
-                    
+
+                    if ([namedImage isKindOfClass:[CUINamedData class]]) {
+                        loadedItemCount++;
+                        continue;
+                    }
+
                     NSString *filename;
                     CGImageRef image;
-                    
+
                     if ([namedImage isKindOfClass:[CUINamedLayerStack class]]) {
                         CUINamedLayerStack *stack = (CUINamedLayerStack *)namedImage;
                         if (!stack.layers.count) {

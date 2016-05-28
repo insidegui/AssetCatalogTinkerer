@@ -8,6 +8,10 @@
 
 #import <Cocoa/Cocoa.h>
 
+@interface CUINamedData : NSObject
+
+@end
+
 @interface CUINamedImage : NSObject
 
 @property (copy, nonatomic) NSString *name;

@@ -26,6 +26,8 @@ class ImagesViewController: NSViewController {
             
             loadProgress = 1.0
             showStatus(error.localizedDescription)
+            
+            tellWindowControllerToDisableSearchField()
         }
     }
     
@@ -36,6 +38,8 @@ class ImagesViewController: NSViewController {
             loadProgress = 1.0
             dataProvider.images = images
             hideSpinner()
+            
+            tellWindowControllerToEnableSearchField()
         }
     }
     
@@ -171,6 +175,8 @@ class ImagesViewController: NSViewController {
     }
     
     private func showExportProgress() {
+        tellWindowControllerToDisableSearchField()
+        
         if exportProgressView.superview == nil {
             exportProgressView.frame = view.bounds
             view.addSubview(exportProgressView)
@@ -188,6 +194,8 @@ class ImagesViewController: NSViewController {
     }
     
     private func hideExportProgress() {
+        tellWindowControllerToEnableSearchField()
+        
         NSAnimationContext.runAnimationGroup({ ctx in
             ctx.duration = 0.4
             self.exportProgressView.animator().alphaValue = 0.0
@@ -220,6 +228,24 @@ class ImagesViewController: NSViewController {
         })
     }
     
+    @IBAction func search(sender: NSSearchField) {
+        dataProvider.searchTerm = sender.stringValue
+        
+        if dataProvider.filteredImages.count == 0 {
+            showStatus("No images found for \"\(dataProvider.searchTerm)\"")
+        } else {
+            hideStatus()
+        }
+    }
+    
+    private func tellWindowControllerToEnableSearchField() {
+        NSApp.sendAction(#selector(MainWindowController.enableSearchField(_:)), to: nil, from: self)
+    }
+    
+    private func tellWindowControllerToDisableSearchField() {
+        NSApp.sendAction(#selector(MainWindowController.disableSearchField(_:)), to: nil, from: self)
+    }
+    
     // MARK: - Export
     
     func copy(sender: AnyObject) {
@@ -229,12 +255,12 @@ class ImagesViewController: NSViewController {
     }
     
     @IBAction func exportAllImages(sender: NSMenuItem) {
-        imagesToExport = images
+        imagesToExport = dataProvider.filteredImages
         launchExportPanel()
     }
     
     @IBAction func exportSelectedImages(sender: NSMenuItem) {
-        imagesToExport = collectionView.selectionIndexes.map { return self.images[$0] }
+        imagesToExport = collectionView.selectionIndexes.map { return self.dataProvider.filteredImages[$0] }
         launchExportPanel()
     }
     

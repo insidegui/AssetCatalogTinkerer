@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DDA691CB1CFA02CA00583328 /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA691CA1CFA02CA00583328 /* MainWindowController.swift */; };
 		DDC06B761CA8BCF300B6A9F3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC06B751CA8BCF300B6A9F3 /* AppDelegate.swift */; };
 		DDC06B781CA8BCF300B6A9F3 /* ImagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC06B771CA8BCF300B6A9F3 /* ImagesViewController.swift */; };
 		DDC06B7A1CA8BCF300B6A9F3 /* AssetCatalogDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC06B791CA8BCF300B6A9F3 /* AssetCatalogDocument.swift */; };
@@ -24,6 +25,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DDA691CA1CFA02CA00583328 /* MainWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainWindowController.swift; sourceTree = "<group>"; };
 		DDC06B721CA8BCF300B6A9F3 /* Asset Catalog Tinkerer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Asset Catalog Tinkerer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DDC06B751CA8BCF300B6A9F3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DDC06B771CA8BCF300B6A9F3 /* ImagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesViewController.swift; sourceTree = "<group>"; };
@@ -119,6 +121,7 @@
 		DDC06B8F1CA8BD6F00B6A9F3 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				DDA691CA1CFA02CA00583328 /* MainWindowController.swift */,
 				DDC06B921CA8C4F500B6A9F3 /* Views */,
 				DDC06BAB1CA8CB6200B6A9F3 /* ImagesCollectionViewDataProvider.swift */,
 				DDC06B771CA8BCF300B6A9F3 /* ImagesViewController.swift */,
@@ -236,6 +239,7 @@
 				DDC06BA41CA8C9B100B6A9F3 /* GridLayout.swift in Sources */,
 				DDC06B941CA8C4FC00B6A9F3 /* ProgressBar.swift in Sources */,
 				DDC06B7A1CA8BCF300B6A9F3 /* AssetCatalogDocument.swift in Sources */,
+				DDA691CB1CFA02CA00583328 /* MainWindowController.swift in Sources */,
 				DDDDE5C91CA96EF400B353D3 /* DocumentController.swift in Sources */,
 				DDDDE5CB1CA97C0300B353D3 /* QuickLookableCollectionView.swift in Sources */,
 			);

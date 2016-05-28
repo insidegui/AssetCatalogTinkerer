@@ -31,8 +31,25 @@ class ImagesCollectionViewDataProvider: NSObject, NSCollectionViewDataSource, NS
     
     var images = [[String: NSObject]]() {
         didSet {
+            filteredImages = filterImagesWithCurrentSearchTerm()
             collectionView.reloadData()
         }
+    }
+    
+    var searchTerm = "" {
+        didSet {
+            filteredImages = filterImagesWithCurrentSearchTerm()
+            collectionView.reloadData()
+        }
+    }
+    
+    var filteredImages = [[String: NSObject]]()
+    
+    private func filterImagesWithCurrentSearchTerm() -> [[String: NSObject]] {
+        guard !searchTerm.isEmpty else { return images }
+        
+        let predicate = NSPredicate(format: "name contains[cd] %@", searchTerm)
+        return (images as NSArray).filteredArrayUsingPredicate(predicate) as! [[String: NSObject]]
     }
     
     func numberOfSectionsInCollectionView(collectionView: NSCollectionView) -> Int {
@@ -42,13 +59,13 @@ class ImagesCollectionViewDataProvider: NSObject, NSCollectionViewDataSource, NS
     func collectionView(collectionView: NSCollectionView, itemForRepresentedObjectAtIndexPath indexPath: NSIndexPath) -> NSCollectionViewItem {
         let item = collectionView.makeItemWithIdentifier(Constants.imageItemIdentifier, forIndexPath: indexPath) as! ImageCollectionViewItem
         
-        item.image = images[indexPath.item]
+        item.image = filteredImages[indexPath.item]
         
         return item
     }
     
     func collectionView(collectionView: NSCollectionView, numberOfItemsInSection section: Int) -> Int {
-        return images.count
+        return filteredImages.count
     }
     
     func collectionView(collectionView: NSCollectionView, writeItemsAtIndexPaths indexPaths: Set<NSIndexPath>, toPasteboard pasteboard: NSPasteboard) -> Bool {
@@ -57,8 +74,8 @@ class ImagesCollectionViewDataProvider: NSObject, NSCollectionViewDataSource, NS
         let images: [String?] = indexPaths.map { indexPath in
             let index = indexPath.item
             
-            guard let filename = self.images[index]["filename"] as? String else { return nil }
-            guard let data = self.images[index]["png"] as? NSData else { return nil }
+            guard let filename = self.filteredImages[index]["filename"] as? String else { return nil }
+            guard let data = self.filteredImages[index]["png"] as? NSData else { return nil }
             let tempURL = NSURL(fileURLWithPath: "\(NSTemporaryDirectory())\(filename)")
             
             guard data.writeToURL(tempURL, atomically: true) else { return nil }

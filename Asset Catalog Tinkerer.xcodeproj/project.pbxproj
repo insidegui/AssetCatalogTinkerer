@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DD256BF91CFCF96000FFE33B /* ProKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD256BF81CFCF96000FFE33B /* ProKit.framework */; };
 		DDA691CB1CFA02CA00583328 /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA691CA1CFA02CA00583328 /* MainWindowController.swift */; };
 		DDC06B761CA8BCF300B6A9F3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC06B751CA8BCF300B6A9F3 /* AppDelegate.swift */; };
 		DDC06B781CA8BCF300B6A9F3 /* ImagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC06B771CA8BCF300B6A9F3 /* ImagesViewController.swift */; };
@@ -25,6 +26,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DD256BF71CFCF93F00FFE33B /* ProKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProKit.h; sourceTree = "<group>"; };
+		DD256BF81CFCF96000FFE33B /* ProKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ProKit.framework; path = ../../../../../System/Library/PrivateFrameworks/ProKit.framework; sourceTree = "<group>"; };
 		DDA691CA1CFA02CA00583328 /* MainWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainWindowController.swift; sourceTree = "<group>"; };
 		DDC06B721CA8BCF300B6A9F3 /* Asset Catalog Tinkerer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Asset Catalog Tinkerer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DDC06B751CA8BCF300B6A9F3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -54,6 +57,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DDC06B911CA8BDE900B6A9F3 /* CoreUI.framework in Frameworks */,
+				DD256BF91CFCF96000FFE33B /* ProKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -63,6 +67,7 @@
 		DDC06B691CA8BCF300B6A9F3 = {
 			isa = PBXGroup;
 			children = (
+				DD256BF81CFCF96000FFE33B /* ProKit.framework */,
 				DDC06B901CA8BDE900B6A9F3 /* CoreUI.framework */,
 				DDC06B741CA8BCF300B6A9F3 /* Asset Catalog Tinkerer */,
 				DDC06B731CA8BCF300B6A9F3 /* Products */,
@@ -94,6 +99,7 @@
 			children = (
 				DDC06B871CA8BD0D00B6A9F3 /* CoreUI+TV.h */,
 				DDC06B881CA8BD0D00B6A9F3 /* CoreUI.h */,
+				DD256BF71CFCF93F00FFE33B /* ProKit.h */,
 			);
 			path = "Private Headers";
 			sourceTree = SOURCE_ROOT;

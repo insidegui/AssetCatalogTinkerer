@@ -11,62 +11,62 @@ import Quartz
 
 class QuickLookableCollectionView: NSCollectionView {
     
-    override func keyDown(theEvent: NSEvent) {
+    override func keyDown(with theEvent: NSEvent) {
         // spacebar
         if theEvent.keyCode == 49 {
             showQuickLookPreview(self);
             return;
         }
         
-        super.keyDown(theEvent)
+        super.keyDown(with: theEvent)
     }
     
-    func collectionView(collectionView: NSCollectionView, didSelectItemsAtIndexPaths indexPaths: Set<NSIndexPath>) {
-        delegate?.collectionView?(self, didSelectItemsAtIndexPaths: indexPaths)
+    func collectionView(_ collectionView: NSCollectionView, didSelectItemsAtIndexPaths indexPaths: Set<IndexPath>) {
+        delegate?.collectionView?(self, didSelectItemsAt: indexPaths)
         
-        guard QLPreviewPanel.sharedPreviewPanelExists() && QLPreviewPanel.sharedPreviewPanel().visible else { return }
+        guard QLPreviewPanel.sharedPreviewPanelExists() && QLPreviewPanel.shared().isVisible else { return }
         
         writeSelectionToQuickLookPasteboard()
-        QLPreviewPanel.sharedPreviewPanel().reloadData()
+        QLPreviewPanel.shared().reloadData()
     }
     
-    private lazy var quickLookHandler = QuickLookableCollectionViewPreviewHandler()
+    fileprivate lazy var quickLookHandler = QuickLookableCollectionViewPreviewHandler()
     
-    @IBAction func showQuickLookPreview(sender: AnyObject) {
+    @IBAction func showQuickLookPreview(_ sender: AnyObject) {
         guard selectionIndexPaths.count > 0 else { return }
         
         quickLookHandler.pasteboard = NSPasteboard(name: "CollectionViewQuickLook")
         quickLookHandler.collectionView = self
         
-        let panel = QLPreviewPanel.sharedPreviewPanel()
+        let panel = QLPreviewPanel.shared()
         
-        if (QLPreviewPanel.sharedPreviewPanelExists() && panel.visible) {
-            panel.orderOut(self)
+        if (QLPreviewPanel.sharedPreviewPanelExists() && (panel?.isVisible)!) {
+            panel?.orderOut(self)
         } else {
-            panel.makeKeyAndOrderFront(self)
-            panel.reloadData()
+            panel?.makeKeyAndOrderFront(self)
+            panel?.reloadData()
         }
     }
     
-    override func acceptsPreviewPanelControl(panel: QLPreviewPanel!) -> Bool {
+    override func acceptsPreviewPanelControl(_ panel: QLPreviewPanel!) -> Bool {
         return true
     }
     
-    override func beginPreviewPanelControl(panel: QLPreviewPanel!) {
+    override func beginPreviewPanelControl(_ panel: QLPreviewPanel!) {
         writeSelectionToQuickLookPasteboard()
         
         panel.delegate = quickLookHandler
         panel.dataSource = quickLookHandler
     }
     
-    override func endPreviewPanelControl(panel: QLPreviewPanel!) {
+    override func endPreviewPanelControl(_ panel: QLPreviewPanel!) {
         panel.delegate = nil
         panel.dataSource = nil
     }
     
-    private func writeSelectionToQuickLookPasteboard() {
+    fileprivate func writeSelectionToQuickLookPasteboard() {
         quickLookHandler.pasteboard.clearContents()
-        delegate?.collectionView?(self, writeItemsAtIndexPaths: selectionIndexPaths, toPasteboard: quickLookHandler.pasteboard)
+        _ = delegate?.collectionView?(self, writeItemsAt: selectionIndexPaths, to: quickLookHandler.pasteboard)
     }
     
 }
@@ -76,37 +76,37 @@ class QuickLookableCollectionView: NSCollectionView {
     var pasteboard: NSPasteboard!
     var collectionView: QuickLookableCollectionView!
     
-    var previewItems: [NSURL] {
-        guard let items = pasteboard.propertyListForType(NSFilenamesPboardType) as? [String] else { return [] }
+    var previewItems: [URL] {
+        guard let items = pasteboard.propertyList(forType: NSFilenamesPboardType) as? [String] else { return [] }
         
-        return items.map { NSURL(fileURLWithPath: $0) }
+        return items.map { URL(fileURLWithPath: $0) }
     }
     
-    @objc private func numberOfPreviewItemsInPreviewPanel(panel: QLPreviewPanel!) -> Int {
+    @objc fileprivate func numberOfPreviewItems(in panel: QLPreviewPanel!) -> Int {
         return previewItems.count
     }
     
-    @objc private func previewPanel(panel: QLPreviewPanel!, previewItemAtIndex index: Int) -> QLPreviewItem! {
+    @objc fileprivate func previewPanel(_ panel: QLPreviewPanel!, previewItemAt index: Int) -> QLPreviewItem! {
         guard previewItems.count > 0 else { return nil }
         
-        return previewItems[index]
+        return previewItems[index] as QLPreviewItem!
     }
     
-    @objc private func previewPanel(panel: QLPreviewPanel!, handleEvent event: NSEvent!) -> Bool {
-        if event.type == NSEventType.KeyDown {
-            collectionView.keyDown(event)
+    @objc fileprivate func previewPanel(_ panel: QLPreviewPanel!, handle event: NSEvent!) -> Bool {
+        if event.type == NSEventType.keyDown {
+            collectionView.keyDown(with: event)
             return true
         }
         
         return false
     }
     
-    @objc private func previewPanel(panel: QLPreviewPanel!, sourceFrameOnScreenForPreviewItem item: QLPreviewItem!) -> NSRect {
-        let combinedRect = collectionView.selectionIndexes.map { return collectionView.frameForItemAtIndex($0) }.reduce(NSZeroRect) { NSUnionRect($0, $1) }
+    @objc fileprivate func previewPanel(_ panel: QLPreviewPanel!, sourceFrameOnScreenFor item: QLPreviewItem!) -> NSRect {
+        let combinedRect = collectionView.selectionIndexes.map { return collectionView.frameForItem(at: $0) }.reduce(NSZeroRect) { NSUnionRect($0, $1) }
         
-        var preliminaryRect = collectionView.enclosingScrollView!.convertRect(combinedRect, toView: nil)
+        var preliminaryRect = collectionView.enclosingScrollView!.convert(combinedRect, to: nil)
         preliminaryRect.origin.y += collectionView.enclosingScrollView!.contentView.bounds.origin.y
-        let rect = collectionView.window?.convertRectToScreen(preliminaryRect)
+        let rect = collectionView.window?.convertToScreen(preliminaryRect)
         
         return rect ?? NSZeroRect
     }

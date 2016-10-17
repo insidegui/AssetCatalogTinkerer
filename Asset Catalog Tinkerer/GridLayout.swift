@@ -10,7 +10,7 @@ import Cocoa
 
 class GridLayout: NSCollectionViewFlowLayout {
 
-    private struct Constants {
+    fileprivate struct Constants {
         static let itemWidth = CGFloat(150.0)
         static let itemHeight = CGFloat(150.0)
         static let itemPadding = CGFloat(10.0)
@@ -29,21 +29,21 @@ class GridLayout: NSCollectionViewFlowLayout {
         super.init(coder: aDecoder)
     }
     
-    override func layoutAttributesForItemAtIndexPath(indexPath: NSIndexPath) -> NSCollectionViewLayoutAttributes? {
-        let attributes = super.layoutAttributesForItemAtIndexPath(indexPath)
+    override func layoutAttributesForItem(at indexPath: IndexPath) -> NSCollectionViewLayoutAttributes? {
+        let attributes = super.layoutAttributesForItem(at: indexPath)
         
-        attributes?.zIndex = indexPath.item
+        attributes?.zIndex = (indexPath as NSIndexPath).item
 
         
         return attributes
     }
     
-    override func layoutAttributesForElementsInRect(rect: NSRect) -> [NSCollectionViewLayoutAttributes] {
-        let layoutAttributesArray = super.layoutAttributesForElementsInRect(rect)
+    override func layoutAttributesForElements(in rect: NSRect) -> [NSCollectionViewLayoutAttributes] {
+        let layoutAttributesArray = super.layoutAttributesForElements(in: rect)
         
         for attr in layoutAttributesArray {
             guard let path = attr.indexPath else { continue }
-            attr.zIndex = path.item
+            attr.zIndex = (path as NSIndexPath).item
         }
         
         return layoutAttributesArray

@@ -118,7 +118,8 @@ struct _renditionkeytoken {
 - (instancetype)initWithURL:(NSURL *)url error:(NSError **)outError;
 
 @property (nonatomic, readonly) NSArray *allImageNames;
-- (NSArray *)imagesWithName:(NSString *)name;
+- (CUINamedImage *)imageWithName:(NSString *)name scaleFactor:(CGFloat)scaleFactor;
+
 
 - (CUIStructuredThemeStore *)_themeStore;
 

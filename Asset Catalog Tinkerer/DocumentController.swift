@@ -10,15 +10,15 @@ import Cocoa
 
 class DocumentController: NSDocumentController {
 
-    override func newDocument(sender: AnyObject?) {
+    override func newDocument(_ sender: Any?) {
         // the app doesn't support creating new documents
     }
     
-    override func saveAllDocuments(sender: AnyObject?) {
+    override func saveAllDocuments(_ sender: Any?) {
         // the app doesn't support saving documents
     }
     
-    override func runModalOpenPanel(openPanel: NSOpenPanel, forTypes types: [String]?) -> Int {
+    override func runModalOpenPanel(_ openPanel: NSOpenPanel, forTypes types: [String]?) -> Int {
         openPanel.allowedFileTypes = ["car", "app", "framework", "bundle", "plugin"]
         openPanel.treatsFilePackagesAsDirectories = true
         

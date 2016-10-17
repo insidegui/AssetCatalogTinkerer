@@ -8,7 +8,7 @@
 
 import Cocoa
 
-public class ProgressBar: NSView {
+open class ProgressBar: NSView {
 
     override public init(frame frameRect: NSRect) {
         super.init(frame: frameRect)
@@ -22,51 +22,51 @@ public class ProgressBar: NSView {
         commonInit()
     }
     
-    override public func awakeFromNib() {
+    override open func awakeFromNib() {
         super.awakeFromNib()
         
         commonInit()
     }
     
-    public var tintColor: NSColor? {
+    open var tintColor: NSColor? {
         didSet {
             CATransaction.begin()
             CATransaction.setAnimationDuration(0.0)
-            progressLayer.backgroundColor = tintColor?.CGColor
+            progressLayer.backgroundColor = tintColor?.cgColor
             CATransaction.commit()
         }
     }
     
-    public var progress: Double = 0.0 {
+    open var progress: Double = 0.0 {
         didSet {
             let animated = oldValue < progress
             
-            dispatch_async(dispatch_get_main_queue()) { self.updateProgressLayer(animated) }
+            DispatchQueue.main.async { self.updateProgressLayer(animated) }
         }
     }
     
-    private var progressLayer: CALayer!
+    fileprivate var progressLayer: CALayer!
     
-    private func commonInit() {
+    fileprivate func commonInit() {
         guard progressLayer == nil else { return }
         
         wantsLayer = true
         layer = CALayer()
         
         progressLayer = CALayer()
-        progressLayer.backgroundColor = tintColor?.CGColor
+        progressLayer.backgroundColor = tintColor?.cgColor
         progressLayer.frame = NSRect(x: 0.0, y: 0.0, width: 0.0, height: bounds.height)
         layer!.addSublayer(progressLayer)
-        progressLayer.autoresizingMask = [.LayerWidthSizable, .LayerHeightSizable]
+        progressLayer.autoresizingMask = [.layerWidthSizable, .layerHeightSizable]
         
         updateProgressLayer()
     }
     
-    private var widthForProgressLayer: CGFloat {
+    fileprivate var widthForProgressLayer: CGFloat {
         return bounds.width * CGFloat(progress)
     }
     
-    private func updateProgressLayer(animated: Bool = true) {
+    fileprivate func updateProgressLayer(_ animated: Bool = true) {
         CATransaction.begin()
         CATransaction.setAnimationDuration(animated ? 0.4 : 0.0)
         var frame = progressLayer.frame

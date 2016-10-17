@@ -16,20 +16,20 @@ class ImageCollectionViewItem: NSCollectionViewItem {
         }
     }
     
-    private struct Colors {
-        static let background = NSColor.whiteColor()
+    fileprivate struct Colors {
+        static let background = NSColor.white
         static let border = NSColor(calibratedWhite: 0.9, alpha: 1.0)
         static let selectedBackground = NSColor(calibratedRed:0, green:0.496, blue:1, alpha:1)
         static let selectedBorder = NSColor(calibratedRed:0.019, green:0.316, blue:0.687, alpha:1)
         static let text = NSColor(calibratedRed:0, green:0.496, blue:1, alpha:1)
-        static let selectedText = NSColor.whiteColor()
+        static let selectedText = NSColor.white
     }
     
-    override var selected: Bool {
+    override var isSelected: Bool {
         didSet {
-            view.layer?.backgroundColor = selected ? Colors.selectedBackground.CGColor : Colors.background.CGColor
-            view.layer?.borderColor = selected ? Colors.selectedBorder.CGColor : Colors.border.CGColor
-            nameLabel.textColor = selected ? Colors.selectedText : Colors.text
+            view.layer?.backgroundColor = isSelected ? Colors.selectedBackground.cgColor : Colors.background.cgColor
+            view.layer?.borderColor = isSelected ? Colors.selectedBorder.cgColor : Colors.border.cgColor
+            nameLabel.textColor = isSelected ? Colors.selectedText : Colors.text
         }
     }
     
@@ -40,34 +40,34 @@ class ImageCollectionViewItem: NSCollectionViewItem {
         updateUI()
     }
     
-    private lazy var catalogImageView: NSImageView = {
+    fileprivate lazy var catalogImageView: NSImageView = {
         let iv = NSImageView(frame: NSZeroRect)
         
         iv.translatesAutoresizingMaskIntoConstraints = false
-        iv.imageFrameStyle = .None
-        iv.imageScaling = .ScaleProportionallyDown
-        iv.imageAlignment = .AlignCenter
+        iv.imageFrameStyle = .none
+        iv.imageScaling = .scaleProportionallyDown
+        iv.imageAlignment = .alignCenter
         
         return iv
     }()
     
-    private lazy var nameLabel: NSTextField = {
+    fileprivate lazy var nameLabel: NSTextField = {
         let l = NSTextField(frame: NSZeroRect)
         
         l.translatesAutoresizingMaskIntoConstraints = false
-        l.bordered = false
-        l.bezeled = false
-        l.editable = false
-        l.selectable = false
+        l.isBordered = false
+        l.isBezeled = false
+        l.isEditable = false
+        l.isSelectable = false
         l.drawsBackground = false
-        l.font = NSFont.systemFontOfSize(11.0, weight: NSFontWeightMedium)
+        l.font = NSFont.systemFont(ofSize: 11.0, weight: NSFontWeightMedium)
         l.textColor = Colors.text
-        l.lineBreakMode = .ByTruncatingMiddle
+        l.lineBreakMode = .byTruncatingMiddle
         
         return l
     }()
     
-    private func buildUI() {
+    fileprivate func buildUI() {
         guard catalogImageView.superview == nil else { return }
         
         view.wantsLayer = true
@@ -76,23 +76,23 @@ class ImageCollectionViewItem: NSCollectionViewItem {
         catalogImageView.frame = view.bounds
         view.addSubview(catalogImageView)
         
-        catalogImageView.topAnchor.constraintEqualToAnchor(view.topAnchor).active = true
-        catalogImageView.bottomAnchor.constraintEqualToAnchor(view.bottomAnchor).active = true
-        catalogImageView.leadingAnchor.constraintEqualToAnchor(view.leadingAnchor).active = true
-        catalogImageView.trailingAnchor.constraintEqualToAnchor(view.trailingAnchor).active = true
+        catalogImageView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        catalogImageView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        catalogImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        catalogImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         
         view.layer!.borderWidth = 1.0
-        view.layer!.borderColor = Colors.border.CGColor
+        view.layer!.borderColor = Colors.border.cgColor
         view.layer!.cornerRadius = 4.0
         
         view.addSubview(nameLabel)
-        nameLabel.bottomAnchor.constraintEqualToAnchor(view.bottomAnchor, constant: -2.0).active = true
-        nameLabel.centerXAnchor.constraintEqualToAnchor(view.centerXAnchor).active = true
-        nameLabel.widthAnchor.constraintLessThanOrEqualToAnchor(view.widthAnchor, multiplier: 1.0, constant: -12.0)
+        nameLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -2.0).isActive = true
+        nameLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        nameLabel.widthAnchor.constraint(lessThanOrEqualTo: view.widthAnchor, multiplier: 1.0, constant: -12.0)
     }
     
-    private func updateUI() {
-        guard let imageData = image where viewLoaded else { return }
+    fileprivate func updateUI() {
+        guard let imageData = image , isViewLoaded else { return }
         guard let image = imageData["thumbnail"] as? NSImage else { return }
         let name = imageData["name"] as! String
         let filename = imageData["filename"] as! String

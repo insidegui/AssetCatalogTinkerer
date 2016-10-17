@@ -10,14 +10,14 @@ import Cocoa
 
 class ImagesCollectionViewDataProvider: NSObject, NSCollectionViewDataSource, NSCollectionViewDelegate {
     
-    private struct Constants {
+    fileprivate struct Constants {
         static let nibName = "ImageCollectionViewItem"
         static let imageItemIdentifier = "ImageItemIdentifier"
     }
     
     var collectionView: NSCollectionView! {
         didSet {
-            collectionView.setDraggingSourceOperationMask(.Copy, forLocal: false)
+            collectionView.setDraggingSourceOperationMask(.copy, forLocal: false)
             
             collectionView.delegate = self
             collectionView.dataSource = self
@@ -25,7 +25,7 @@ class ImagesCollectionViewDataProvider: NSObject, NSCollectionViewDataSource, NS
             collectionView.collectionViewLayout = GridLayout()
             
             let nib = NSNib(nibNamed: Constants.nibName, bundle: nil)
-            collectionView.registerNib(nib, forItemWithIdentifier: Constants.imageItemIdentifier)
+            collectionView.register(nib, forItemWithIdentifier: Constants.imageItemIdentifier)
         }
     }
     
@@ -45,40 +45,40 @@ class ImagesCollectionViewDataProvider: NSObject, NSCollectionViewDataSource, NS
     
     var filteredImages = [[String: NSObject]]()
     
-    private func filterImagesWithCurrentSearchTerm() -> [[String: NSObject]] {
+    fileprivate func filterImagesWithCurrentSearchTerm() -> [[String: NSObject]] {
         guard !searchTerm.isEmpty else { return images }
         
         let predicate = NSPredicate(format: "name contains[cd] %@", searchTerm)
-        return (images as NSArray).filteredArrayUsingPredicate(predicate) as! [[String: NSObject]]
+        return (images as NSArray).filtered(using: predicate) as! [[String: NSObject]]
     }
     
-    func numberOfSectionsInCollectionView(collectionView: NSCollectionView) -> Int {
+    func numberOfSections(in collectionView: NSCollectionView) -> Int {
         return 1
     }
     
-    func collectionView(collectionView: NSCollectionView, itemForRepresentedObjectAtIndexPath indexPath: NSIndexPath) -> NSCollectionViewItem {
-        let item = collectionView.makeItemWithIdentifier(Constants.imageItemIdentifier, forIndexPath: indexPath) as! ImageCollectionViewItem
+    func collectionView(_ collectionView: NSCollectionView, itemForRepresentedObjectAt indexPath: IndexPath) -> NSCollectionViewItem {
+        let item = collectionView.makeItem(withIdentifier: Constants.imageItemIdentifier, for: indexPath) as! ImageCollectionViewItem
         
-        item.image = filteredImages[indexPath.item]
+        item.image = filteredImages[(indexPath as NSIndexPath).item]
         
         return item
     }
     
-    func collectionView(collectionView: NSCollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: NSCollectionView, numberOfItemsInSection section: Int) -> Int {
         return filteredImages.count
     }
     
-    func collectionView(collectionView: NSCollectionView, writeItemsAtIndexPaths indexPaths: Set<NSIndexPath>, toPasteboard pasteboard: NSPasteboard) -> Bool {
+    func collectionView(_ collectionView: NSCollectionView, writeItemsAt indexPaths: Set<IndexPath>, to pasteboard: NSPasteboard) -> Bool {
         pasteboard.clearContents()
         
         let images: [String?] = indexPaths.map { indexPath in
-            let index = indexPath.item
+            let index = (indexPath as NSIndexPath).item
             
             guard let filename = self.filteredImages[index]["filename"] as? String else { return nil }
-            guard let data = self.filteredImages[index]["png"] as? NSData else { return nil }
-            let tempURL = NSURL(fileURLWithPath: "\(NSTemporaryDirectory())\(filename)")
+            guard let data = self.filteredImages[index]["png"] as? Data else { return nil }
+            let tempURL = URL(fileURLWithPath: "\(NSTemporaryDirectory())\(filename)")
             
-            guard data.writeToURL(tempURL, atomically: true) else { return nil }
+            guard (try? data.write(to: tempURL, options: [.atomic])) != nil else { return nil }
             
             return tempURL.path
         }

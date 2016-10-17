@@ -10,7 +10,7 @@ import Cocoa
 
 class AssetCatalogDocument: NSDocument {
 
-    private var reader: AssetCatalogReader!
+    fileprivate var reader: AssetCatalogReader!
     
     override init() {
         super.init()
@@ -23,33 +23,33 @@ class AssetCatalogDocument: NSDocument {
 
     override func makeWindowControllers() {
         let storyboard = NSStoryboard(name: "Main", bundle: nil)
-        let windowController = storyboard.instantiateControllerWithIdentifier("Document Window Controller") as! NSWindowController
+        let windowController = storyboard.instantiateController(withIdentifier: "Document Window Controller") as! NSWindowController
         self.addWindowController(windowController)
-        NSNotificationCenter.defaultCenter().addObserverForName(NSWindowWillCloseNotification, object: windowController.window, queue: NSOperationQueue.mainQueue()) { _ in
+        NotificationCenter.default.addObserver(forName: NSNotification.Name.NSWindowWillClose, object: windowController.window, queue: OperationQueue.main) { _ in
             if self.reader != nil { self.reader.cancelReading() }
         }
     }
     
-    private var imagesViewController: ImagesViewController! {
+    fileprivate var imagesViewController: ImagesViewController! {
         return windowControllers[0].contentViewController as! ImagesViewController
     }
 
-    override func readFromURL(url: NSURL, ofType typeName: String) throws {
+    override func read(from url: URL, ofType typeName: String) throws {
         reader = AssetCatalogReader(fileURL: url)
         reader.thumbnailSize = NSSize(width: 138.0, height: 138.0)
         
-        reader.readWithCompletionHandler(didFinishReading, progressHandler: updateProgress)
+        reader.read(completionHandler: didFinishReading, progressHandler: updateProgress)
     }
     
-    private func updateProgress(progress: Double) {
+    fileprivate func updateProgress(_ progress: Double) {
         imagesViewController.loadProgress = progress
     }
     
-    private func didFinishReading() {
+    fileprivate func didFinishReading() {
         guard !reader.cancelled else { return }
         
         if let error = reader.error {
-            imagesViewController.error = error
+            imagesViewController.error = error as NSError?
         } else {
             imagesViewController.images = reader.images
         }

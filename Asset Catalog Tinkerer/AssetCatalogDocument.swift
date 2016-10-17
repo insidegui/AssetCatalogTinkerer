@@ -25,13 +25,19 @@ class AssetCatalogDocument: NSDocument {
         let storyboard = NSStoryboard(name: "Main", bundle: nil)
         let windowController = storyboard.instantiateController(withIdentifier: "Document Window Controller") as! NSWindowController
         self.addWindowController(windowController)
+        
+        if #available(OSX 10.12, *) {
+            windowController.window?.tabbingIdentifier = "ACTWindow"
+            windowController.window?.tabbingMode = .preferred
+        }
+        
         NotificationCenter.default.addObserver(forName: NSNotification.Name.NSWindowWillClose, object: windowController.window, queue: OperationQueue.main) { _ in
             if self.reader != nil { self.reader.cancelReading() }
         }
     }
     
-    fileprivate var imagesViewController: ImagesViewController! {
-        return windowControllers[0].contentViewController as! ImagesViewController
+    fileprivate var imagesViewController: ImagesViewController? {
+        return windowControllers.first?.contentViewController as? ImagesViewController
     }
 
     override func read(from url: URL, ofType typeName: String) throws {
@@ -42,16 +48,16 @@ class AssetCatalogDocument: NSDocument {
     }
     
     fileprivate func updateProgress(_ progress: Double) {
-        imagesViewController.loadProgress = progress
+        imagesViewController?.loadProgress = progress
     }
     
     fileprivate func didFinishReading() {
         guard !reader.cancelled else { return }
         
         if let error = reader.error {
-            imagesViewController.error = error as NSError?
+            imagesViewController?.error = error as NSError?
         } else {
-            imagesViewController.images = reader.images
+            imagesViewController?.images = reader.images
         }
     }
 

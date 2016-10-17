@@ -97,7 +97,7 @@ NSString * const kAssetCatalogReaderErrorDomain = @"br.com.guilhermerambo.AssetC
             return [self readProThemeStoreWithCompletionHandler:callback progressHandler:progressCallback];
         }
         
-        if (!self.catalog.allImageNames.count || ![self.catalog respondsToSelector:@selector(imagesWithName:)]) {
+        if (!self.catalog.allImageNames.count || ![self.catalog respondsToSelector:@selector(imageWithName:scaleFactor:)]) {
             // CAR is a theme file not an asset catalog
             return [self readThemeStoreWithCompletionHandler:callback progressHandler:progressCallback];
         }
@@ -111,7 +111,7 @@ NSString * const kAssetCatalogReaderErrorDomain = @"br.com.guilhermerambo.AssetC
                 if (progressCallback) progressCallback(loadedFraction);
             });
             
-            for (CUINamedImage *namedImage in [self.catalog imagesWithName:imageName]) {
+            for (CUINamedImage *namedImage in [self imagesNamed:imageName]) {
                 if (self.cancelled) return;
                 
                 @autoreleasepool {
@@ -144,6 +144,11 @@ NSString * const kAssetCatalogReaderErrorDomain = @"br.com.guilhermerambo.AssetC
                             filename = [NSString stringWithFormat:@"%@.png", namedImage.name];
                         }
                         image = namedImage.image;
+                    }
+                    
+                    if (image == nil) {
+                        loadedItemCount++;
+                        continue;
                     }
                     
                     NSBitmapImageRep *imageRep = [[NSBitmapImageRep alloc] initWithCGImage:image];
@@ -362,6 +367,20 @@ NSString * const kAssetCatalogReaderErrorDomain = @"br.com.guilhermerambo.AssetC
         NSLog(@"Unable to determine if catalog is pro, exception: %@", exception);
         return NO;
     }
+}
+
+- (NSArray <CUINamedImage *> *)imagesNamed:(NSString *)name
+{
+    NSMutableArray <CUINamedImage *> *images = [[NSMutableArray alloc] initWithCapacity:3];
+    
+    for (NSNumber *factor in @[@1,@2,@3]) {
+        CUINamedImage *image = [self.catalog imageWithName:name scaleFactor:factor.doubleValue];
+        if (!image || image.scale != factor.doubleValue) continue;
+        
+        [images addObject:image];
+    }
+    
+    return images;
 }
 
 @end

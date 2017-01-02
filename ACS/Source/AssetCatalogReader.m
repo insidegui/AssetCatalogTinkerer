@@ -343,7 +343,7 @@ NSString * const kAssetCatalogReaderErrorDomain = @"br.com.guilhermerambo.AssetC
     
     NSImage *newImage = [[NSImage alloc] initWithSize:NSMakeSize(newWidth, newHeight)];
     [newImage lockFocus];
-    [image drawInRect:NSMakeRect(0, 0, newWidth, newHeight) fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0];
+    [image drawInRect:NSMakeRect(0, 0, newWidth, newHeight) fromRect:NSZeroRect operation:NSCompositingOperationSourceOver fraction:1.0];
     [newImage unlockFocus];
     
     return newImage;

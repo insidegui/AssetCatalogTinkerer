@@ -7,15 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		DD256BF91CFCF96000FFE33B /* ProKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD256BF81CFCF96000FFE33B /* ProKit.framework */; };
 		DDA691CB1CFA02CA00583328 /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA691CA1CFA02CA00583328 /* MainWindowController.swift */; };
+		DDAF8ACC1E1B113400A8A235 /* ACS.h in Headers */ = {isa = PBXBuildFile; fileRef = DDAF8ACA1E1B113400A8A235 /* ACS.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DDAF8ACF1E1B113400A8A235 /* ACS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDAF8AC81E1B113300A8A235 /* ACS.framework */; };
+		DDAF8AD01E1B113400A8A235 /* ACS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DDAF8AC81E1B113300A8A235 /* ACS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		DDAF8ADD1E1B117600A8A235 /* AssetCatalogReader.h in Headers */ = {isa = PBXBuildFile; fileRef = DDAF8ADB1E1B117600A8A235 /* AssetCatalogReader.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DDAF8ADE1E1B117600A8A235 /* AssetCatalogReader.m in Sources */ = {isa = PBXBuildFile; fileRef = DDAF8ADC1E1B117600A8A235 /* AssetCatalogReader.m */; };
+		DDAF8AE31E1B119A00A8A235 /* CoreUI+TV.h in Headers */ = {isa = PBXBuildFile; fileRef = DDAF8AE01E1B119A00A8A235 /* CoreUI+TV.h */; };
+		DDAF8AE41E1B119A00A8A235 /* CoreUI.h in Headers */ = {isa = PBXBuildFile; fileRef = DDAF8AE11E1B119A00A8A235 /* CoreUI.h */; };
+		DDAF8AE51E1B119A00A8A235 /* ProKit.h in Headers */ = {isa = PBXBuildFile; fileRef = DDAF8AE21E1B119A00A8A235 /* ProKit.h */; };
+		DDAF8AEA1E1B11DB00A8A235 /* CoreUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDAF8AE91E1B11DB00A8A235 /* CoreUI.framework */; };
+		DDAF8AEC1E1B11DF00A8A235 /* ProKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDAF8AEB1E1B11DF00A8A235 /* ProKit.framework */; };
 		DDC06B761CA8BCF300B6A9F3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC06B751CA8BCF300B6A9F3 /* AppDelegate.swift */; };
 		DDC06B781CA8BCF300B6A9F3 /* ImagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC06B771CA8BCF300B6A9F3 /* ImagesViewController.swift */; };
 		DDC06B7A1CA8BCF300B6A9F3 /* AssetCatalogDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC06B791CA8BCF300B6A9F3 /* AssetCatalogDocument.swift */; };
 		DDC06B7C1CA8BCF300B6A9F3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DDC06B7B1CA8BCF300B6A9F3 /* Assets.xcassets */; };
 		DDC06B7F1CA8BCF300B6A9F3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DDC06B7D1CA8BCF300B6A9F3 /* Main.storyboard */; };
-		DDC06B8D1CA8BD6000B6A9F3 /* AssetCatalogReader.m in Sources */ = {isa = PBXBuildFile; fileRef = DDC06B8C1CA8BD6000B6A9F3 /* AssetCatalogReader.m */; };
-		DDC06B911CA8BDE900B6A9F3 /* CoreUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDC06B901CA8BDE900B6A9F3 /* CoreUI.framework */; };
 		DDC06B941CA8C4FC00B6A9F3 /* ProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC06B931CA8C4FC00B6A9F3 /* ProgressBar.swift */; };
 		DDC06BA41CA8C9B100B6A9F3 /* GridLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC06BA31CA8C9B100B6A9F3 /* GridLayout.swift */; };
 		DDC06BAC1CA8CB6200B6A9F3 /* ImagesCollectionViewDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC06BAB1CA8CB6200B6A9F3 /* ImagesCollectionViewDataProvider.swift */; };
@@ -25,10 +32,42 @@
 		DDDDE5CB1CA97C0300B353D3 /* QuickLookableCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDDE5CA1CA97C0300B353D3 /* QuickLookableCollectionView.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		DDAF8ACD1E1B113400A8A235 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DDC06B6A1CA8BCF300B6A9F3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DDAF8AC71E1B113300A8A235;
+			remoteInfo = ACS;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		DDAF8AD41E1B113400A8A235 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				DDAF8AD01E1B113400A8A235 /* ACS.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
-		DD256BF71CFCF93F00FFE33B /* ProKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProKit.h; sourceTree = "<group>"; };
-		DD256BF81CFCF96000FFE33B /* ProKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ProKit.framework; path = ../../../../../System/Library/PrivateFrameworks/ProKit.framework; sourceTree = "<group>"; };
 		DDA691CA1CFA02CA00583328 /* MainWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainWindowController.swift; sourceTree = "<group>"; };
+		DDAF8AC81E1B113300A8A235 /* ACS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ACS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DDAF8ACA1E1B113400A8A235 /* ACS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ACS.h; sourceTree = "<group>"; };
+		DDAF8ACB1E1B113400A8A235 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DDAF8ADB1E1B117600A8A235 /* AssetCatalogReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssetCatalogReader.h; sourceTree = "<group>"; };
+		DDAF8ADC1E1B117600A8A235 /* AssetCatalogReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssetCatalogReader.m; sourceTree = "<group>"; };
+		DDAF8AE01E1B119A00A8A235 /* CoreUI+TV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CoreUI+TV.h"; sourceTree = "<group>"; };
+		DDAF8AE11E1B119A00A8A235 /* CoreUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreUI.h; sourceTree = "<group>"; };
+		DDAF8AE21E1B119A00A8A235 /* ProKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProKit.h; sourceTree = "<group>"; };
+		DDAF8AE91E1B11DB00A8A235 /* CoreUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreUI.framework; path = ../../../../../System/Library/PrivateFrameworks/CoreUI.framework; sourceTree = "<group>"; };
+		DDAF8AEB1E1B11DF00A8A235 /* ProKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ProKit.framework; path = ../../../../../System/Library/PrivateFrameworks/ProKit.framework; sourceTree = "<group>"; };
 		DDC06B721CA8BCF300B6A9F3 /* Asset Catalog Tinkerer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Asset Catalog Tinkerer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DDC06B751CA8BCF300B6A9F3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DDC06B771CA8BCF300B6A9F3 /* ImagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesViewController.swift; sourceTree = "<group>"; };
@@ -36,12 +75,7 @@
 		DDC06B7B1CA8BCF300B6A9F3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DDC06B7E1CA8BCF300B6A9F3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		DDC06B801CA8BCF300B6A9F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		DDC06B871CA8BD0D00B6A9F3 /* CoreUI+TV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CoreUI+TV.h"; sourceTree = "<group>"; };
-		DDC06B881CA8BD0D00B6A9F3 /* CoreUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreUI.h; sourceTree = "<group>"; };
 		DDC06B8A1CA8BD6000B6A9F3 /* Asset Catalog Tinkerer-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Asset Catalog Tinkerer-Bridging-Header.h"; sourceTree = "<group>"; };
-		DDC06B8B1CA8BD6000B6A9F3 /* AssetCatalogReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssetCatalogReader.h; sourceTree = "<group>"; };
-		DDC06B8C1CA8BD6000B6A9F3 /* AssetCatalogReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssetCatalogReader.m; sourceTree = "<group>"; };
-		DDC06B901CA8BDE900B6A9F3 /* CoreUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreUI.framework; path = ../../../../../../System/Library/PrivateFrameworks/CoreUI.framework; sourceTree = "<group>"; };
 		DDC06B931CA8C4FC00B6A9F3 /* ProgressBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressBar.swift; sourceTree = "<group>"; };
 		DDC06BA31CA8C9B100B6A9F3 /* GridLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridLayout.swift; sourceTree = "<group>"; };
 		DDC06BAB1CA8CB6200B6A9F3 /* ImagesCollectionViewDataProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagesCollectionViewDataProvider.swift; sourceTree = "<group>"; };
@@ -52,25 +86,80 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		DDAF8AC41E1B113300A8A235 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DDAF8AEA1E1B11DB00A8A235 /* CoreUI.framework in Frameworks */,
+				DDAF8AEC1E1B11DF00A8A235 /* ProKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		DDC06B6F1CA8BCF300B6A9F3 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DDC06B911CA8BDE900B6A9F3 /* CoreUI.framework in Frameworks */,
-				DD256BF91CFCF96000FFE33B /* ProKit.framework in Frameworks */,
+				DDAF8ACF1E1B113400A8A235 /* ACS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DDAF8AC91E1B113300A8A235 /* ACS */ = {
+			isa = PBXGroup;
+			children = (
+				DDAF8ACA1E1B113400A8A235 /* ACS.h */,
+				DDAF8AD61E1B113F00A8A235 /* Resources */,
+				DDAF8ADF1E1B119A00A8A235 /* Private Headers */,
+				DDAF8AD51E1B113A00A8A235 /* Source */,
+			);
+			path = ACS;
+			sourceTree = "<group>";
+		};
+		DDAF8AD51E1B113A00A8A235 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				DDAF8ADB1E1B117600A8A235 /* AssetCatalogReader.h */,
+				DDAF8ADC1E1B117600A8A235 /* AssetCatalogReader.m */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
+		DDAF8AD61E1B113F00A8A235 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				DDAF8ACB1E1B113400A8A235 /* Info.plist */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		DDAF8ADF1E1B119A00A8A235 /* Private Headers */ = {
+			isa = PBXGroup;
+			children = (
+				DDAF8AE01E1B119A00A8A235 /* CoreUI+TV.h */,
+				DDAF8AE11E1B119A00A8A235 /* CoreUI.h */,
+				DDAF8AE21E1B119A00A8A235 /* ProKit.h */,
+			);
+			path = "Private Headers";
+			sourceTree = "<group>";
+		};
+		DDAF8AE81E1B11DB00A8A235 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				DDAF8AEB1E1B11DF00A8A235 /* ProKit.framework */,
+				DDAF8AE91E1B11DB00A8A235 /* CoreUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		DDC06B691CA8BCF300B6A9F3 = {
 			isa = PBXGroup;
 			children = (
-				DD256BF81CFCF96000FFE33B /* ProKit.framework */,
-				DDC06B901CA8BDE900B6A9F3 /* CoreUI.framework */,
 				DDC06B741CA8BCF300B6A9F3 /* Asset Catalog Tinkerer */,
+				DDAF8AC91E1B113300A8A235 /* ACS */,
 				DDC06B731CA8BCF300B6A9F3 /* Products */,
+				DDAF8AE81E1B11DB00A8A235 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -78,6 +167,7 @@
 			isa = PBXGroup;
 			children = (
 				DDC06B721CA8BCF300B6A9F3 /* Asset Catalog Tinkerer.app */,
+				DDAF8AC81E1B113300A8A235 /* ACS.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -86,7 +176,6 @@
 			isa = PBXGroup;
 			children = (
 				DDC06BB31CA8DC0C00B6A9F3 /* Resources */,
-				DDC06B861CA8BD0D00B6A9F3 /* Private Headers */,
 				DDC06B8E1CA8BD6500B6A9F3 /* Bootstrap */,
 				DDC06B891CA8BD1100B6A9F3 /* Core */,
 				DDC06B8F1CA8BD6F00B6A9F3 /* UI */,
@@ -94,24 +183,12 @@
 			path = "Asset Catalog Tinkerer";
 			sourceTree = "<group>";
 		};
-		DDC06B861CA8BD0D00B6A9F3 /* Private Headers */ = {
-			isa = PBXGroup;
-			children = (
-				DDC06B871CA8BD0D00B6A9F3 /* CoreUI+TV.h */,
-				DDC06B881CA8BD0D00B6A9F3 /* CoreUI.h */,
-				DD256BF71CFCF93F00FFE33B /* ProKit.h */,
-			);
-			path = "Private Headers";
-			sourceTree = SOURCE_ROOT;
-		};
 		DDC06B891CA8BD1100B6A9F3 /* Core */ = {
 			isa = PBXGroup;
 			children = (
 				DDDDE5C81CA96EF400B353D3 /* DocumentController.swift */,
 				DDC06B791CA8BCF300B6A9F3 /* AssetCatalogDocument.swift */,
 				DDC06B8A1CA8BD6000B6A9F3 /* Asset Catalog Tinkerer-Bridging-Header.h */,
-				DDC06B8B1CA8BD6000B6A9F3 /* AssetCatalogReader.h */,
-				DDC06B8C1CA8BD6000B6A9F3 /* AssetCatalogReader.m */,
 			);
 			name = Core;
 			sourceTree = "<group>";
@@ -167,7 +244,40 @@
 		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		DDAF8AC51E1B113300A8A235 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DDAF8AE31E1B119A00A8A235 /* CoreUI+TV.h in Headers */,
+				DDAF8AE41E1B119A00A8A235 /* CoreUI.h in Headers */,
+				DDAF8ADD1E1B117600A8A235 /* AssetCatalogReader.h in Headers */,
+				DDAF8ACC1E1B113400A8A235 /* ACS.h in Headers */,
+				DDAF8AE51E1B119A00A8A235 /* ProKit.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
+		DDAF8AC71E1B113300A8A235 /* ACS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DDAF8AD31E1B113400A8A235 /* Build configuration list for PBXNativeTarget "ACS" */;
+			buildPhases = (
+				DDAF8AC31E1B113300A8A235 /* Sources */,
+				DDAF8AC41E1B113300A8A235 /* Frameworks */,
+				DDAF8AC51E1B113300A8A235 /* Headers */,
+				DDAF8AC61E1B113300A8A235 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ACS;
+			productName = ACS;
+			productReference = DDAF8AC81E1B113300A8A235 /* ACS.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 		DDC06B711CA8BCF300B6A9F3 /* Asset Catalog Tinkerer */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = DDC06B831CA8BCF300B6A9F3 /* Build configuration list for PBXNativeTarget "Asset Catalog Tinkerer" */;
@@ -175,10 +285,12 @@
 				DDC06B6E1CA8BCF300B6A9F3 /* Sources */,
 				DDC06B6F1CA8BCF300B6A9F3 /* Frameworks */,
 				DDC06B701CA8BCF300B6A9F3 /* Resources */,
+				DDAF8AD41E1B113400A8A235 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				DDAF8ACE1E1B113400A8A235 /* PBXTargetDependency */,
 			);
 			name = "Asset Catalog Tinkerer";
 			productName = "Asset Catalog Tinkerer";
@@ -195,6 +307,11 @@
 				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "Guilherme Rambo";
 				TargetAttributes = {
+					DDAF8AC71E1B113300A8A235 = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = 8C7439RJLG;
+						ProvisioningStyle = Automatic;
+					};
 					DDC06B711CA8BCF300B6A9F3 = {
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = 8C7439RJLG;
@@ -217,11 +334,19 @@
 			projectRoot = "";
 			targets = (
 				DDC06B711CA8BCF300B6A9F3 /* Asset Catalog Tinkerer */,
+				DDAF8AC71E1B113300A8A235 /* ACS */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		DDAF8AC61E1B113300A8A235 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		DDC06B701CA8BCF300B6A9F3 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -235,13 +360,20 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		DDAF8AC31E1B113300A8A235 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DDAF8ADE1E1B117600A8A235 /* AssetCatalogReader.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		DDC06B6E1CA8BCF300B6A9F3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				DDC06B781CA8BCF300B6A9F3 /* ImagesViewController.swift in Sources */,
 				DDC06BB01CA8CFB900B6A9F3 /* ImageCollectionViewItem.swift in Sources */,
-				DDC06B8D1CA8BD6000B6A9F3 /* AssetCatalogReader.m in Sources */,
 				DDC06B761CA8BCF300B6A9F3 /* AppDelegate.swift in Sources */,
 				DDC06BAC1CA8CB6200B6A9F3 /* ImagesCollectionViewDataProvider.swift in Sources */,
 				DDC06BA41CA8C9B100B6A9F3 /* GridLayout.swift in Sources */,
@@ -255,6 +387,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		DDAF8ACE1E1B113400A8A235 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DDAF8AC71E1B113300A8A235 /* ACS */;
+			targetProxy = DDAF8ACD1E1B113400A8A235 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		DDC06B7D1CA8BCF300B6A9F3 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
@@ -267,6 +407,67 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		DDAF8AD11E1B113400A8A235 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 8C7439RJLG;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks",
+				);
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = ACS/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				PRODUCT_BUNDLE_IDENTIFIER = br.com.guilhermerambo.ACS;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 3.0;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		DDAF8AD21E1B113400A8A235 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 8C7439RJLG;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks",
+				);
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = ACS/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				PRODUCT_BUNDLE_IDENTIFIER = br.com.guilhermerambo.ACS;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 		DDC06B811CA8BCF300B6A9F3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -400,6 +601,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		DDAF8AD31E1B113400A8A235 /* Build configuration list for PBXNativeTarget "ACS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DDAF8AD11E1B113400A8A235 /* Debug */,
+				DDAF8AD21E1B113400A8A235 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		DDC06B6D1CA8BCF300B6A9F3 /* Build configuration list for PBXProject "Asset Catalog Tinkerer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

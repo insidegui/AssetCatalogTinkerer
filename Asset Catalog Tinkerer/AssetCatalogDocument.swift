@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import ACS
 
 class AssetCatalogDocument: NSDocument {
 

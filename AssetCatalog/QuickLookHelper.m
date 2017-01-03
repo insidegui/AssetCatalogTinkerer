@@ -81,6 +81,7 @@
 
 #define kCellMargin 28.0f
 #define kTextPadding 8.0f
+#define kTextDrawingRelativeSizeThreshold 2.5f
 
 - (void)drawPreview
 {
@@ -154,7 +155,9 @@
         NSString *assetName = [asset[kACSNameKey] stringByDeletingPathExtension];
         NSAttributedString *assetInfo = [[NSAttributedString alloc] initWithString:assetName attributes:assetTextAttrs];
         CGFloat textAreaWidth = rect.size.width + kCellMargin - kTextPadding * 2;
-        if (textAreaWidth > assetInfo.size.width / 2) {
+        
+        // draw text only if the area available for it is not too small
+        if (textAreaWidth > floor(assetInfo.size.width / kTextDrawingRelativeSizeThreshold)) {
             NSRect textRect = NSMakeRect(rect.origin.x + round(rect.size.width / 2.0 - textAreaWidth / 2.0),
                                          rect.origin.y - assetInfo.size.height - kTextPadding,
                                          textAreaWidth,

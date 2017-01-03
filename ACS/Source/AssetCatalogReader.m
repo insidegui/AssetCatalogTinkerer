@@ -128,7 +128,7 @@ NSString * const kAssetCatalogReaderErrorDomain = @"br.com.guilhermerambo.AssetC
         totalItemCount = _resourceConstrained ? MIN(maxItemCount, _catalog.allImageNames.count) : _catalog.allImageNames.count;
         
         for (NSString *imageName in self.catalog.allImageNames) {
-            if (_resourceConstrained && totalItemCount >= loadedItemCount) break;
+            if (_resourceConstrained && loadedItemCount >= totalItemCount) break;
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 double loadedFraction = (double)loadedItemCount / (double)totalItemCount;

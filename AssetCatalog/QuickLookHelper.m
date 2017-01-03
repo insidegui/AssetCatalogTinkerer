@@ -85,6 +85,9 @@
 
 - (void)drawPreview
 {
+    // the number of assets actually previewed (the drawing can be aborted if there's not enough space to draw everyting)
+    NSUInteger totalAssetsDrawn = 0;
+    
     // text attributes for per-asset info
     
     NSMutableParagraphStyle *pStyle = [[NSMutableParagraphStyle alloc] init];
@@ -164,11 +167,13 @@
                                          assetInfo.size.height);
             [assetInfo drawInRect:textRect];
         }
+        
+        totalAssetsDrawn++;
     }
     
     // draw summary text
     
-    unsigned long readCount = MIN(self.reader.totalNumberOfAssets, kMaxNumberOfAssets);
+    unsigned long readCount = MIN(self.reader.totalNumberOfAssets, totalAssetsDrawn);
     
     NSDictionary *attrs = @{
                             NSFontAttributeName: [NSFont systemFontOfSize:12.0 weight:NSFontWeightMedium],

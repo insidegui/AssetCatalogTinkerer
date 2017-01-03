@@ -79,11 +79,25 @@
     [self.reader cancelReading];
 }
 
-#define kCellMargin 22.0f
+#define kCellMargin 28.0f
+#define kTextPadding 8.0f
 
 - (void)drawPreview
 {
+    // text attributes for per-asset info
+    
+    NSMutableParagraphStyle *pStyle = [[NSMutableParagraphStyle alloc] init];
+    pStyle.alignment = NSTextAlignmentCenter;
+    pStyle.lineBreakMode = NSLineBreakByTruncatingTail;
+    
+    NSDictionary *assetTextAttrs = @{
+                                     NSFontAttributeName: [NSFont systemFontOfSize:8.0],
+                                     NSForegroundColorAttributeName: [NSColor grayColor],
+                                     NSParagraphStyleAttributeName: pStyle
+                                     };
+    
     // fill background
+    
     [[NSColor whiteColor] setFill];
     NSRectFill(NSMakeRect(0, 0, _size.width, _size.height));
     
@@ -101,7 +115,7 @@
         }
         
         if (y == 0) {
-            y = _size.height - rep.size.height - kCellMargin * 2;
+            y = _size.height - rep.size.height - kCellMargin;
         }
         
         if ((x + rep.size.width + kCellMargin) > (self.size.width - kCellMargin)) {
@@ -121,6 +135,19 @@
         [border stroke];
         
         x += rep.size.width + kCellMargin;
+        
+        // draw per-asset info (if enough space is available)
+        
+        NSString *assetName = [asset[kACSNameKey] stringByDeletingPathExtension];
+        NSAttributedString *assetInfo = [[NSAttributedString alloc] initWithString:assetName attributes:assetTextAttrs];
+        CGFloat textAreaWidth = rect.size.width + kCellMargin - kTextPadding * 2;
+        if (textAreaWidth > assetInfo.size.width / 2) {
+            NSRect textRect = NSMakeRect(rect.origin.x + round(rect.size.width / 2.0 - textAreaWidth / 2.0),
+                                         rect.origin.y - assetInfo.size.height - kTextPadding,
+                                         textAreaWidth,
+                                         assetInfo.size.height);
+            [assetInfo drawInRect:textRect];
+        }
     }
     
     // draw summary text

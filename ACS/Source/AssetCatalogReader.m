@@ -12,6 +12,13 @@
 #import "CoreUI+TV.h"
 #import "ProKit.h"
 
+NSString * const kACSNameKey = @"name";
+NSString * const kACSImageKey = @"image";
+NSString * const kACSThumbnailKey = @"thumbnail";
+NSString * const kACSFilenameKey = @"filename";
+NSString * const kACSPNGDataKey = @"png";
+NSString * const kACSImageRepKey = @"imagerep";
+
 NSString * const kAssetCatalogReaderErrorDomain = @"br.com.guilhermerambo.AssetCatalogReader";
 
 @interface AssetCatalogReader ()
@@ -19,6 +26,10 @@ NSString * const kAssetCatalogReaderErrorDomain = @"br.com.guilhermerambo.AssetC
 @property (nonatomic, copy) NSURL *fileURL;
 @property (nonatomic, strong) CUICatalog *catalog;
 @property (nonatomic, strong) NSMutableArray <NSDictionary <NSString *, NSObject *> *> *mutableImages;
+
+// These properties are set when the read is initiated by a call to `resourceConstrainedReadWithMaxCount`
+@property (nonatomic, assign, getter=isResourceConstrained) BOOL resourceConstrained;
+@property (nonatomic, assign) int maxCount;
 
 @end
 
@@ -50,21 +61,32 @@ NSString * const kAssetCatalogReaderErrorDomain = @"br.com.guilhermerambo.AssetC
     self.cancelled = true;
 }
 
+- (void)resourceConstrainedReadWithMaxCount:(int)max completionHandler:(void (^)())callback
+{
+    self.resourceConstrained = YES;
+    self.maxCount = max;
+    
+    [self readWithCompletionHandler:callback progressHandler:nil];
+}
+
 - (void)readWithCompletionHandler:(void (^__nonnull)())callback progressHandler:(void (^__nullable)(double progress))progressCallback
 {
     __block uint64 totalItemCount = 0;
     __block uint64 loadedItemCount = 0;
+    __block uint64 maxItemCount = _maxCount;
     
-    NSString *catalogPath = nil;
+    NSString *catalogPath = self.fileURL.path;
     
-    // we need to figure out if the user selected an app bundle or a specific .car file
-    NSBundle *bundle = [NSBundle bundleWithURL:self.fileURL];
-    if (!bundle) {
-        catalogPath = self.fileURL.path;
-        self.catalogName = catalogPath.lastPathComponent;
-    } else {
-        catalogPath = [bundle pathForResource:@"Assets" ofType:@"car"];
-        self.catalogName = [NSString stringWithFormat:@"%@ | %@", bundle.bundlePath.lastPathComponent, catalogPath.lastPathComponent];
+    if (!_resourceConstrained) {
+        // we need to figure out if the user selected an app bundle or a specific .car file
+        NSBundle *bundle = [NSBundle bundleWithURL:self.fileURL];
+        if (!bundle) {
+            catalogPath = self.fileURL.path;
+            self.catalogName = catalogPath.lastPathComponent;
+        } else {
+            catalogPath = [bundle pathForResource:@"Assets" ofType:@"car"];
+            self.catalogName = [NSString stringWithFormat:@"%@ | %@", bundle.bundlePath.lastPathComponent, catalogPath.lastPathComponent];
+        }
     }
     
     dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), ^{
@@ -102,9 +124,11 @@ NSString * const kAssetCatalogReaderErrorDomain = @"br.com.guilhermerambo.AssetC
             return [self readThemeStoreWithCompletionHandler:callback progressHandler:progressCallback];
         }
         
-        totalItemCount = self.catalog.allImageNames.count;
+        // limits the total items to be read to the total number of images or the max count set for a resource constrained read
+        totalItemCount = _resourceConstrained ? MIN(maxItemCount, _catalog.allImageNames.count) : _catalog.allImageNames.count;
         
         for (NSString *imageName in self.catalog.allImageNames) {
+            if (_resourceConstrained && totalItemCount >= loadedItemCount) break;
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 double loadedFraction = (double)loadedItemCount / (double)totalItemCount;
@@ -151,26 +175,23 @@ NSString * const kAssetCatalogReaderErrorDomain = @"br.com.guilhermerambo.AssetC
                         continue;
                     }
                     
-                    NSBitmapImageRep *imageRep = [[NSBitmapImageRep alloc] initWithCGImage:image];
-                    imageRep.size = namedImage.size;
-                    
-                    NSData *pngData = [imageRep representationUsingType:NSPNGFileType properties:@{NSImageInterlaced:@(NO)}];
-                    if (!pngData.length) {
-                        NSLog(@"Unable to get PNG data from image named %@", namedImage.name);
-                        loadedItemCount++;
+                    // when resource constrained, only load images with the scale of the current machine's screen
+                    if (_resourceConstrained && namedImage.scale != [NSScreen mainScreen].backingScaleFactor) {
                         continue;
                     }
                     
-                    NSImage *originalImage = [[NSImage alloc] initWithData:pngData];
-                    NSImage *thumbnail = [self constrainImage:originalImage toSize:self.thumbnailSize];
+                    NSBitmapImageRep *imageRep = [[NSBitmapImageRep alloc] initWithCGImage:image];
+                    imageRep.size = namedImage.size;
                     
-                    [self.mutableImages addObject:@{
-                                             @"name" : namedImage.name,
-                                             @"image" : originalImage,
-                                             @"thumbnail": thumbnail,
-                                             @"filename": filename,
-                                             @"png": pngData
-                                             }];
+                    NSDictionary *desc = [self imageDescriptionWithName:namedImage.name filename:filename representation:imageRep];
+                    if (!desc) {
+                        loadedItemCount++;
+                        return;
+                    }
+                    
+                    if (self.cancelled) return;
+                    
+                    [self.mutableImages addObject:desc];
                     
                     if (self.cancelled) return;
                     
@@ -217,25 +238,15 @@ NSString * const kAssetCatalogReaderErrorDomain = @"br.com.guilhermerambo.AssetC
                 NSBitmapImageRep *imageRep = [[NSBitmapImageRep alloc] initWithCGImage:rendition.unslicedImage];
                 imageRep.size = NSMakeSize(CGImageGetWidth(rendition.unslicedImage), CGImageGetHeight(rendition.unslicedImage));
                 
-                NSData *pngData = [imageRep representationUsingType:NSPNGFileType properties:@{NSImageInterlaced:@(NO)}];
-                if (!pngData.length) {
-                    NSLog(@"Unable to get PNG data from rendition named %@", rendition.name);
+                NSDictionary *desc = [self imageDescriptionWithName:rendition.name filename:filename representation:imageRep];
+                if (!desc) {
                     loadedItemCount++;
                     return;
                 }
                 
-                NSImage *originalImage = [[NSImage alloc] initWithData:pngData];
-                NSImage *thumbnail = [self constrainImage:originalImage toSize:self.thumbnailSize];
-                
                 if (self.cancelled) return;
                 
-                [self.mutableImages addObject:@{
-                                                @"name" : rendition.name,
-                                                @"image" : originalImage,
-                                                @"thumbnail": thumbnail,
-                                                @"filename": filename,
-                                                @"png": pngData
-                                                }];
+                [self.mutableImages addObject:desc];
             } else {
                 NSLog(@"The rendition %@ doesn't have an image, It is probably an effect or material.", rendition.name);
             }
@@ -381,6 +392,40 @@ NSString * const kAssetCatalogReaderErrorDomain = @"br.com.guilhermerambo.AssetC
     }
     
     return images;
+}
+
+- (NSUInteger)totalNumberOfAssets
+{
+    return _catalog.allImageNames.count;
+}
+
+- (NSDictionary *)imageDescriptionWithName:(NSString *)name filename:(NSString *)filename representation:(NSBitmapImageRep *)imageRep
+{
+    if (_resourceConstrained) {
+        return @{
+                 kACSNameKey : name,
+                 kACSFilenameKey: filename,
+                 kACSImageRepKey: imageRep
+                 };
+    } else {
+        NSData *pngData = [imageRep representationUsingType:NSPNGFileType properties:@{NSImageInterlaced:@(NO)}];
+        
+        if (!pngData.length) {
+            NSLog(@"Unable to get PNG data from rendition named %@", name);
+            return nil;
+        }
+        
+        NSImage *originalImage = [[NSImage alloc] initWithData:pngData];
+        NSImage *thumbnail = [self constrainImage:originalImage toSize:self.thumbnailSize];
+        
+        return @{
+                 kACSNameKey : name,
+                 kACSImageKey : originalImage,
+                 kACSThumbnailKey: thumbnail,
+                 kACSFilenameKey: filename,
+                 kACSPNGDataKey: pngData
+                 };
+    }
 }
 
 @end

@@ -124,6 +124,8 @@ NSString * const kAssetCatalogReaderErrorDomain = @"br.com.guilhermerambo.AssetC
             return [self readThemeStoreWithCompletionHandler:callback progressHandler:progressCallback];
         }
         
+        _totalNumberOfAssets = self.catalog.allImageNames.count;
+        
         // limits the total items to be read to the total number of images or the max count set for a resource constrained read
         totalItemCount = _resourceConstrained ? MIN(maxItemCount, _catalog.allImageNames.count) : _catalog.allImageNames.count;
         
@@ -218,10 +220,17 @@ NSString * const kAssetCatalogReaderErrorDomain = @"br.com.guilhermerambo.AssetC
 
 - (void)readThemeStoreWithCompletionHandler:(void (^__nonnull)())callback progressHandler:(void (^__nullable)(double progress))progressCallback
 {
-    __block uint64 totalItemCount = [self.catalog _themeStore].themeStore.allAssetKeys.count;
+    uint64 realTotalItemCount = [self.catalog _themeStore].themeStore.allAssetKeys.count;
     __block uint64 loadedItemCount = 0;
     
+    // limits the total items to be read to the total number of images or the max count set for a resource constrained read
+    __block uint64 totalItemCount = _resourceConstrained ? MIN(_maxCount, realTotalItemCount) : realTotalItemCount;
+    
+    _totalNumberOfAssets = [self.catalog _themeStore].themeStore.allAssetKeys.count;
+    
     [[self.catalog _themeStore].themeStore.allAssetKeys enumerateObjectsWithOptions:0 usingBlock:^(CUIRenditionKey * _Nonnull key, NSUInteger idx, BOOL * _Nonnull stop) {
+        if (_resourceConstrained && loadedItemCount >= totalItemCount) return;
+        
         if (self.cancelled) return;
         
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -268,6 +277,7 @@ NSString * const kAssetCatalogReaderErrorDomain = @"br.com.guilhermerambo.AssetC
     NSData *pngData;
     NSString *filename;
     NSImage *thumbnail;
+    NSBitmapImageRep *imageRep;
     
     NSString *filebasename = [NSString stringWithFormat:@"%@-%@", rendition.name.stringByDeletingPathExtension, presentationStateNameForPresentationState(key.themeState)];
     
@@ -277,21 +287,34 @@ NSString * const kAssetCatalogReaderErrorDomain = @"br.com.guilhermerambo.AssetC
     filename = [filebasename stringByAppendingFormat:@"-slice%d.png", sliceIndex];
     
     if ([originalImage.representations.lastObject isKindOfClass:[NSBitmapImageRep class]]) {
-        NSBitmapImageRep *imageRep = (NSBitmapImageRep *)originalImage.representations.lastObject;
-        pngData = [imageRep representationUsingType:NSPNGFileType properties:@{NSImageInterlaced:@(NO)}];
+        imageRep = (NSBitmapImageRep *)originalImage.representations.lastObject;
+        if (!_resourceConstrained) {
+            pngData = [imageRep representationUsingType:NSPNGFileType properties:@{NSImageInterlaced:@(NO)}];
+        }
     }
     
     thumbnail = [self constrainImage:originalImage toSize:NSMakeSize(50.0, 50.0)];
     
-    if (!rendition || !originalImage || !thumbnail || !filename || !pngData || !pngData.length || !filename.length) return nil;
+    if (!rendition || !originalImage || !filename || !filename.length) return nil;
+    if (!_resourceConstrained) {
+        if (!pngData || !pngData.length || !thumbnail) return nil;
+    }
     
-    return @{
-             @"name" : rendition.name,
-             @"image" : originalImage,
-             @"thumbnail": thumbnail,
-             @"filename": filename,
-             @"png": pngData
-             };
+    if (_resourceConstrained) {
+        return @{
+                 kACSNameKey : rendition.name,
+                 kACSFilenameKey: filename,
+                 kACSImageRepKey: imageRep
+                 };
+    } else {
+        return @{
+                 kACSNameKey : rendition.name,
+                 kACSImageKey : originalImage,
+                 kACSThumbnailKey: thumbnail,
+                 kACSFilenameKey: filename,
+                 kACSPNGDataKey: pngData
+                 };
+    }
 }
 
 - (void)readProThemeStoreWithCompletionHandler:(void (^__nonnull)())callback progressHandler:(void (^__nullable)(double progress))progressCallback
@@ -300,6 +323,8 @@ NSString * const kAssetCatalogReaderErrorDomain = @"br.com.guilhermerambo.AssetC
     
     __block uint64 totalItemCount = [[catalog themeStore] allAssetKeys].count;
     __block uint64 loadedItemCount = 0;
+    
+    _totalNumberOfAssets = [[catalog themeStore] allAssetKeys].count;
     
     [[[catalog themeStore] allAssetKeys] enumerateObjectsWithOptions:0 usingBlock:^(NSProRenditionKey * _Nonnull key, NSUInteger idx, BOOL * _Nonnull stop) {
         if (self.cancelled) return;
@@ -392,11 +417,6 @@ NSString * const kAssetCatalogReaderErrorDomain = @"br.com.guilhermerambo.AssetC
     }
     
     return images;
-}
-
-- (NSUInteger)totalNumberOfAssets
-{
-    return _catalog.allImageNames.count;
 }
 
 - (NSDictionary *)imageDescriptionWithName:(NSString *)name filename:(NSString *)filename representation:(NSBitmapImageRep *)imageRep

@@ -31,20 +31,27 @@
 
 @end
 
-#define kCoreThemePresentationStateActive 0
-#define kCoreThemePresentationStateInactive 1
-#define kCoreThemePresentationStateActiveMain 2
+#define kCoreThemeStateNone -1
 
-NSString *presentationStateNameForPresentationState(long long state) {
+NSString *themeStateNameForThemeState(long long state) {
     switch (state) {
-        case kCoreThemePresentationStateActive:
-            return @"Active";
+        case 0:
+            return @"Normal";
             break;
-        case kCoreThemePresentationStateInactive:
+        case 1:
+            return @"Rollover";
+            break;
+        case 2:
+            return @"Pressed";
+            break;
+        case 3:
             return @"Inactive";
             break;
-        case kCoreThemePresentationStateActiveMain:
-            return @"ActiveMain";
+        case 4:
+            return @"Disabled";
+            break;
+        case 5:
+            return @"DeeplyPressed";
             break;
     }
     
@@ -71,6 +78,7 @@ struct _renditionkeytoken {
 
 @interface CUIThemeRendition: NSObject
 
+@property (nonatomic, readonly) CGFloat scale;
 @property (nonatomic, readonly) NSString *name;
 @property (nonatomic, readonly) NSData *data;
 @property (nonatomic, readonly) CGImageRef unslicedImage;

@@ -164,11 +164,7 @@ NSString * const kAssetCatalogReaderErrorDomain = @"br.com.guilhermerambo.AssetC
                         filename = [NSString stringWithFormat:@"%@.png", namedImage.name];
                         image = stack.flattenedImage;
                     } else {
-                        if (namedImage.scale > 1.0) {
-                            filename = [NSString stringWithFormat:@"%@@%.0fx.png", namedImage.name, namedImage.scale];
-                        } else {
-                            filename = [NSString stringWithFormat:@"%@.png", namedImage.name];
-                        }
+                        filename = [self filenameForAssetNamed:namedImage.name scale:namedImage.scale presentationState:kCoreThemeStateNone];
                         image = namedImage.image;
                     }
                     
@@ -177,8 +173,8 @@ NSString * const kAssetCatalogReaderErrorDomain = @"br.com.guilhermerambo.AssetC
                         continue;
                     }
                     
-                    // when resource constrained, only load images with the scale of the current machine's screen
-                    if (_resourceConstrained && namedImage.scale != [NSScreen mainScreen].backingScaleFactor) {
+                    // when resource constrained, only load 2x images
+                    if (_resourceConstrained && namedImage.scale < 2) {
                         continue;
                     }
                     
@@ -241,7 +237,12 @@ NSString * const kAssetCatalogReaderErrorDomain = @"br.com.guilhermerambo.AssetC
         @try {
             CUIThemeRendition *rendition = [[self.catalog _themeStore] renditionWithKey:key.keyList];
             
-            NSString *filename = [NSString stringWithFormat:@"%@-%@.png", rendition.name.stringByDeletingPathExtension, presentationStateNameForPresentationState(key.themeState)];
+            // when resource constrained, only load 2x images
+            if (_resourceConstrained && rendition.scale < 2) {
+                return;
+            }
+            
+            NSString *filename = [self filenameForAssetNamed:[self cleanupRenditionName:rendition.name] scale:rendition.scale presentationState:key.themeState];
             
             if (rendition.unslicedImage) {
                 NSBitmapImageRep *imageRep = [[NSBitmapImageRep alloc] initWithCGImage:rendition.unslicedImage];
@@ -279,7 +280,7 @@ NSString * const kAssetCatalogReaderErrorDomain = @"br.com.guilhermerambo.AssetC
     NSImage *thumbnail;
     NSBitmapImageRep *imageRep;
     
-    NSString *filebasename = [NSString stringWithFormat:@"%@-%@", rendition.name.stringByDeletingPathExtension, presentationStateNameForPresentationState(key.themeState)];
+    NSString *filebasename = [NSString stringWithFormat:@"%@-%@", rendition.name.stringByDeletingPathExtension, themeStateNameForThemeState(key.themeState)];
     
     originalImage = [rendition imageForSliceIndex:sliceIndex];
     if (!originalImage) return nil;
@@ -321,12 +322,17 @@ NSString * const kAssetCatalogReaderErrorDomain = @"br.com.guilhermerambo.AssetC
 {
     ProStructuredThemeStore *catalog = [[ProStructuredThemeStore alloc] initWithPath:@"/System/Library/PrivateFrameworks/ProKit.framework/Versions/A/Resources/ProThemeBits.car"];
     
-    __block uint64 totalItemCount = [[catalog themeStore] allAssetKeys].count;
+    uint64 realTotalItemCount = [[catalog themeStore] allAssetKeys].count;
     __block uint64 loadedItemCount = 0;
     
     _totalNumberOfAssets = [[catalog themeStore] allAssetKeys].count;
     
+    // limits the total items to be read to the total number of images or the max count set for a resource constrained read
+    __block uint64 totalItemCount = _resourceConstrained ? MIN(_maxCount, realTotalItemCount) : realTotalItemCount;
+    
     [[[catalog themeStore] allAssetKeys] enumerateObjectsWithOptions:0 usingBlock:^(NSProRenditionKey * _Nonnull key, NSUInteger idx, BOOL * _Nonnull stop) {
+        if (_resourceConstrained && loadedItemCount >= totalItemCount) return;
+        
         if (self.cancelled) return;
         
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -445,6 +451,30 @@ NSString * const kAssetCatalogReaderErrorDomain = @"br.com.guilhermerambo.AssetC
                  kACSFilenameKey: filename,
                  kACSPNGDataKey: pngData
                  };
+    }
+}
+
+- (NSString *)cleanupRenditionName:(NSString *)name
+{
+    NSArray *components = [name.stringByDeletingPathExtension componentsSeparatedByString:@"@"];
+    
+    return components.firstObject;
+}
+
+- (NSString *)filenameForAssetNamed:(NSString *)name scale:(CGFloat)scale presentationState:(NSInteger)presentationState
+{
+    if (scale > 1.0) {
+        if (presentationState != kCoreThemeStateNone) {
+            return [NSString stringWithFormat:@"%@_%@@%.0fx.png", name, themeStateNameForThemeState(presentationState), scale];
+        } else {
+            return [NSString stringWithFormat:@"%@@%.0fx.png", name, scale];
+        }
+    } else {
+        if (presentationState != kCoreThemeStateNone) {
+            return [NSString stringWithFormat:@"%@_%@.png", name, themeStateNameForThemeState(presentationState)];
+        } else {
+            return [NSString stringWithFormat:@"%@.png", name];
+        }
     }
 }
 

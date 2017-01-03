@@ -18,6 +18,13 @@
 		DDAF8AE51E1B119A00A8A235 /* ProKit.h in Headers */ = {isa = PBXBuildFile; fileRef = DDAF8AE21E1B119A00A8A235 /* ProKit.h */; };
 		DDAF8AEA1E1B11DB00A8A235 /* CoreUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDAF8AE91E1B11DB00A8A235 /* CoreUI.framework */; };
 		DDAF8AEC1E1B11DF00A8A235 /* ProKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDAF8AEB1E1B11DF00A8A235 /* ProKit.framework */; };
+		DDAF8AF51E1B12F300A8A235 /* GenerateThumbnailForURL.m in Sources */ = {isa = PBXBuildFile; fileRef = DDAF8AF41E1B12F300A8A235 /* GenerateThumbnailForURL.m */; };
+		DDAF8AF71E1B12F300A8A235 /* GeneratePreviewForURL.m in Sources */ = {isa = PBXBuildFile; fileRef = DDAF8AF61E1B12F300A8A235 /* GeneratePreviewForURL.m */; };
+		DDAF8AF91E1B12F300A8A235 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = DDAF8AF81E1B12F300A8A235 /* main.c */; };
+		DDAF8B001E1B130200A8A235 /* ACS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDAF8AC81E1B113300A8A235 /* ACS.framework */; };
+		DDAF8B051E1B183D00A8A235 /* QuickLookHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = DDAF8B031E1B14B500A8A235 /* QuickLookHelper.m */; };
+		DDAF8B091E1B1F4D00A8A235 /* AssetCatalog.qlgenerator in QuickLook PlugIn */ = {isa = PBXBuildFile; fileRef = DDAF8AF21E1B12F300A8A235 /* AssetCatalog.qlgenerator */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		DDAF8B1A1E1C266C00A8A235 /* QuickLookHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = DDAF8B021E1B14B500A8A235 /* QuickLookHelper.h */; };
 		DDC06B761CA8BCF300B6A9F3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC06B751CA8BCF300B6A9F3 /* AppDelegate.swift */; };
 		DDC06B781CA8BCF300B6A9F3 /* ImagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC06B771CA8BCF300B6A9F3 /* ImagesViewController.swift */; };
 		DDC06B7A1CA8BCF300B6A9F3 /* AssetCatalogDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC06B791CA8BCF300B6A9F3 /* AssetCatalogDocument.swift */; };
@@ -40,6 +47,20 @@
 			remoteGlobalIDString = DDAF8AC71E1B113300A8A235;
 			remoteInfo = ACS;
 		};
+		DDAF8AFE1E1B12FE00A8A235 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DDC06B6A1CA8BCF300B6A9F3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DDAF8AC71E1B113300A8A235;
+			remoteInfo = ACS;
+		};
+		DDAF8B061E1B1F2600A8A235 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DDC06B6A1CA8BCF300B6A9F3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DDAF8AF11E1B12F300A8A235;
+			remoteInfo = AssetCatalog;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -52,6 +73,17 @@
 				DDAF8AD01E1B113400A8A235 /* ACS.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DDAF8B081E1B1F2B00A8A235 /* QuickLook PlugIn */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = Contents/Library/QuickLook;
+			dstSubfolderSpec = 1;
+			files = (
+				DDAF8B091E1B1F4D00A8A235 /* AssetCatalog.qlgenerator in QuickLook PlugIn */,
+			);
+			name = "QuickLook PlugIn";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -68,6 +100,13 @@
 		DDAF8AE21E1B119A00A8A235 /* ProKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProKit.h; sourceTree = "<group>"; };
 		DDAF8AE91E1B11DB00A8A235 /* CoreUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreUI.framework; path = ../../../../../System/Library/PrivateFrameworks/CoreUI.framework; sourceTree = "<group>"; };
 		DDAF8AEB1E1B11DF00A8A235 /* ProKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ProKit.framework; path = ../../../../../System/Library/PrivateFrameworks/ProKit.framework; sourceTree = "<group>"; };
+		DDAF8AF21E1B12F300A8A235 /* AssetCatalog.qlgenerator */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AssetCatalog.qlgenerator; sourceTree = BUILT_PRODUCTS_DIR; };
+		DDAF8AF41E1B12F300A8A235 /* GenerateThumbnailForURL.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GenerateThumbnailForURL.m; sourceTree = "<group>"; };
+		DDAF8AF61E1B12F300A8A235 /* GeneratePreviewForURL.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GeneratePreviewForURL.m; sourceTree = "<group>"; };
+		DDAF8AF81E1B12F300A8A235 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
+		DDAF8AFA1E1B12F300A8A235 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DDAF8B021E1B14B500A8A235 /* QuickLookHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuickLookHelper.h; sourceTree = "<group>"; };
+		DDAF8B031E1B14B500A8A235 /* QuickLookHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuickLookHelper.m; sourceTree = "<group>"; };
 		DDC06B721CA8BCF300B6A9F3 /* Asset Catalog Tinkerer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Asset Catalog Tinkerer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DDC06B751CA8BCF300B6A9F3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DDC06B771CA8BCF300B6A9F3 /* ImagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesViewController.swift; sourceTree = "<group>"; };
@@ -92,6 +131,14 @@
 			files = (
 				DDAF8AEA1E1B11DB00A8A235 /* CoreUI.framework in Frameworks */,
 				DDAF8AEC1E1B11DF00A8A235 /* ProKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DDAF8AEE1E1B12F300A8A235 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DDAF8B001E1B130200A8A235 /* ACS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -153,11 +200,34 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		DDAF8AF31E1B12F300A8A235 /* QuickLook PlugIn */ = {
+			isa = PBXGroup;
+			children = (
+				DDAF8B011E1B14A200A8A235 /* Helpers */,
+				DDAF8AF41E1B12F300A8A235 /* GenerateThumbnailForURL.m */,
+				DDAF8AF61E1B12F300A8A235 /* GeneratePreviewForURL.m */,
+				DDAF8AF81E1B12F300A8A235 /* main.c */,
+				DDAF8AFA1E1B12F300A8A235 /* Info.plist */,
+			);
+			name = "QuickLook PlugIn";
+			path = AssetCatalog;
+			sourceTree = "<group>";
+		};
+		DDAF8B011E1B14A200A8A235 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				DDAF8B021E1B14B500A8A235 /* QuickLookHelper.h */,
+				DDAF8B031E1B14B500A8A235 /* QuickLookHelper.m */,
+			);
+			name = Helpers;
+			sourceTree = "<group>";
+		};
 		DDC06B691CA8BCF300B6A9F3 = {
 			isa = PBXGroup;
 			children = (
 				DDC06B741CA8BCF300B6A9F3 /* Asset Catalog Tinkerer */,
 				DDAF8AC91E1B113300A8A235 /* ACS */,
+				DDAF8AF31E1B12F300A8A235 /* QuickLook PlugIn */,
 				DDC06B731CA8BCF300B6A9F3 /* Products */,
 				DDAF8AE81E1B11DB00A8A235 /* Frameworks */,
 			);
@@ -168,6 +238,7 @@
 			children = (
 				DDC06B721CA8BCF300B6A9F3 /* Asset Catalog Tinkerer.app */,
 				DDAF8AC81E1B113300A8A235 /* ACS.framework */,
+				DDAF8AF21E1B12F300A8A235 /* AssetCatalog.qlgenerator */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -257,6 +328,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		DDAF8AEF1E1B12F300A8A235 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DDAF8B1A1E1C266C00A8A235 /* QuickLookHelper.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
@@ -278,6 +357,25 @@
 			productReference = DDAF8AC81E1B113300A8A235 /* ACS.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		DDAF8AF11E1B12F300A8A235 /* AssetCatalog */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DDAF8AFD1E1B12F300A8A235 /* Build configuration list for PBXNativeTarget "AssetCatalog" */;
+			buildPhases = (
+				DDAF8AED1E1B12F300A8A235 /* Sources */,
+				DDAF8AEE1E1B12F300A8A235 /* Frameworks */,
+				DDAF8AEF1E1B12F300A8A235 /* Headers */,
+				DDAF8AF01E1B12F300A8A235 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DDAF8AFF1E1B12FE00A8A235 /* PBXTargetDependency */,
+			);
+			name = AssetCatalog;
+			productName = AssetCatalog;
+			productReference = DDAF8AF21E1B12F300A8A235 /* AssetCatalog.qlgenerator */;
+			productType = "com.apple.product-type.bundle";
+		};
 		DDC06B711CA8BCF300B6A9F3 /* Asset Catalog Tinkerer */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = DDC06B831CA8BCF300B6A9F3 /* Build configuration list for PBXNativeTarget "Asset Catalog Tinkerer" */;
@@ -286,10 +384,13 @@
 				DDC06B6F1CA8BCF300B6A9F3 /* Frameworks */,
 				DDC06B701CA8BCF300B6A9F3 /* Resources */,
 				DDAF8AD41E1B113400A8A235 /* Embed Frameworks */,
+				DDAF8B081E1B1F2B00A8A235 /* QuickLook PlugIn */,
+				DDAF8B141E1C175300A8A235 /* Reset quicklookd */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				DDAF8B071E1B1F2600A8A235 /* PBXTargetDependency */,
 				DDAF8ACE1E1B113400A8A235 /* PBXTargetDependency */,
 			);
 			name = "Asset Catalog Tinkerer";
@@ -308,6 +409,11 @@
 				ORGANIZATIONNAME = "Guilherme Rambo";
 				TargetAttributes = {
 					DDAF8AC71E1B113300A8A235 = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = 8C7439RJLG;
+						ProvisioningStyle = Automatic;
+					};
+					DDAF8AF11E1B12F300A8A235 = {
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = 8C7439RJLG;
 						ProvisioningStyle = Automatic;
@@ -335,12 +441,20 @@
 			targets = (
 				DDC06B711CA8BCF300B6A9F3 /* Asset Catalog Tinkerer */,
 				DDAF8AC71E1B113300A8A235 /* ACS */,
+				DDAF8AF11E1B12F300A8A235 /* AssetCatalog */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		DDAF8AC61E1B113300A8A235 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DDAF8AF01E1B12F300A8A235 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -359,12 +473,40 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		DDAF8B141E1C175300A8A235 /* Reset quicklookd */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Reset quicklookd";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "qlmanage -r";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		DDAF8AC31E1B113300A8A235 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DDAF8B051E1B183D00A8A235 /* QuickLookHelper.m in Sources */,
 				DDAF8ADE1E1B117600A8A235 /* AssetCatalogReader.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DDAF8AED1E1B12F300A8A235 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DDAF8AF51E1B12F300A8A235 /* GenerateThumbnailForURL.m in Sources */,
+				DDAF8AF71E1B12F300A8A235 /* GeneratePreviewForURL.m in Sources */,
+				DDAF8AF91E1B12F300A8A235 /* main.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -392,6 +534,16 @@
 			isa = PBXTargetDependency;
 			target = DDAF8AC71E1B113300A8A235 /* ACS */;
 			targetProxy = DDAF8ACD1E1B113400A8A235 /* PBXContainerItemProxy */;
+		};
+		DDAF8AFF1E1B12FE00A8A235 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DDAF8AC71E1B113300A8A235 /* ACS */;
+			targetProxy = DDAF8AFE1E1B12FE00A8A235 /* PBXContainerItemProxy */;
+		};
+		DDAF8B071E1B1F2600A8A235 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DDAF8AF11E1B12F300A8A235 /* AssetCatalog */;
+			targetProxy = DDAF8B061E1B1F2600A8A235 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -465,6 +617,40 @@
 				SWIFT_VERSION = 3.0;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		DDAF8AFB1E1B12F300A8A235 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 8C7439RJLG;
+				FRAMEWORK_SEARCH_PATHS = "";
+				INFOPLIST_FILE = AssetCatalog/Info.plist;
+				INSTALL_PATH = /Library/QuickLook;
+				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../../../../../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				PRODUCT_BUNDLE_IDENTIFIER = br.com.guilhermerambo.AssetCatalog;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = qlgenerator;
+			};
+			name = Debug;
+		};
+		DDAF8AFC1E1B12F300A8A235 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 8C7439RJLG;
+				FRAMEWORK_SEARCH_PATHS = "";
+				INFOPLIST_FILE = AssetCatalog/Info.plist;
+				INSTALL_PATH = /Library/QuickLook;
+				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../../../../../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				PRODUCT_BUNDLE_IDENTIFIER = br.com.guilhermerambo.AssetCatalog;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = qlgenerator;
 			};
 			name = Release;
 		};
@@ -606,6 +792,15 @@
 			buildConfigurations = (
 				DDAF8AD11E1B113400A8A235 /* Debug */,
 				DDAF8AD21E1B113400A8A235 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DDAF8AFD1E1B12F300A8A235 /* Build configuration list for PBXNativeTarget "AssetCatalog" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DDAF8AFB1E1B12F300A8A235 /* Debug */,
+				DDAF8AFC1E1B12F300A8A235 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 		};

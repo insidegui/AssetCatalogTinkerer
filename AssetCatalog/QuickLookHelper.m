@@ -103,6 +103,17 @@
     
     // draw asset grid
     
+    // calculate median size which will be used to draw the assets
+    NSSize referenceSize = [self medianImageSize];
+    
+    // sometimes this median can be greater than the size of the viewport, so resize accordingly
+    if (referenceSize.width > self.size.width - kCellMargin * 2) {
+        referenceSize.width = self.size.width - kCellMargin * 2;
+    }
+    if (referenceSize.height > self.size.height - kCellMargin * 2) {
+        referenceSize.height = self.size.height - kCellMargin * 2;
+    }
+    
     CGFloat x = kCellMargin;
     CGFloat y = 0;
     CGFloat lastRowHeight = 0;
@@ -110,23 +121,25 @@
     for (NSDictionary *asset in self.reader.images) {
         NSBitmapImageRep *rep = asset[kACSImageRepKey];
         
-        if (rep.size.height > lastRowHeight) {
-            lastRowHeight = rep.size.height;
+        NSSize size = [self fitSize:rep.size inSize:referenceSize];
+        
+        if (size.height > lastRowHeight) {
+            lastRowHeight = size.height;
         }
         
         if (y == 0) {
-            y = _size.height - rep.size.height - kCellMargin;
+            y = _size.height - size.height - kCellMargin;
         }
         
-        if ((x + rep.size.width + kCellMargin) > (self.size.width - kCellMargin)) {
+        if ((x + size.width + kCellMargin) > (self.size.width - kCellMargin)) {
             x = kCellMargin;
             y -= (lastRowHeight + kCellMargin);
             lastRowHeight = 0;
         }
         
-        if ((y - rep.size.height) < kCellMargin) break;
+        if ((y - size.height) < kCellMargin) break;
         
-        NSRect rect = NSMakeRect(x, y, rep.size.width, rep.size.height);
+        NSRect rect = NSMakeRect(x, y, size.width, size.height);
         
         [rep drawInRect:rect];
         
@@ -134,7 +147,7 @@
         [[NSColor colorWithCalibratedWhite:0.9 alpha:1.0] setStroke];
         [border stroke];
         
-        x += rep.size.width + kCellMargin;
+        x += size.width + kCellMargin;
         
         // draw per-asset info (if enough space is available)
         
@@ -166,6 +179,60 @@
     NSRect summaryRect = NSMakeRect(round(_size.width / 2.0 - tw / 2.0), kCellMargin, tw, th);
     
     [summary drawInRect:summaryRect];
+}
+
+- (NSSize)fitSize:(NSSize)originalSize inSize:(NSSize)maxSize
+{
+    if (originalSize.width <= maxSize.width && originalSize.height <= maxSize.height) return originalSize;
+    
+    CGFloat newWidth, newHeight = 0;
+    double rw = originalSize.width / maxSize.width;
+    double rh = originalSize.height / maxSize.height;
+    
+    if (rw > rh)
+    {
+        newHeight = MAX(roundl(originalSize.height / rw), 1);
+        newWidth = maxSize.width;
+    }
+    else
+    {
+        newWidth = MAX(roundl(originalSize.width / rh), 1);
+        newHeight = maxSize.height;
+    }
+    
+    return NSMakeSize(newWidth, newHeight);
+}
+
+- (NSNumber *)medianValueInArray:(NSArray <NSNumber *> *)input
+{
+    NSArray <NSNumber *> *sorted = [input sortedArrayUsingSelector:@selector(compare:)];
+    NSUInteger c = input.count;
+    
+    if (c % 2 == 1) {
+        return sorted[c / 2];
+    } else {
+        NSNumber *m1 = sorted[c / 2];
+        NSNumber *m2 = sorted[c / 2 - 1];
+        
+        return @((m1.doubleValue + m2.doubleValue) / 2);
+    }
+}
+
+- (NSSize)medianImageSize
+{
+    NSMutableArray <NSNumber *> *widths = [[NSMutableArray alloc] initWithCapacity:self.reader.images.count];
+    NSMutableArray <NSNumber *> *heights = [[NSMutableArray alloc] initWithCapacity:self.reader.images.count];
+    
+    [self.reader.images enumerateObjectsUsingBlock:^(NSDictionary* asset, NSUInteger idx, BOOL *stop) {
+        NSBitmapImageRep *rep = asset[kACSImageRepKey];
+        [widths addObject:@(rep.size.width)];
+        [heights addObject:@(rep.size.height)];
+    }];
+    
+    NSNumber *medianWidth = [self medianValueInArray:widths];
+    NSNumber *medianHeight = [self medianValueInArray:heights];
+    
+    return NSMakeSize(round(medianWidth.doubleValue), round(medianHeight.doubleValue));
 }
 
 @end

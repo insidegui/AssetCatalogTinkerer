@@ -34,6 +34,10 @@ NSString * const kAssetCatalogReaderErrorDomain = @"br.com.guilhermerambo.AssetC
 @end
 
 @implementation AssetCatalogReader
+{
+    BOOL _computedCatalogHasRetinaContent;
+    BOOL _catalogHasRetinaContent;
+}
 
 - (instancetype)initWithFileURL:(NSURL *)URL
 {
@@ -173,8 +177,8 @@ NSString * const kAssetCatalogReaderErrorDomain = @"br.com.guilhermerambo.AssetC
                         continue;
                     }
                     
-                    // when resource constrained, only load 2x images
-                    if (_resourceConstrained && namedImage.scale < 2) {
+                    // when resource constrained and the catalog contains retina images, only load retina images
+                    if ([self catalogHasRetinaContent] && _resourceConstrained && namedImage.scale < 2) {
                         continue;
                     }
                     
@@ -237,8 +241,8 @@ NSString * const kAssetCatalogReaderErrorDomain = @"br.com.guilhermerambo.AssetC
         @try {
             CUIThemeRendition *rendition = [[self.catalog _themeStore] renditionWithKey:key.keyList];
             
-            // when resource constrained, only load 2x images
-            if (_resourceConstrained && rendition.scale < 2) {
+            // when resource constrained and the catalog contains retina images, only load retina images
+            if ([self catalogHasRetinaContent] && _resourceConstrained && rendition.scale < 2) {
                 return;
             }
             
@@ -476,6 +480,25 @@ NSString * const kAssetCatalogReaderErrorDomain = @"br.com.guilhermerambo.AssetC
             return [NSString stringWithFormat:@"%@.png", name];
         }
     }
+}
+
+- (BOOL)catalogHasRetinaContent
+{
+    if (!_computedCatalogHasRetinaContent) {
+        for (NSString *name in self.catalog.allImageNames) {
+            for (CUINamedImage *namedImage in [self imagesNamed:name]) {
+                if (namedImage.scale > 1) {
+                    _catalogHasRetinaContent = YES;
+                    break;
+                }
+            }
+            if (_catalogHasRetinaContent) break;
+        }
+        
+        _computedCatalogHasRetinaContent = YES;
+    }
+    
+    return _catalogHasRetinaContent;
 }
 
 @end

@@ -6,6 +6,18 @@
         <description>Most recent changes with links to updates.</description>
         <language>en</language>
 		
-
+		<item>
+            <title>Version 2.5</title>
+			<description><![CDATA[
+							<ul>
+								<li>Finally added an auto-update feature (thanks, Sparkle)</li>
+								<li>Improved handling of ProKit's theme stores</li>
+								<li>The app now comes with a QuickLook PlugIn so you can preview the contents of asset catalogs using QuickLook</li>
+							</ul>
+						]]></description>
+            <pubDate>Tue, 3 Jan 2017 22:40:00 -0200</pubDate>
+            <enclosure url="https://github.com/insidegui/AssetCatalogTinkerer/releases/download/2.5/AssetCatalogTinkerer_v2.5.zip" sparkle:version="250" sparkle:shortVersionString="2.5" length="4336460" type="application/octet-stream" />
+            <sparkle:minimumSystemVersion>10.11</sparkle:minimumSystemVersion>
+        </item>
     </channel>
 </rss>

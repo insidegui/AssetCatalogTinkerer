@@ -648,7 +648,7 @@
 				DEVELOPMENT_TEAM = 8C7439RJLG;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Carthage/Build/Mac";
 				INFOPLIST_FILE = AssetCatalog/Info.plist;
-				INSTALL_PATH = /Library/QuickLook;
+				INSTALL_PATH = "";
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../../../../../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				PRODUCT_BUNDLE_IDENTIFIER = br.com.guilhermerambo.AssetCatalog;
@@ -665,7 +665,7 @@
 				DEVELOPMENT_TEAM = 8C7439RJLG;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Carthage/Build/Mac";
 				INFOPLIST_FILE = AssetCatalog/Info.plist;
-				INSTALL_PATH = /Library/QuickLook;
+				INSTALL_PATH = "";
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../../../../../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				PRODUCT_BUNDLE_IDENTIFIER = br.com.guilhermerambo.AssetCatalog;

@@ -25,6 +25,7 @@
 		DDAF8B051E1B183D00A8A235 /* QuickLookHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = DDAF8B031E1B14B500A8A235 /* QuickLookHelper.m */; };
 		DDAF8B091E1B1F4D00A8A235 /* AssetCatalog.qlgenerator in QuickLook PlugIn */ = {isa = PBXBuildFile; fileRef = DDAF8AF21E1B12F300A8A235 /* AssetCatalog.qlgenerator */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		DDAF8B1A1E1C266C00A8A235 /* QuickLookHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = DDAF8B021E1B14B500A8A235 /* QuickLookHelper.h */; };
+		DDAF8B1D1E1C774C00A8A235 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDAF8B1B1E1C772F00A8A235 /* Sparkle.framework */; };
 		DDC06B761CA8BCF300B6A9F3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC06B751CA8BCF300B6A9F3 /* AppDelegate.swift */; };
 		DDC06B781CA8BCF300B6A9F3 /* ImagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC06B771CA8BCF300B6A9F3 /* ImagesViewController.swift */; };
 		DDC06B7A1CA8BCF300B6A9F3 /* AssetCatalogDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC06B791CA8BCF300B6A9F3 /* AssetCatalogDocument.swift */; };
@@ -107,6 +108,7 @@
 		DDAF8AFA1E1B12F300A8A235 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DDAF8B021E1B14B500A8A235 /* QuickLookHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuickLookHelper.h; sourceTree = "<group>"; };
 		DDAF8B031E1B14B500A8A235 /* QuickLookHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuickLookHelper.m; sourceTree = "<group>"; };
+		DDAF8B1B1E1C772F00A8A235 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = Carthage/Build/Mac/Sparkle.framework; sourceTree = "<group>"; };
 		DDC06B721CA8BCF300B6A9F3 /* Asset Catalog Tinkerer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Asset Catalog Tinkerer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DDC06B751CA8BCF300B6A9F3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DDC06B771CA8BCF300B6A9F3 /* ImagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesViewController.swift; sourceTree = "<group>"; };
@@ -147,6 +149,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DDAF8ACF1E1B113400A8A235 /* ACS.framework in Frameworks */,
+				DDAF8B1D1E1C774C00A8A235 /* Sparkle.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -194,6 +197,7 @@
 		DDAF8AE81E1B11DB00A8A235 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				DDAF8B1B1E1C772F00A8A235 /* Sparkle.framework */,
 				DDAF8AEB1E1B11DF00A8A235 /* ProKit.framework */,
 				DDAF8AE91E1B11DB00A8A235 /* CoreUI.framework */,
 			);
@@ -386,6 +390,7 @@
 				DDAF8AD41E1B113400A8A235 /* Embed Frameworks */,
 				DDAF8B081E1B1F2B00A8A235 /* QuickLook PlugIn */,
 				DDAF8B141E1C175300A8A235 /* Reset quicklookd */,
+				DDAF8B1E1E1C775000A8A235 /* Carthage */,
 			);
 			buildRules = (
 			);
@@ -487,6 +492,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "qlmanage -r";
+		};
+		DDAF8B1E1E1C775000A8A235 /* Carthage */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/Mac/Sparkle.framework",
+			);
+			name = Carthage;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -626,7 +646,7 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 8C7439RJLG;
-				FRAMEWORK_SEARCH_PATHS = "";
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Carthage/Build/Mac";
 				INFOPLIST_FILE = AssetCatalog/Info.plist;
 				INSTALL_PATH = /Library/QuickLook;
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../../../../../Frameworks";
@@ -643,7 +663,7 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 8C7439RJLG;
-				FRAMEWORK_SEARCH_PATHS = "";
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Carthage/Build/Mac";
 				INFOPLIST_FILE = AssetCatalog/Info.plist;
 				INSTALL_PATH = /Library/QuickLook;
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../../../../../Frameworks";
@@ -752,6 +772,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
 				);
 				INFOPLIST_FILE = "Asset Catalog Tinkerer/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
@@ -774,6 +795,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
 				);
 				INFOPLIST_FILE = "Asset Catalog Tinkerer/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";

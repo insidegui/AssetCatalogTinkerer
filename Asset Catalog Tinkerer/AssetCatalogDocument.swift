@@ -45,6 +45,9 @@ class AssetCatalogDocument: NSDocument {
         reader = AssetCatalogReader(fileURL: url)
         reader.thumbnailSize = NSSize(width: 138.0, height: 138.0)
         
+        reader.distinguishCatalogsFromThemeStores = Preferences.shared[.distinguishCatalogsAndThemeStores]
+        reader.ignorePackedAssets = Preferences.shared[.ignorePackedAssets]
+        
         reader.read(completionHandler: didFinishReading, progressHandler: updateProgress)
     }
     

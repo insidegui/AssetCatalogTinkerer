@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11762"/>
@@ -29,7 +29,11 @@
                                                 <action selector="checkForUpdates:" target="nGq-XR-x2i" id="Z24-2Q-p3z"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Preferences…" keyEquivalent="," id="BOF-NM-1cW"/>
+                                        <menuItem title="Preferences…" keyEquivalent="," id="BOF-NM-1cW">
+                                            <connections>
+                                                <segue destination="GWg-5j-e6c" kind="show" id="kZv-bn-DFi"/>
+                                            </connections>
+                                        </menuItem>
                                         <menuItem isSeparatorItem="YES" id="wFC-TO-SCJ"/>
                                         <menuItem title="Services" id="NMo-om-nkz">
                                             <modifierMask key="keyEquivalentModifierMask"/>
@@ -706,6 +710,67 @@
                 <customObject id="2Tp-Fl-jBw" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="51" y="998"/>
+        </scene>
+        <!--Window Controller-->
+        <scene sceneID="odU-n0-yfc">
+            <objects>
+                <windowController id="GWg-5j-e6c" sceneMemberID="viewController">
+                    <window key="window" title="Preferences" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="utilityWindow" frameAutosaveName="" id="E45-rN-xPJ">
+                        <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES"/>
+                        <rect key="contentRect" x="245" y="301" width="480" height="270"/>
+                        <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1028"/>
+                    </window>
+                    <connections>
+                        <segue destination="Iek-g6-X4E" kind="relationship" relationship="window.shadowedContentViewController" id="viQ-xn-G2a"/>
+                    </connections>
+                </windowController>
+                <customObject id="2T2-6T-6Ar" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="806" y="738"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="ial-Yi-tbb">
+            <objects>
+                <viewController id="Iek-g6-X4E" sceneMemberID="viewController">
+                    <view key="view" wantsLayer="YES" id="zXd-SH-nkM">
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="74"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <button translatesAutoresizingMaskIntoConstraints="NO" id="SEU-hH-Kvf">
+                                <rect key="frame" x="18" y="38" width="345" height="18"/>
+                                <string key="toolTip">If you never plan on using the app to read system asset catalogs (like SystemAppearance.car), you probably want to leave this enabled</string>
+                                <buttonCell key="cell" type="check" title="Distinguish between asset catalogs and theme stores" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="fF2-E4-acI">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <binding destination="xNd-tS-534" name="value" keyPath="values.distinguishCatalogsAndThemeStores" id="8Fy-ng-4i0"/>
+                                </connections>
+                            </button>
+                            <button translatesAutoresizingMaskIntoConstraints="NO" id="NTs-9M-eTM">
+                                <rect key="frame" x="18" y="18" width="151" height="18"/>
+                                <string key="toolTip">Some asset catalogs contain packed assets (multiple images in one asset), this option makes the app ignore those when reading catalogs</string>
+                                <buttonCell key="cell" type="check" title="Ignore packed assets" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="8eu-eh-w6E">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <binding destination="xNd-tS-534" name="value" keyPath="values.ignorePackedAssets" id="jpt-SY-RFf"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="NTs-9M-eTM" firstAttribute="leading" secondItem="SEU-hH-Kvf" secondAttribute="leading" id="EpM-oz-US8"/>
+                            <constraint firstItem="NTs-9M-eTM" firstAttribute="top" secondItem="SEU-hH-Kvf" secondAttribute="bottom" constant="6" id="O7e-G6-hlv"/>
+                            <constraint firstItem="SEU-hH-Kvf" firstAttribute="leading" secondItem="zXd-SH-nkM" secondAttribute="leading" constant="20" id="Z7b-nX-mnH"/>
+                            <constraint firstItem="SEU-hH-Kvf" firstAttribute="top" secondItem="zXd-SH-nkM" secondAttribute="top" constant="20" id="bkb-Bg-pwz"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <customObject id="8NY-sS-roC" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <userDefaultsController representsSharedInstance="YES" id="xNd-tS-534"/>
+            </objects>
+            <point key="canvasLocation" x="806" y="1034"/>
         </scene>
     </scenes>
 </document>

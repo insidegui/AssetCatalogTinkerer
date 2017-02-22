@@ -43,6 +43,7 @@ NSString * const kAssetCatalogReaderErrorDomain = @"br.com.guilhermerambo.AssetC
 {
     self = [super init];
     
+    _ignorePackedAssets = YES;
     _fileURL = [URL copy];
     
     return self;
@@ -123,8 +124,12 @@ NSString * const kAssetCatalogReaderErrorDomain = @"br.com.guilhermerambo.AssetC
             return [self readProThemeStoreWithCompletionHandler:callback progressHandler:progressCallback];
         }
         
-        if (!self.catalog.allImageNames.count || ![self.catalog respondsToSelector:@selector(imageWithName:scaleFactor:)]) {
-            // CAR is a theme file not an asset catalog
+        if (self.distinguishCatalogsFromThemeStores) {
+            if (!self.catalog.allImageNames.count || ![self.catalog respondsToSelector:@selector(imageWithName:scaleFactor:)]) {
+                // CAR is a theme file not an asset catalog
+                return [self readThemeStoreWithCompletionHandler:callback progressHandler:progressCallback];
+            }
+        } else {
             return [self readThemeStoreWithCompletionHandler:callback progressHandler:progressCallback];
         }
         
@@ -253,7 +258,10 @@ NSString * const kAssetCatalogReaderErrorDomain = @"br.com.guilhermerambo.AssetC
                 imageRep.size = NSMakeSize(CGImageGetWidth(rendition.unslicedImage), CGImageGetHeight(rendition.unslicedImage));
                 
                 NSDictionary *desc = [self imageDescriptionWithName:rendition.name filename:filename representation:imageRep];
-                if (!desc) {
+                
+                BOOL ignore = [filename containsString:@"ZZPackedAsset"] && self.ignorePackedAssets;
+                
+                if (!desc || ignore) {
                     loadedItemCount++;
                     return;
                 }

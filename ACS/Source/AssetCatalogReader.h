@@ -42,4 +42,7 @@ extern NSString *__nonnull const kACSImageRepKey;
 
 @property (nonatomic, assign) BOOL cancelled;
 
+@property (nonatomic, assign) BOOL distinguishCatalogsFromThemeStores;
+@property (nonatomic, assign) BOOL ignorePackedAssets;
+
 @end

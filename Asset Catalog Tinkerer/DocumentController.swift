@@ -18,9 +18,20 @@ class DocumentController: NSDocumentController {
         // the app doesn't support saving documents
     }
     
+    private func makeSettingsView() -> NSView? {
+        let storyboard = NSStoryboard(name: "Main", bundle: nil)
+        
+        guard let viewController = storyboard.instantiateController(withIdentifier: "prefs") as? NSViewController else {
+            return nil
+        }
+        
+        return viewController.view
+    }
+    
     override func runModalOpenPanel(_ openPanel: NSOpenPanel, forTypes types: [String]?) -> Int {
         openPanel.allowedFileTypes = ["car", "app", "framework", "bundle", "plugin"]
         openPanel.treatsFilePackagesAsDirectories = true
+        openPanel.accessoryView = makeSettingsView()
         
         return openPanel.runModal()
     }

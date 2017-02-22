@@ -731,7 +731,7 @@
         <!--View Controller-->
         <scene sceneID="ial-Yi-tbb">
             <objects>
-                <viewController id="Iek-g6-X4E" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="prefs" id="Iek-g6-X4E" sceneMemberID="viewController">
                     <view key="view" wantsLayer="YES" id="zXd-SH-nkM">
                         <rect key="frame" x="0.0" y="0.0" width="480" height="74"/>
                         <autoresizingMask key="autoresizingMask"/>

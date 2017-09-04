@@ -6,7 +6,7 @@ An app that lets you open `.car` files and browse/extract their images, or previ
 
 [⬇ Download Latest Release](https://github.com/insidegui/AssetCatalogTinkerer/raw/master/releases/AssetCatalogTinkerer_latest.zip)
 
-You can also install it using [Homebrew Cask](https://caskroom.github.io), simply `brew install asset-catalog-tinkerer`!
+You can also install it using [Homebrew Cask](https://caskroom.github.io), simply `brew cask install asset-catalog-tinkerer`!
 
 ![screenshot](https://raw.github.com/insidegui/AssetCatalogTinkerer/master/screenshot.png)
 

@@ -6,6 +6,18 @@
         <description>Most recent changes with links to updates.</description>
         <language>en</language>
 		
+        <item>
+            <title>Version 2.5.1</title>
+			<description><![CDATA[
+							<ul>
+								<li>The all will now launch correctly on High Sierra</li>
+							</ul>
+						]]></description>
+            <pubDate>Thu, 5 Oct 2017 18:20:00 -0300</pubDate>
+            <enclosure url="https://github.com/insidegui/AssetCatalogTinkerer/releases/download/2.5.1/AssetCatalogTinkerer_v2.5.1.zip" sparkle:version="251" sparkle:shortVersionString="2.5.1" length="5906601" type="application/octet-stream" />
+            <sparkle:minimumSystemVersion>10.11</sparkle:minimumSystemVersion>
+        </item>
+
 		<item>
             <title>Version 2.5</title>
 			<description><![CDATA[

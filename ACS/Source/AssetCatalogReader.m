@@ -10,7 +10,6 @@
 
 #import "CoreUI.h"
 #import "CoreUI+TV.h"
-#import "ProKit.h"
 
 NSString * const kACSNameKey = @"name";
 NSString * const kACSImageKey = @"image";
@@ -116,12 +115,14 @@ NSString * const kAssetCatalogReaderErrorDomain = @"br.com.guilhermerambo.AssetC
             return;
         }
         
-        // TODO: open the file to see if it has "PROJECT:ProThemeDefinition" in the header and use ProKit to extract the assets if It does
         if ([self isProThemeStoreAtPath:catalogPath]) {
-            #ifdef DEBUG
-            NSLog(@"Pro theme store detected");
-            #endif
-            return [self readProThemeStoreWithCompletionHandler:callback progressHandler:progressCallback];
+            NSError *error = [NSError errorWithDomain:kAssetCatalogReaderErrorDomain code:1 userInfo:@{NSLocalizedDescriptionKey: @"Pro asset catalogs are not supported"}];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                self.error = error;
+                callback();
+            });
+            
+            return;
         }
         
         if (self.distinguishCatalogsFromThemeStores) {
@@ -276,98 +277,6 @@ NSString * const kAssetCatalogReaderErrorDomain = @"br.com.guilhermerambo.AssetC
             loadedItemCount++;
         } @catch (NSException *exception) {
             NSLog(@"Exception while reading theme store: %@", exception);
-        }
-    }];
-    
-    dispatch_async(dispatch_get_main_queue(), ^{
-        callback();
-    });
-}
-
-- (NSDictionary *)infoForProRendition:(NSProThemeRendition *)rendition key:(NSProRenditionKey *)key sliceIndex:(int)sliceIndex
-{
-    NSImage *originalImage;
-    NSData *pngData;
-    NSString *filename;
-    NSImage *thumbnail;
-    NSBitmapImageRep *imageRep;
-    
-    NSString *filebasename = [NSString stringWithFormat:@"%@-%@", rendition.name.stringByDeletingPathExtension, themeStateNameForThemeState(key.themeState)];
-    
-    originalImage = [rendition imageForSliceIndex:sliceIndex];
-    if (!originalImage) return nil;
-    
-    filename = [filebasename stringByAppendingFormat:@"-slice%d.png", sliceIndex];
-    
-    if ([originalImage.representations.lastObject isKindOfClass:[NSBitmapImageRep class]]) {
-        imageRep = (NSBitmapImageRep *)originalImage.representations.lastObject;
-        if (!_resourceConstrained) {
-            pngData = [imageRep representationUsingType:NSPNGFileType properties:@{NSImageInterlaced:@(NO)}];
-        }
-    }
-    
-    thumbnail = [self constrainImage:originalImage toSize:NSMakeSize(50.0, 50.0)];
-    
-    if (!rendition || !originalImage || !filename || !filename.length) return nil;
-    if (!_resourceConstrained) {
-        if (!pngData || !pngData.length || !thumbnail) return nil;
-    }
-    
-    if (_resourceConstrained) {
-        return @{
-                 kACSNameKey : rendition.name,
-                 kACSFilenameKey: filename,
-                 kACSImageRepKey: imageRep
-                 };
-    } else {
-        return @{
-                 kACSNameKey : rendition.name,
-                 kACSImageKey : originalImage,
-                 kACSThumbnailKey: thumbnail,
-                 kACSFilenameKey: filename,
-                 kACSPNGDataKey: pngData
-                 };
-    }
-}
-
-- (void)readProThemeStoreWithCompletionHandler:(void (^__nonnull)())callback progressHandler:(void (^__nullable)(double progress))progressCallback
-{
-    ProStructuredThemeStore *catalog = [[ProStructuredThemeStore alloc] initWithPath:@"/System/Library/PrivateFrameworks/ProKit.framework/Versions/A/Resources/ProThemeBits.car"];
-    
-    uint64 realTotalItemCount = [[catalog themeStore] allAssetKeys].count;
-    __block uint64 loadedItemCount = 0;
-    
-    _totalNumberOfAssets = [[catalog themeStore] allAssetKeys].count;
-    
-    // limits the total items to be read to the total number of images or the max count set for a resource constrained read
-    __block uint64 totalItemCount = _resourceConstrained ? MIN(_maxCount, realTotalItemCount) : realTotalItemCount;
-    
-    [[[catalog themeStore] allAssetKeys] enumerateObjectsWithOptions:0 usingBlock:^(NSProRenditionKey * _Nonnull key, NSUInteger idx, BOOL * _Nonnull stop) {
-        if (_resourceConstrained && loadedItemCount >= totalItemCount) return;
-        
-        if (self.cancelled) return;
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            double loadedFraction = (double)loadedItemCount / (double)totalItemCount;
-            if (progressCallback) progressCallback(loadedFraction);
-        });
-        
-        @try {
-            NSProThemeRendition *rendition = [catalog renditionWithKey:key.keyList];
-            
-            if ([rendition sliceInformation]) {
-                for (int i = 0; i < 9; i++) {
-                    NSDictionary *info = [self infoForProRendition:rendition key:key sliceIndex:i];
-                    if (info) [self.mutableImages addObject:info];
-                }
-            } else {
-                NSDictionary *info = [self infoForProRendition:rendition key:key sliceIndex:0];
-                if (info) [self.mutableImages addObject:info];
-            }
-            
-            loadedItemCount++;
-        } @catch (NSException *exception) {
-            NSLog(@"Exception raised: %@", exception);
         }
     }];
     

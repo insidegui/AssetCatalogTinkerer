@@ -35,8 +35,6 @@ class ImageCollectionViewItem: NSCollectionViewItem {
     override func viewDidLoad() {
         super.viewDidLoad()
       
-//        view.layer?.backgroundColor = NSColor.red.cgColor
-      
         updateUI()
     }
     

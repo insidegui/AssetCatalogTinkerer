@@ -8,87 +8,36 @@
 
 import Cocoa
 
+private extension NSColor {
+  static let background = NSColor.clear
+  static let selectedBackground = NSColor(calibratedRed:0, green:0.496, blue:1, alpha:1)
+}
+
 class ImageCollectionViewItem: NSCollectionViewItem {
 
-    var image: [String: NSObject]? {
+  @IBOutlet weak var nameLabel: NSTextField!
+  @IBOutlet weak var catalogImageBox: NSBox!
+  @IBOutlet weak var catalogImageView: NSImageView!
+  
+  var image: [String: NSObject]? {
         didSet {
             updateUI()
         }
     }
     
-    fileprivate struct Colors {
-        static let background = NSColor.white
-        static let border = NSColor(calibratedWhite: 0.9, alpha: 1.0)
-        static let selectedBackground = NSColor(calibratedRed:0, green:0.496, blue:1, alpha:1)
-        static let selectedBorder = NSColor(calibratedRed:0.019, green:0.316, blue:0.687, alpha:1)
-        static let text = NSColor(calibratedRed:0, green:0.496, blue:1, alpha:1)
-        static let selectedText = NSColor.white
-    }
-    
     override var isSelected: Bool {
         didSet {
-            view.layer?.backgroundColor = isSelected ? Colors.selectedBackground.cgColor : Colors.background.cgColor
-            view.layer?.borderColor = isSelected ? Colors.selectedBorder.cgColor : Colors.border.cgColor
-            nameLabel.textColor = isSelected ? Colors.selectedText : Colors.text
+          catalogImageBox.fillColor = isSelected ? .selectedBackground : .background
+          catalogImageBox.borderWidth = isSelected ? 0 : 1
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        buildUI()
+      
+//        view.layer?.backgroundColor = NSColor.red.cgColor
+      
         updateUI()
-    }
-    
-    fileprivate lazy var catalogImageView: NSImageView = {
-        let iv = NSImageView(frame: NSZeroRect)
-        
-        iv.translatesAutoresizingMaskIntoConstraints = false
-        iv.imageFrameStyle = .none
-        iv.imageScaling = .scaleProportionallyDown
-        iv.imageAlignment = .alignCenter
-        
-        return iv
-    }()
-    
-    fileprivate lazy var nameLabel: NSTextField = {
-        let l = NSTextField(frame: NSZeroRect)
-        
-        l.translatesAutoresizingMaskIntoConstraints = false
-        l.isBordered = false
-        l.isBezeled = false
-        l.isEditable = false
-        l.isSelectable = false
-        l.drawsBackground = false
-        l.font = NSFont.systemFont(ofSize: 11.0, weight: NSFontWeightMedium)
-        l.textColor = Colors.text
-        l.lineBreakMode = .byTruncatingMiddle
-        
-        return l
-    }()
-    
-    fileprivate func buildUI() {
-        guard catalogImageView.superview == nil else { return }
-        
-        view.wantsLayer = true
-        view.layer = CALayer()
-        
-        catalogImageView.frame = view.bounds
-        view.addSubview(catalogImageView)
-        
-        catalogImageView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        catalogImageView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-        catalogImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        catalogImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        
-        view.layer!.borderWidth = 1.0
-        view.layer!.borderColor = Colors.border.cgColor
-        view.layer!.cornerRadius = 4.0
-        
-        view.addSubview(nameLabel)
-        nameLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -2.0).isActive = true
-        nameLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        nameLabel.widthAnchor.constraint(lessThanOrEqualTo: view.widthAnchor, multiplier: 1.0, constant: -12.0)
     }
     
     fileprivate func updateUI() {
@@ -101,5 +50,4 @@ class ImageCollectionViewItem: NSCollectionViewItem {
         nameLabel.stringValue = name
         view.toolTip = filename
     }
-    
 }

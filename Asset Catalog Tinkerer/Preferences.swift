@@ -13,6 +13,7 @@ final class Preferences {
     enum Key: String {
         case distinguishCatalogsAndThemeStores
         case ignorePackedAssets
+        case startInDarkMode
     }
     
     static let shared = Preferences()

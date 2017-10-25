@@ -45,8 +45,7 @@ class ImagesViewController: NSViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        view.layer?.backgroundColor = NSColor.white.cgColor
+      
         buildUI()
         showStatus("Extracting Images...")
     }
@@ -95,11 +94,11 @@ class ImagesViewController: NSViewController {
     
     fileprivate lazy var scrollView: NSScrollView = {
         let s = NSScrollView(frame: NSZeroRect)
-        
+
         s.translatesAutoresizingMaskIntoConstraints = false
         s.hasVerticalScroller = true
         s.borderType = .noBorder
-        
+      
         return s
     }()
     
@@ -108,7 +107,8 @@ class ImagesViewController: NSViewController {
         
         c.isSelectable = true
         c.allowsMultipleSelection = true
-        
+        c.backgroundColors = [.clear]
+      
         return c
     }()
     

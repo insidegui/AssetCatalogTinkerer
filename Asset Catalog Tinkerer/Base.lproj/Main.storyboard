@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11762"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13196"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+        <capability name="stacking Non-gravity area distributions on NSStackView" minToolsVersion="7.0" minSystemVersion="10.11"/>
     </dependencies>
     <scenes>
         <!--Application-->
@@ -668,7 +669,7 @@
                                     <nil key="toolTip"/>
                                     <size key="minSize" width="96" height="22"/>
                                     <size key="maxSize" width="9999999" height="22"/>
-                                    <searchField key="view" wantsLayer="YES" verticalHuggingPriority="750" id="BAb-TV-019">
+                                    <searchField key="view" wantsLayer="YES" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" id="BAb-TV-019">
                                         <rect key="frame" x="0.0" y="14" width="96" height="22"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" enabled="NO" borderStyle="bezel" usesSingleLineMode="YES" bezelStyle="round" id="iFm-7u-hh9">
@@ -681,15 +682,43 @@
                                         </connections>
                                     </searchField>
                                 </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="62A5FE87-C2C6-4E63-BBFA-2DBB7696AC73" label="" paletteLabel="Dark Mode" id="wbB-7z-UZo">
+                                    <nil key="toolTip"/>
+                                    <size key="minSize" width="50" height="19"/>
+                                    <size key="maxSize" width="60" height="19"/>
+                                    <button key="view" verticalHuggingPriority="750" id="rXO-2B-6Nj">
+                                        <rect key="frame" x="3" y="14" width="60" height="19"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <buttonCell key="cell" type="roundRect" title="Light" bezelStyle="roundedRect" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="bKN-GN-dZ1">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
+                                            <font key="font" metaFont="cellTitle"/>
+                                        </buttonCell>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="frame.size.width">
+                                                <integer key="value" value="0"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </button>
+                                    <connections>
+                                        <action selector="toggleBackground:" target="jGA-0Y-lOj" id="c0m-cE-KlK"/>
+                                    </connections>
+                                </toolbarItem>
                             </allowedToolbarItems>
                             <defaultToolbarItems>
+                                <toolbarItem reference="ZOY-kZ-Q8L"/>
+                                <toolbarItem reference="ZOY-kZ-Q8L"/>
                                 <toolbarItem reference="H6V-R9-WfC"/>
                                 <toolbarItem reference="fKD-mW-cF5"/>
                                 <toolbarItem reference="H6V-R9-WfC"/>
+                                <toolbarItem reference="wbB-7z-UZo"/>
                             </defaultToolbarItems>
                         </toolbar>
+                        <connections>
+                            <outlet property="delegate" destination="jGA-0Y-lOj" id="hLT-v3-Rof"/>
+                        </connections>
                     </window>
                     <connections>
+                        <outlet property="darkModeButton" destination="rXO-2B-6Nj" id="O8V-lr-BSp"/>
                         <outlet property="searchField" destination="BAb-TV-019" id="DdZ-7n-ZQt"/>
                         <segue destination="5gI-5U-AMq" kind="relationship" relationship="window.shadowedContentViewController" id="nsd-lR-9xd"/>
                     </connections>
@@ -702,7 +731,7 @@
         <scene sceneID="hIz-AP-VOD">
             <objects>
                 <viewController id="5gI-5U-AMq" customClass="ImagesViewController" customModule="Asset_Catalog_Tinkerer" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" wantsLayer="YES" id="ERx-hH-rdd">
+                    <view key="view" id="ERx-hH-rdd">
                         <rect key="frame" x="0.0" y="0.0" width="812" height="538"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </view>
@@ -719,6 +748,9 @@
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES"/>
                         <rect key="contentRect" x="245" y="301" width="480" height="270"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1028"/>
+                        <connections>
+                            <outlet property="delegate" destination="GWg-5j-e6c" id="wzO-gU-DMO"/>
+                        </connections>
                     </window>
                     <connections>
                         <segue destination="Iek-g6-X4E" kind="relationship" relationship="window.shadowedContentViewController" id="viQ-xn-G2a"/>
@@ -733,44 +765,69 @@
             <objects>
                 <viewController storyboardIdentifier="prefs" id="Iek-g6-X4E" sceneMemberID="viewController">
                     <view key="view" wantsLayer="YES" id="zXd-SH-nkM">
-                        <rect key="frame" x="0.0" y="0.0" width="480" height="74"/>
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="204"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <button translatesAutoresizingMaskIntoConstraints="NO" id="SEU-hH-Kvf">
-                                <rect key="frame" x="18" y="38" width="345" height="18"/>
-                                <string key="toolTip">If you never plan on using the app to read system asset catalogs (like SystemAppearance.car), you probably want to leave this enabled</string>
-                                <buttonCell key="cell" type="check" title="Distinguish between asset catalogs and theme stores" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="fF2-E4-acI">
-                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <binding destination="xNd-tS-534" name="value" keyPath="values.distinguishCatalogsAndThemeStores" id="8Fy-ng-4i0"/>
-                                </connections>
-                            </button>
-                            <button translatesAutoresizingMaskIntoConstraints="NO" id="NTs-9M-eTM">
-                                <rect key="frame" x="18" y="18" width="151" height="18"/>
-                                <string key="toolTip">Some asset catalogs contain packed assets (multiple images in one asset), this option makes the app ignore those when reading catalogs</string>
-                                <buttonCell key="cell" type="check" title="Ignore packed assets" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="8eu-eh-w6E">
-                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <binding destination="xNd-tS-534" name="value" keyPath="values.ignorePackedAssets" id="jpt-SY-RFf"/>
-                                </connections>
-                            </button>
+                            <stackView distribution="fill" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tGB-5m-9bS">
+                                <rect key="frame" x="20" y="126" width="440" height="58"/>
+                                <subviews>
+                                    <button translatesAutoresizingMaskIntoConstraints="NO" id="SEU-hH-Kvf">
+                                        <rect key="frame" x="-2" y="42" width="345" height="18"/>
+                                        <string key="toolTip">If you never plan on using the app to read system asset catalogs (like SystemAppearance.car), you probably want to leave this enabled</string>
+                                        <buttonCell key="cell" type="check" title="Distinguish between asset catalogs and theme stores" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="fF2-E4-acI">
+                                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <binding destination="xNd-tS-534" name="value" keyPath="values.distinguishCatalogsAndThemeStores" id="8Fy-ng-4i0"/>
+                                        </connections>
+                                    </button>
+                                    <button translatesAutoresizingMaskIntoConstraints="NO" id="NTs-9M-eTM">
+                                        <rect key="frame" x="-2" y="20" width="151" height="18"/>
+                                        <string key="toolTip">Some asset catalogs contain packed assets (multiple images in one asset), this option makes the app ignore those when reading catalogs</string>
+                                        <buttonCell key="cell" type="check" title="Ignore packed assets" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="8eu-eh-w6E">
+                                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <binding destination="xNd-tS-534" name="value" keyPath="values.ignorePackedAssets" id="jpt-SY-RFf"/>
+                                        </connections>
+                                    </button>
+                                    <button translatesAutoresizingMaskIntoConstraints="NO" id="DgP-Za-rIp">
+                                        <rect key="frame" x="-2" y="-2" width="135" height="18"/>
+                                        <string key="toolTip">Some asset catalogs contain packed assets (multiple images in one asset), this option makes the app ignore those when reading catalogs</string>
+                                        <buttonCell key="cell" type="check" title="Start in dark mode" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="YnS-kP-Ial">
+                                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <binding destination="xNd-tS-534" name="value" keyPath="values.startInDarkMode" id="Ew1-8k-JF4"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <visibilityPriorities>
+                                    <integer value="1000"/>
+                                    <integer value="1000"/>
+                                    <integer value="1000"/>
+                                </visibilityPriorities>
+                                <customSpacing>
+                                    <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
+                                </customSpacing>
+                            </stackView>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="NTs-9M-eTM" firstAttribute="leading" secondItem="SEU-hH-Kvf" secondAttribute="leading" id="EpM-oz-US8"/>
-                            <constraint firstItem="NTs-9M-eTM" firstAttribute="top" secondItem="SEU-hH-Kvf" secondAttribute="bottom" constant="6" id="O7e-G6-hlv"/>
-                            <constraint firstItem="SEU-hH-Kvf" firstAttribute="leading" secondItem="zXd-SH-nkM" secondAttribute="leading" constant="20" id="Z7b-nX-mnH"/>
-                            <constraint firstItem="SEU-hH-Kvf" firstAttribute="top" secondItem="zXd-SH-nkM" secondAttribute="top" constant="20" id="bkb-Bg-pwz"/>
+                            <constraint firstItem="tGB-5m-9bS" firstAttribute="top" secondItem="zXd-SH-nkM" secondAttribute="top" constant="20" id="1Oj-gy-PpU"/>
+                            <constraint firstItem="tGB-5m-9bS" firstAttribute="leading" secondItem="zXd-SH-nkM" secondAttribute="leading" constant="20" id="9Kx-tv-ErT"/>
+                            <constraint firstAttribute="trailing" secondItem="tGB-5m-9bS" secondAttribute="trailing" constant="20" id="m7v-9y-ME9"/>
                         </constraints>
                     </view>
                 </viewController>
                 <customObject id="8NY-sS-roC" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <userDefaultsController representsSharedInstance="YES" id="xNd-tS-534"/>
             </objects>
-            <point key="canvasLocation" x="806" y="1034"/>
+            <point key="canvasLocation" x="806" y="1099"/>
         </scene>
     </scenes>
 </document>

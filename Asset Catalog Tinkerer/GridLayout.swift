@@ -12,7 +12,7 @@ class GridLayout: NSCollectionViewFlowLayout {
 
     fileprivate struct Constants {
         static let itemWidth = CGFloat(150.0)
-        static let itemHeight = CGFloat(150.0)
+        static let itemHeight = CGFloat(170.0)
         static let itemPadding = CGFloat(10.0)
     }
     

@@ -3,3 +3,4 @@
 //
 
 #import "AssetCatalogReader.h"
+#import "NSImage+BrightnessDetection.h"

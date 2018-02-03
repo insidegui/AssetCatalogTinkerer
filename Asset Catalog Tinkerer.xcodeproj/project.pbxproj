@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		DD8118B31E5DC4DD00426746 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD8118B21E5DC4DD00426746 /* Preferences.swift */; };
 		DDA691CB1CFA02CA00583328 /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA691CA1CFA02CA00583328 /* MainWindowController.swift */; };
+		DDADF2AF2026678C003CB15D /* NSImage+BrightnessDetection.m in Sources */ = {isa = PBXBuildFile; fileRef = DDADF2AE2026678C003CB15D /* NSImage+BrightnessDetection.m */; };
 		DDAF8ACC1E1B113400A8A235 /* ACS.h in Headers */ = {isa = PBXBuildFile; fileRef = DDAF8ACA1E1B113400A8A235 /* ACS.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DDAF8ACF1E1B113400A8A235 /* ACS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDAF8AC81E1B113300A8A235 /* ACS.framework */; };
 		DDAF8AD01E1B113400A8A235 /* ACS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DDAF8AC81E1B113300A8A235 /* ACS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -91,6 +92,8 @@
 /* Begin PBXFileReference section */
 		DD8118B21E5DC4DD00426746 /* Preferences.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
 		DDA691CA1CFA02CA00583328 /* MainWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainWindowController.swift; sourceTree = "<group>"; };
+		DDADF2AD2026678C003CB15D /* NSImage+BrightnessDetection.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSImage+BrightnessDetection.h"; sourceTree = "<group>"; };
+		DDADF2AE2026678C003CB15D /* NSImage+BrightnessDetection.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSImage+BrightnessDetection.m"; sourceTree = "<group>"; };
 		DDAF8AC81E1B113300A8A235 /* ACS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ACS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DDAF8ACA1E1B113400A8A235 /* ACS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ACS.h; sourceTree = "<group>"; };
 		DDAF8ACB1E1B113400A8A235 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -154,6 +157,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DDADF2AC20266770003CB15D /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				DDADF2AD2026678C003CB15D /* NSImage+BrightnessDetection.h */,
+				DDADF2AE2026678C003CB15D /* NSImage+BrightnessDetection.m */,
+			);
+			name = Util;
+			sourceTree = "<group>";
+		};
 		DDAF8AC91E1B113300A8A235 /* ACS */ = {
 			isa = PBXGroup;
 			children = (
@@ -278,6 +290,7 @@
 			isa = PBXGroup;
 			children = (
 				DDA691CA1CFA02CA00583328 /* MainWindowController.swift */,
+				DDADF2AC20266770003CB15D /* Util */,
 				DDC06B921CA8C4F500B6A9F3 /* Views */,
 				DDC06BAB1CA8CB6200B6A9F3 /* ImagesCollectionViewDataProvider.swift */,
 				DDC06B771CA8BCF300B6A9F3 /* ImagesViewController.swift */,
@@ -534,6 +547,7 @@
 				DDC06B781CA8BCF300B6A9F3 /* ImagesViewController.swift in Sources */,
 				DDC06BB01CA8CFB900B6A9F3 /* ImageCollectionViewItem.swift in Sources */,
 				DDC06B761CA8BCF300B6A9F3 /* AppDelegate.swift in Sources */,
+				DDADF2AF2026678C003CB15D /* NSImage+BrightnessDetection.m in Sources */,
 				DDC06BAC1CA8CB6200B6A9F3 /* ImagesCollectionViewDataProvider.swift in Sources */,
 				DDC06BA41CA8C9B100B6A9F3 /* GridLayout.swift in Sources */,
 				DDC06B941CA8C4FC00B6A9F3 /* ProgressBar.swift in Sources */,

@@ -13,6 +13,7 @@ final class Preferences {
     enum Key: String {
         case distinguishCatalogsAndThemeStores
         case ignorePackedAssets
+        case debugImageBrightness = "ACTDebugImageBrightness"
     }
     
     static let shared = Preferences()

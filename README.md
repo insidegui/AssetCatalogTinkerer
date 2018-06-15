@@ -1,6 +1,6 @@
-If you want to support my open source projects financially, you can do so by purchasing a copy of [BrowserFreedom](https://getbrowserfreedom.com), [Mediunic](https://itunes.apple.com/app/mediunic-medium-client/id1088945121?mt=12) or sending Bitcoin to `3DH9B42m6k2A89hy1Diz3Vr3cpDNQTQCbJ` 😁
-
 ## Asset Catalog Tinkerer
+
+**Important: if you want to open asset catalogs from iOS 12, macOS Mojave, watchOS 5 or tvOS 12 you need to run the app in macOS Mojave. Apple introduced a new compression to asset catalogs so it's not possible to extract them with previous versions. An update for macOS Mojave will be released in the future with Dark Mode support.**
 
 An app that lets you open `.car` files and browse/extract their images, or preview them on Finder with QuickLook.
 

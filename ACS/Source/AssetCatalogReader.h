@@ -30,13 +30,13 @@ extern NSString *__nonnull const kACSImageRepKey;
 @property (nonatomic, copy) NSError *__nullable error;
 
 // After reading, contains the total number of assets contained within the asset catalog
-@property (nonatomic, readonly) NSUInteger totalNumberOfAssets;
+@property (readonly) NSUInteger totalNumberOfAssets;
 
 - (instancetype __nonnull)initWithFileURL:(NSURL * __nonnull)URL;
-- (void)readWithCompletionHandler:(void (^__nonnull)())callback progressHandler:(void (^__nullable)(double progress))progressCallback;
+- (void)readWithCompletionHandler:(void (^__nonnull)(void))callback progressHandler:(void (^__nullable)(double progress))progressCallback;
 
 // Performs a more lightweight read (used by the QuickLook PlugIn)
-- (void)resourceConstrainedReadWithMaxCount:(int)max completionHandler:(void (^__nonnull)())callback;
+- (void)resourceConstrainedReadWithMaxCount:(int)max completionHandler:(void (^__nonnull)(void))callback;
 
 - (void)cancelReading;
 

@@ -14,6 +14,8 @@
 
 @interface QuickLookHelper ()
 
+@property (nonatomic, assign, getter=isFinished) BOOL isFinished;
+
 @property (nonatomic, strong) AssetCatalogReader *reader;
 @property (nonatomic, assign) CGSize size;
 
@@ -69,8 +71,9 @@
 
 - (void)generatePreview
 {
+    __weak typeof(self) weakSelf = self;
     [self.reader resourceConstrainedReadWithMaxCount:kMaxNumberOfAssets completionHandler:^{
-        _isFinished = YES;
+        weakSelf.isFinished = YES;
     }];
 }
 

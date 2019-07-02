@@ -4,3 +4,4 @@
 
 #import "AssetCatalogReader.h"
 #import "NSImage+BrightnessDetection.h"
+#import "NSPasteboard+Filenames.h"

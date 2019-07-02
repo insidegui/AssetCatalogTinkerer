@@ -26,6 +26,8 @@ NSString * const kAssetCatalogReaderErrorDomain = @"br.com.guilhermerambo.AssetC
 @property (nonatomic, strong) CUICatalog *catalog;
 @property (nonatomic, strong) NSMutableArray <NSDictionary <NSString *, NSObject *> *> *mutableImages;
 
+@property (assign) NSUInteger totalNumberOfAssets;
+
 // These properties are set when the read is initiated by a call to `resourceConstrainedReadWithMaxCount`
 @property (nonatomic, assign, getter=isResourceConstrained) BOOL resourceConstrained;
 @property (nonatomic, assign) int maxCount;
@@ -65,7 +67,7 @@ NSString * const kAssetCatalogReaderErrorDomain = @"br.com.guilhermerambo.AssetC
     self.cancelled = true;
 }
 
-- (void)resourceConstrainedReadWithMaxCount:(int)max completionHandler:(void (^)())callback
+- (void)resourceConstrainedReadWithMaxCount:(int)max completionHandler:(void (^)(void))callback
 {
     self.resourceConstrained = YES;
     self.maxCount = max;
@@ -73,7 +75,7 @@ NSString * const kAssetCatalogReaderErrorDomain = @"br.com.guilhermerambo.AssetC
     [self readWithCompletionHandler:callback progressHandler:nil];
 }
 
-- (void)readWithCompletionHandler:(void (^__nonnull)())callback progressHandler:(void (^__nullable)(double progress))progressCallback
+- (void)readWithCompletionHandler:(void (^__nonnull)(void))callback progressHandler:(void (^__nullable)(double progress))progressCallback
 {
     __block uint64 totalItemCount = 0;
     __block uint64 loadedItemCount = 0;
@@ -92,6 +94,8 @@ NSString * const kAssetCatalogReaderErrorDomain = @"br.com.guilhermerambo.AssetC
             self.catalogName = [NSString stringWithFormat:@"%@ | %@", bundle.bundlePath.lastPathComponent, catalogPath.lastPathComponent];
         }
     }
+
+    __weak typeof(self) weakSelf = self;
     
     dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), ^{
         // bundle is nil for some reason
@@ -134,13 +138,13 @@ NSString * const kAssetCatalogReaderErrorDomain = @"br.com.guilhermerambo.AssetC
             return [self readThemeStoreWithCompletionHandler:callback progressHandler:progressCallback];
         }
         
-        _totalNumberOfAssets = self.catalog.allImageNames.count;
+        weakSelf.totalNumberOfAssets = self.catalog.allImageNames.count;
         
         // limits the total items to be read to the total number of images or the max count set for a resource constrained read
-        totalItemCount = _resourceConstrained ? MIN(maxItemCount, _catalog.allImageNames.count) : _catalog.allImageNames.count;
+        totalItemCount = weakSelf.resourceConstrained ? MIN(maxItemCount, weakSelf.catalog.allImageNames.count) : weakSelf.catalog.allImageNames.count;
         
         for (NSString *imageName in self.catalog.allImageNames) {
-            if (_resourceConstrained && loadedItemCount >= totalItemCount) break;
+            if (weakSelf.resourceConstrained && loadedItemCount >= totalItemCount) break;
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 double loadedFraction = (double)loadedItemCount / (double)totalItemCount;
@@ -184,7 +188,7 @@ NSString * const kAssetCatalogReaderErrorDomain = @"br.com.guilhermerambo.AssetC
                     }
                     
                     // when resource constrained and the catalog contains retina images, only load retina images
-                    if ([self catalogHasRetinaContent] && _resourceConstrained && namedImage.scale < 2) {
+                    if ([self catalogHasRetinaContent] && weakSelf.resourceConstrained && namedImage.scale < 2) {
                         continue;
                     }
                     
@@ -224,18 +228,20 @@ NSString * const kAssetCatalogReaderErrorDomain = @"br.com.guilhermerambo.AssetC
     });
 }
 
-- (void)readThemeStoreWithCompletionHandler:(void (^__nonnull)())callback progressHandler:(void (^__nullable)(double progress))progressCallback
+- (void)readThemeStoreWithCompletionHandler:(void (^__nonnull)(void))callback progressHandler:(void (^__nullable)(double progress))progressCallback
 {
     uint64 realTotalItemCount = [self.catalog _themeStore].themeStore.allAssetKeys.count;
     __block uint64 loadedItemCount = 0;
     
     // limits the total items to be read to the total number of images or the max count set for a resource constrained read
-    __block uint64 totalItemCount = _resourceConstrained ? MIN(_maxCount, realTotalItemCount) : realTotalItemCount;
+    __block uint64 totalItemCount = self.resourceConstrained ? MIN(_maxCount, realTotalItemCount) : realTotalItemCount;
     
     _totalNumberOfAssets = [self.catalog _themeStore].themeStore.allAssetKeys.count;
-    
+
+    __weak typeof(self) weakSelf = self;
+
     [[self.catalog _themeStore].themeStore.allAssetKeys enumerateObjectsWithOptions:0 usingBlock:^(CUIRenditionKey * _Nonnull key, NSUInteger idx, BOOL * _Nonnull stop) {
-        if (_resourceConstrained && loadedItemCount >= totalItemCount) return;
+        if (weakSelf.resourceConstrained && loadedItemCount >= totalItemCount) return;
         
         if (self.cancelled) return;
         
@@ -248,7 +254,7 @@ NSString * const kAssetCatalogReaderErrorDomain = @"br.com.guilhermerambo.AssetC
             CUIThemeRendition *rendition = [[self.catalog _themeStore] renditionWithKey:key.keyList];
             
             // when resource constrained and the catalog contains retina images, only load retina images
-            if ([self catalogHasRetinaContent] && _resourceConstrained && rendition.scale < 2) {
+            if ([self catalogHasRetinaContent] && weakSelf.resourceConstrained && rendition.scale < 2) {
                 return;
             }
             

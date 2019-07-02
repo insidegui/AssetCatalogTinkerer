@@ -27,13 +27,13 @@ class DocumentController: NSDocumentController {
         
         return viewController.view
     }
-    
+
     override func runModalOpenPanel(_ openPanel: NSOpenPanel, forTypes types: [String]?) -> Int {
         openPanel.allowedFileTypes = ["car", "app", "framework", "bundle", "plugin"]
         openPanel.treatsFilePackagesAsDirectories = true
         openPanel.accessoryView = makeSettingsView()
-        
-        return openPanel.runModal()
+
+        return openPanel.runModal().rawValue
     }
-    
+
 }

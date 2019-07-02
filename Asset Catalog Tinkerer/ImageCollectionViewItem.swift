@@ -79,7 +79,7 @@ class ImageCollectionViewItem: NSCollectionViewItem {
     fileprivate lazy var nameLabel: NSTextField = {
         let l = NSTextField.makeLabel()
         
-        l.font = NSFont.systemFont(ofSize: 11.0, weight: NSFontWeightMedium)
+        l.font = NSFont.systemFont(ofSize: 11.0, weight: .medium)
         l.textColor = Colors.text
         l.lineBreakMode = .byTruncatingMiddle
         
@@ -89,7 +89,7 @@ class ImageCollectionViewItem: NSCollectionViewItem {
     fileprivate lazy var brightnessDebugLabel: NSTextField = {
         let l = NSTextField.makeLabel()
         
-        l.font = NSFont.systemFont(ofSize: 11.0, weight: NSFontWeightMedium)
+        l.font = NSFont.systemFont(ofSize: 11.0, weight: .medium)
         l.isHidden = !Preferences.shared[.debugImageBrightness]
         
         return l

@@ -38,6 +38,7 @@
 		DDC06BB11CA8CFB900B6A9F3 /* ImageCollectionViewItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = DDC06BAF1CA8CFB900B6A9F3 /* ImageCollectionViewItem.xib */; };
 		DDDDE5C91CA96EF400B353D3 /* DocumentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDDE5C81CA96EF400B353D3 /* DocumentController.swift */; };
 		DDDDE5CB1CA97C0300B353D3 /* QuickLookableCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDDE5CA1CA97C0300B353D3 /* QuickLookableCollectionView.swift */; };
+		DDF7E41F22CC0AB600EF1965 /* NSPasteboard+Filenames.m in Sources */ = {isa = PBXBuildFile; fileRef = DDF7E41E22CC0AB600EF1965 /* NSPasteboard+Filenames.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -91,6 +92,7 @@
 
 /* Begin PBXFileReference section */
 		DD8118B21E5DC4DD00426746 /* Preferences.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
+		DDA23B2322CC0BA500600574 /* Asset Catalog Tinkerer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Asset Catalog Tinkerer.entitlements"; sourceTree = "<group>"; };
 		DDA691CA1CFA02CA00583328 /* MainWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainWindowController.swift; sourceTree = "<group>"; };
 		DDADF2AD2026678C003CB15D /* NSImage+BrightnessDetection.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSImage+BrightnessDetection.h"; sourceTree = "<group>"; };
 		DDADF2AE2026678C003CB15D /* NSImage+BrightnessDetection.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSImage+BrightnessDetection.m"; sourceTree = "<group>"; };
@@ -126,6 +128,8 @@
 		DDC06BAF1CA8CFB900B6A9F3 /* ImageCollectionViewItem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImageCollectionViewItem.xib; sourceTree = "<group>"; };
 		DDDDE5C81CA96EF400B353D3 /* DocumentController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocumentController.swift; sourceTree = "<group>"; };
 		DDDDE5CA1CA97C0300B353D3 /* QuickLookableCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuickLookableCollectionView.swift; sourceTree = "<group>"; };
+		DDF7E41D22CC0AB600EF1965 /* NSPasteboard+Filenames.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSPasteboard+Filenames.h"; sourceTree = "<group>"; };
+		DDF7E41E22CC0AB600EF1965 /* NSPasteboard+Filenames.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSPasteboard+Filenames.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -162,6 +166,8 @@
 			children = (
 				DDADF2AD2026678C003CB15D /* NSImage+BrightnessDetection.h */,
 				DDADF2AE2026678C003CB15D /* NSImage+BrightnessDetection.m */,
+				DDF7E41D22CC0AB600EF1965 /* NSPasteboard+Filenames.h */,
+				DDF7E41E22CC0AB600EF1965 /* NSPasteboard+Filenames.m */,
 			);
 			name = Util;
 			sourceTree = "<group>";
@@ -259,6 +265,7 @@
 		DDC06B741CA8BCF300B6A9F3 /* Asset Catalog Tinkerer */ = {
 			isa = PBXGroup;
 			children = (
+				DDA23B2322CC0BA500600574 /* Asset Catalog Tinkerer.entitlements */,
 				DDC06BB31CA8DC0C00B6A9F3 /* Resources */,
 				DDC06B8E1CA8BD6500B6A9F3 /* Bootstrap */,
 				DDC06B891CA8BD1100B6A9F3 /* Core */,
@@ -395,6 +402,7 @@
 			buildConfigurationList = DDC06B831CA8BCF300B6A9F3 /* Build configuration list for PBXNativeTarget "Asset Catalog Tinkerer" */;
 			buildPhases = (
 				DDC06B6E1CA8BCF300B6A9F3 /* Sources */,
+				DDA23B2422CC0C1300600574 /* ShellScript */,
 				DDC06B6F1CA8BCF300B6A9F3 /* Frameworks */,
 				DDC06B701CA8BCF300B6A9F3 /* Resources */,
 				DDAF8AD41E1B113400A8A235 /* Embed Frameworks */,
@@ -420,7 +428,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0800;
+				LastUpgradeCheck = 1020;
 				ORGANIZATIONNAME = "Guilherme Rambo";
 				TargetAttributes = {
 					DDAF8AC71E1B113300A8A235 = {
@@ -443,7 +451,7 @@
 			};
 			buildConfigurationList = DDC06B6D1CA8BCF300B6A9F3 /* Build configuration list for PBXProject "Asset Catalog Tinkerer" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
@@ -489,6 +497,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		DDA23B2422CC0C1300600574 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [ \"${CONFIGURATION}\" = \"Debug\" ]; then\nexit 0\nfi\n\nCARTHAGE_BUILD_MAC_DIR=\"${PROJECT_DIR}/Carthage/Build/Mac\"\nSPARKLE_AUTOUPDATE_PATH=\"${CARTHAGE_BUILD_MAC_DIR}/Sparkle.framework/Resources/Autoupdate.app\"\ncodesign --force --deep -o runtime --sign \"$CODE_SIGN_IDENTITY\" \"$SPARKLE_AUTOUPDATE_PATH\"\n";
+		};
 		DDAF8B141E1C175300A8A235 /* Reset quicklookd */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -516,7 +541,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks";
+			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -554,6 +579,7 @@
 				DDC06B7A1CA8BCF300B6A9F3 /* AssetCatalogDocument.swift in Sources */,
 				DD8118B31E5DC4DD00426746 /* Preferences.swift in Sources */,
 				DDA691CB1CFA02CA00583328 /* MainWindowController.swift in Sources */,
+				DDF7E41F22CC0AB600EF1965 /* NSPasteboard+Filenames.m in Sources */,
 				DDDDE5C91CA96EF400B353D3 /* DocumentController.swift in Sources */,
 				DDDDE5CB1CA97C0300B353D3 /* QuickLookableCollectionView.swift in Sources */,
 			);
@@ -595,7 +621,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -626,7 +652,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -690,19 +716,28 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -730,6 +765,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -737,19 +773,28 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -770,6 +815,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
@@ -778,9 +824,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "Asset Catalog Tinkerer/Asset Catalog Tinkerer.entitlements";
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 260;
 				DEVELOPMENT_TEAM = 8C7439RJLG;
+				ENABLE_HARDENED_RUNTIME = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks",
@@ -788,11 +837,13 @@
 				);
 				INFOPLIST_FILE = "Asset Catalog Tinkerer/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MARKETING_VERSION = 2.6;
 				PRODUCT_BUNDLE_IDENTIFIER = "br.com.guilhermerambo.Asset-Catalog-Tinkerer";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Asset Catalog Tinkerer/Asset Catalog Tinkerer-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -801,9 +852,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "Asset Catalog Tinkerer/Asset Catalog Tinkerer.entitlements";
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 260;
 				DEVELOPMENT_TEAM = 8C7439RJLG;
+				ENABLE_HARDENED_RUNTIME = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks",
@@ -811,10 +865,12 @@
 				);
 				INFOPLIST_FILE = "Asset Catalog Tinkerer/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MARKETING_VERSION = 2.6;
 				PRODUCT_BUNDLE_IDENTIFIER = "br.com.guilhermerambo.Asset-Catalog-Tinkerer";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Asset Catalog Tinkerer/Asset Catalog Tinkerer-Bridging-Header.h";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};

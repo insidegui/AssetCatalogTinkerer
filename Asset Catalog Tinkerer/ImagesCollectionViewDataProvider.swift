@@ -8,11 +8,15 @@
 
 import Cocoa
 
+extension NSUserInterfaceItemIdentifier {
+    static let imageItemIdentifier = NSUserInterfaceItemIdentifier("ImageItemIdentifier")
+}
+
 class ImagesCollectionViewDataProvider: NSObject, NSCollectionViewDataSource, NSCollectionViewDelegate {
     
     fileprivate struct Constants {
         static let nibName = "ImageCollectionViewItem"
-        static let imageItemIdentifier = "ImageItemIdentifier"
+
     }
     
     var collectionView: NSCollectionView! {
@@ -25,7 +29,7 @@ class ImagesCollectionViewDataProvider: NSObject, NSCollectionViewDataSource, NS
             collectionView.collectionViewLayout = GridLayout()
             
             let nib = NSNib(nibNamed: Constants.nibName, bundle: nil)
-            collectionView.register(nib, forItemWithIdentifier: Constants.imageItemIdentifier)
+            collectionView.register(nib, forItemWithIdentifier: .imageItemIdentifier)
         }
     }
     
@@ -57,7 +61,7 @@ class ImagesCollectionViewDataProvider: NSObject, NSCollectionViewDataSource, NS
     }
     
     func collectionView(_ collectionView: NSCollectionView, itemForRepresentedObjectAt indexPath: IndexPath) -> NSCollectionViewItem {
-        let item = collectionView.makeItem(withIdentifier: Constants.imageItemIdentifier, for: indexPath) as! ImageCollectionViewItem
+        let item = collectionView.makeItem(withIdentifier: .imageItemIdentifier, for: indexPath) as! ImageCollectionViewItem
         
         item.image = filteredImages[(indexPath as NSIndexPath).item]
         
@@ -85,7 +89,7 @@ class ImagesCollectionViewDataProvider: NSObject, NSCollectionViewDataSource, NS
         
         let validImages: [String] = images.filter { $0 != nil }.map { $0! }
         
-        pasteboard.setPropertyList(validImages, forType: NSFilenamesPboardType)
+        pasteboard.setFilenamesPropertyListWithFilenames(validImages)
         
         return true
     }

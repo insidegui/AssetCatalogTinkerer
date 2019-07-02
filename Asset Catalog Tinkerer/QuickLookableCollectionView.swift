@@ -35,7 +35,7 @@ class QuickLookableCollectionView: NSCollectionView {
     @IBAction func showQuickLookPreview(_ sender: AnyObject) {
         guard selectionIndexPaths.count > 0 else { return }
         
-        quickLookHandler.pasteboard = NSPasteboard(name: "CollectionViewQuickLook")
+        quickLookHandler.pasteboard = NSPasteboard(name: NSPasteboard.Name(rawValue: "CollectionViewQuickLook"))
         quickLookHandler.collectionView = self
         
         let panel = QLPreviewPanel.shared()
@@ -77,7 +77,7 @@ class QuickLookableCollectionView: NSCollectionView {
     var collectionView: QuickLookableCollectionView!
     
     var previewItems: [URL] {
-        guard let items = pasteboard.propertyList(forType: NSFilenamesPboardType) as? [String] else { return [] }
+        guard let items = pasteboard.filenamesPropertyList() else { return [] }
         
         return items.map { URL(fileURLWithPath: $0) }
     }
@@ -89,11 +89,11 @@ class QuickLookableCollectionView: NSCollectionView {
     @objc fileprivate func previewPanel(_ panel: QLPreviewPanel!, previewItemAt index: Int) -> QLPreviewItem! {
         guard previewItems.count > 0 else { return nil }
         
-        return previewItems[index] as QLPreviewItem!
+        return previewItems[index] as QLPreviewItem?
     }
     
     @objc fileprivate func previewPanel(_ panel: QLPreviewPanel!, handle event: NSEvent!) -> Bool {
-        if event.type == NSEventType.keyDown {
+        if event.type == .keyDown {
             collectionView.keyDown(with: event)
             return true
         }

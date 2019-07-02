@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class ImagesViewController: NSViewController {
+class ImagesViewController: NSViewController, NSMenuItemValidation {
     
     var loadProgress = 0.0 {
         didSet {
@@ -68,7 +68,7 @@ class ImagesViewController: NSViewController {
         
         p.translatesAutoresizingMaskIntoConstraints = false
         p.controlSize = .regular
-        p.style = .spinningStyle
+        p.style = .spinning
         p.isDisplayedWhenStopped = false
         p.isIndeterminate = true
         
@@ -84,7 +84,7 @@ class ImagesViewController: NSViewController {
         l.isEditable = false
         l.isSelectable = false
         l.drawsBackground = false
-        l.font = NSFont.systemFont(ofSize: 12.0, weight: NSFontWeightMedium)
+        l.font = NSFont.systemFont(ofSize: 12.0, weight: .medium)
         l.textColor = NSColor.secondaryLabelColor
         l.lineBreakMode = .byTruncatingTail
         
@@ -122,7 +122,7 @@ class ImagesViewController: NSViewController {
         let p = NSProgressIndicator(frame: NSZeroRect)
         
         p.translatesAutoresizingMaskIntoConstraints = false
-        p.style = .spinningStyle
+        p.style = .spinning
         p.controlSize = .regular
         p.sizeToFit()
         
@@ -250,8 +250,8 @@ class ImagesViewController: NSViewController {
     
     func copy(_ sender: AnyObject) {
         guard collectionView.selectionIndexPaths.count > 0 else { return }
-        
-        _ = dataProvider.collectionView(collectionView, writeItemsAt: collectionView.selectionIndexPaths, to: NSPasteboard.general())
+
+        _ = dataProvider.collectionView(collectionView, writeItemsAt: collectionView.selectionIndexPaths, to: .general)
     }
     
     @IBAction func exportAllImages(_ sender: NSMenuItem) {
@@ -277,7 +277,7 @@ class ImagesViewController: NSViewController {
         panel.canCreateDirectories = true
         
         panel.beginSheetModal(for: view.window!) { result in
-            guard result == 1 else { return }
+            guard result == .OK else { return }
             guard panel.url != nil else { return }
             
             self.exportImages(imagesToExport, toDirectoryAt: panel.url!)
@@ -314,15 +314,15 @@ class ImagesViewController: NSViewController {
         case exportSelectedImages = 1002
     }
     
-    override func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
+    func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
         if NSStringFromSelector(menuItem.action!) == "copy:" {
             return collectionView.selectionIndexPaths.count > 0
         }
-        
+
         guard let semanticMenuItem = MenuItemTags(rawValue: menuItem.tag) else {
             return false
         }
-        
+
         switch semanticMenuItem {
         case .exportAllImages:
             return images.count > 0

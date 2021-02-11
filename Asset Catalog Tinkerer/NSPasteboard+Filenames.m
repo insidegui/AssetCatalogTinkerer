@@ -12,12 +12,12 @@
 
 - (void)setFilenamesPropertyListWithFilenames:(NSArray <NSString *> *)filenames
 {
-    [self setPropertyList:filenames forType:NSFilenamesPboardType];
+    [self setPropertyList:filenames forType:NSPasteboardTypeFileURL];
 }
 
 - (NSArray<NSString *> *)filenamesPropertyList
 {
-    return [self propertyListForType:NSFilenamesPboardType];
+    return [self propertyListForType:NSPasteboardTypeFileURL];
 }
 
 @end

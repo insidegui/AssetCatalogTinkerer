@@ -116,7 +116,7 @@ class ImagesViewController: NSViewController, NSMenuItemValidation {
         let vfxView = NSVisualEffectView(frame: NSZeroRect)
         
         vfxView.translatesAutoresizingMaskIntoConstraints = false
-        vfxView.material = .mediumLight
+        vfxView.material = .contentBackground
         vfxView.blendingMode = .withinWindow
         
         let p = NSProgressIndicator(frame: NSZeroRect)

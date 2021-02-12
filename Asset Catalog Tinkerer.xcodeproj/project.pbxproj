@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		32A9FFF225D5CCEF00921AD7 /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = 32A9FFF125D5CCEF00921AD7 /* Sparkle */; };
 		DD8118B31E5DC4DD00426746 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD8118B21E5DC4DD00426746 /* Preferences.swift */; };
 		DDA691CB1CFA02CA00583328 /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA691CA1CFA02CA00583328 /* MainWindowController.swift */; };
 		DDADF2AF2026678C003CB15D /* NSImage+BrightnessDetection.m in Sources */ = {isa = PBXBuildFile; fileRef = DDADF2AE2026678C003CB15D /* NSImage+BrightnessDetection.m */; };
@@ -25,7 +26,6 @@
 		DDAF8B051E1B183D00A8A235 /* QuickLookHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = DDAF8B031E1B14B500A8A235 /* QuickLookHelper.m */; };
 		DDAF8B091E1B1F4D00A8A235 /* AssetCatalog.qlgenerator in QuickLook PlugIn */ = {isa = PBXBuildFile; fileRef = DDAF8AF21E1B12F300A8A235 /* AssetCatalog.qlgenerator */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		DDAF8B1A1E1C266C00A8A235 /* QuickLookHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = DDAF8B021E1B14B500A8A235 /* QuickLookHelper.h */; };
-		DDAF8B1D1E1C774C00A8A235 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDAF8B1B1E1C772F00A8A235 /* Sparkle.framework */; };
 		DDC06B761CA8BCF300B6A9F3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC06B751CA8BCF300B6A9F3 /* AppDelegate.swift */; };
 		DDC06B781CA8BCF300B6A9F3 /* ImagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC06B771CA8BCF300B6A9F3 /* ImagesViewController.swift */; };
 		DDC06B7A1CA8BCF300B6A9F3 /* AssetCatalogDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC06B791CA8BCF300B6A9F3 /* AssetCatalogDocument.swift */; };
@@ -112,7 +112,6 @@
 		DDAF8AFA1E1B12F300A8A235 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DDAF8B021E1B14B500A8A235 /* QuickLookHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuickLookHelper.h; sourceTree = "<group>"; };
 		DDAF8B031E1B14B500A8A235 /* QuickLookHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuickLookHelper.m; sourceTree = "<group>"; };
-		DDAF8B1B1E1C772F00A8A235 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = Carthage/Build/Mac/Sparkle.framework; sourceTree = "<group>"; };
 		DDC06B721CA8BCF300B6A9F3 /* Asset Catalog Tinkerer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Asset Catalog Tinkerer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DDC06B751CA8BCF300B6A9F3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DDC06B771CA8BCF300B6A9F3 /* ImagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesViewController.swift; sourceTree = "<group>"; };
@@ -154,7 +153,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DDAF8ACF1E1B113400A8A235 /* ACS.framework in Frameworks */,
-				DDAF8B1D1E1C774C00A8A235 /* Sparkle.framework in Frameworks */,
+				32A9FFF225D5CCEF00921AD7 /* Sparkle in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -212,7 +211,6 @@
 		DDAF8AE81E1B11DB00A8A235 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				DDAF8B1B1E1C772F00A8A235 /* Sparkle.framework */,
 				DDAF8AEB1E1B11DF00A8A235 /* ProKit.framework */,
 				DDAF8AE91E1B11DB00A8A235 /* CoreUI.framework */,
 			);
@@ -402,13 +400,11 @@
 			buildConfigurationList = DDC06B831CA8BCF300B6A9F3 /* Build configuration list for PBXNativeTarget "Asset Catalog Tinkerer" */;
 			buildPhases = (
 				DDC06B6E1CA8BCF300B6A9F3 /* Sources */,
-				DDA23B2422CC0C1300600574 /* ShellScript */,
 				DDC06B6F1CA8BCF300B6A9F3 /* Frameworks */,
 				DDC06B701CA8BCF300B6A9F3 /* Resources */,
 				DDAF8AD41E1B113400A8A235 /* Embed Frameworks */,
 				DDAF8B081E1B1F2B00A8A235 /* QuickLook PlugIn */,
 				DDAF8B141E1C175300A8A235 /* Reset quicklookd */,
-				DDAF8B1E1E1C775000A8A235 /* Carthage */,
 			);
 			buildRules = (
 			);
@@ -417,6 +413,9 @@
 				DDAF8ACE1E1B113400A8A235 /* PBXTargetDependency */,
 			);
 			name = "Asset Catalog Tinkerer";
+			packageProductDependencies = (
+				32A9FFF125D5CCEF00921AD7 /* Sparkle */,
+			);
 			productName = "Asset Catalog Tinkerer";
 			productReference = DDC06B721CA8BCF300B6A9F3 /* Asset Catalog Tinkerer.app */;
 			productType = "com.apple.product-type.application";
@@ -428,22 +427,19 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 1020;
+				LastUpgradeCheck = 1240;
 				ORGANIZATIONNAME = "Guilherme Rambo";
 				TargetAttributes = {
 					DDAF8AC71E1B113300A8A235 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = 8C7439RJLG;
 						ProvisioningStyle = Automatic;
 					};
 					DDAF8AF11E1B12F300A8A235 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = 8C7439RJLG;
 						ProvisioningStyle = Automatic;
 					};
 					DDC06B711CA8BCF300B6A9F3 = {
 						CreatedOnToolsVersion = 7.3;
-						DevelopmentTeam = 8C7439RJLG;
 						LastSwiftMigration = 0800;
 						ProvisioningStyle = Automatic;
 					};
@@ -458,6 +454,9 @@
 				Base,
 			);
 			mainGroup = DDC06B691CA8BCF300B6A9F3;
+			packageReferences = (
+				32A9FFF025D5CCEF00921AD7 /* XCRemoteSwiftPackageReference "Sparkle" */,
+			);
 			productRefGroup = DDC06B731CA8BCF300B6A9F3 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -497,23 +496,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		DDA23B2422CC0C1300600574 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if [ \"${CONFIGURATION}\" = \"Debug\" ]; then\nexit 0\nfi\n\nCARTHAGE_BUILD_MAC_DIR=\"${PROJECT_DIR}/Carthage/Build/Mac\"\nSPARKLE_AUTOUPDATE_PATH=\"${CARTHAGE_BUILD_MAC_DIR}/Sparkle.framework/Resources/Autoupdate.app\"\ncodesign --force --deep -o runtime --sign \"$CODE_SIGN_IDENTITY\" \"$SPARKLE_AUTOUPDATE_PATH\"\n";
-		};
 		DDAF8B141E1C175300A8A235 /* Reset quicklookd */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -526,22 +508,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "qlmanage -r";
-		};
-		DDAF8B1E1E1C775000A8A235 /* Carthage */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/Mac/Sparkle.framework",
-			);
-			name = Carthage;
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
+			shellScript = "qlmanage -r\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -625,7 +592,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 8C7439RJLG;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -636,7 +603,11 @@
 				FRAMEWORK_VERSION = A;
 				INFOPLIST_FILE = ACS/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				PRODUCT_BUNDLE_IDENTIFIER = br.com.guilhermerambo.ACS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -656,7 +627,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 8C7439RJLG;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -667,7 +638,11 @@
 				FRAMEWORK_VERSION = A;
 				INFOPLIST_FILE = ACS/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				PRODUCT_BUNDLE_IDENTIFIER = br.com.guilhermerambo.ACS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -683,8 +658,8 @@
 			buildSettings = {
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 8C7439RJLG;
-				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Carthage/Build/Mac";
+				DEVELOPMENT_TEAM = "";
+				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = AssetCatalog/Info.plist;
 				INSTALL_PATH = "";
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../../../../../Frameworks";
@@ -700,8 +675,8 @@
 			buildSettings = {
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 8C7439RJLG;
-				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Carthage/Build/Mac";
+				DEVELOPMENT_TEAM = "";
+				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = AssetCatalog/Info.plist;
 				INSTALL_PATH = "";
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../../../../../Frameworks";
@@ -736,6 +711,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -793,6 +769,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -814,7 +791,8 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
@@ -828,15 +806,17 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 260;
-				DEVELOPMENT_TEAM = 8C7439RJLG;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks",
-					"$(PROJECT_DIR)/Carthage/Build/Mac",
 				);
 				INFOPLIST_FILE = "Asset Catalog Tinkerer/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				MARKETING_VERSION = 2.6;
 				PRODUCT_BUNDLE_IDENTIFIER = "br.com.guilhermerambo.Asset-Catalog-Tinkerer";
@@ -856,15 +836,17 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 260;
-				DEVELOPMENT_TEAM = 8C7439RJLG;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks",
-					"$(PROJECT_DIR)/Carthage/Build/Mac",
 				);
 				INFOPLIST_FILE = "Asset Catalog Tinkerer/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				MARKETING_VERSION = 2.6;
 				PRODUCT_BUNDLE_IDENTIFIER = "br.com.guilhermerambo.Asset-Catalog-Tinkerer";
@@ -914,6 +896,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		32A9FFF025D5CCEF00921AD7 /* XCRemoteSwiftPackageReference "Sparkle" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sparkle-project/Sparkle";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		32A9FFF125D5CCEF00921AD7 /* Sparkle */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 32A9FFF025D5CCEF00921AD7 /* XCRemoteSwiftPackageReference "Sparkle" */;
+			productName = Sparkle;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = DDC06B6A1CA8BCF300B6A9F3 /* Project object */;
 }

@@ -118,7 +118,7 @@ class ImageCollectionViewItem: NSCollectionViewItem {
         view.addSubview(nameLabel)
         nameLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -2.0).isActive = true
         nameLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        nameLabel.widthAnchor.constraint(lessThanOrEqualTo: view.widthAnchor, multiplier: 1.0, constant: -12.0)
+        nameLabel.widthAnchor.constraint(lessThanOrEqualTo: view.widthAnchor, multiplier: 1.0, constant: -12.0).isActive = true
     }
     
     private func installBrightnessDebugLabelIfNeeded() {

@@ -77,7 +77,7 @@
 	<key>SUEnableAutomaticChecks</key>
 	<true/>
 	<key>SUFeedURL</key>
-	<string>https://github.com/insidegui/AssetCatalogTinkerer/raw/master/releases/appcast.xml</string>
+	<string>https://raw.githubusercontent.com/insidegui/AssetCatalogTinkerer/main/releases/appcast.xml</string>
 	<key>SUScheduledCheckInterval</key>
 	<integer>86400</integer>
 	<key>UTExportedTypeDeclarations</key>

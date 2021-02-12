@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle" xmlns:dc="http://purl.org/dc/elements/1.1/">
     <channel>
         <title>Asset Catalog Tinkerer Changelog</title>
-        <link>https://github.com/insidegui/AssetCatalogTinkerer/raw/master/releases/appcast.xml</link>
+        <link>https://raw.githubusercontent.com/insidegui/AssetCatalogTinkerer/main/releases/appcast.xml</link>
         <description>Most recent changes with links to updates.</description>
         <language>en</language>
 		

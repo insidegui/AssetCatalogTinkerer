@@ -4,7 +4,7 @@
 
 An app that lets you open `.car` files and browse/extract their images, or preview them on Finder with QuickLook.
 
-[⬇ Download Latest Release](https://github.com/insidegui/AssetCatalogTinkerer/raw/master/releases/AssetCatalogTinkerer_latest.zip)
+[⬇ Download Latest Release](https://github.com/insidegui/AssetCatalogTinkerer/raw/main/releases/AssetCatalogTinkerer_latest.zip)
 
 You can also install it using [Homebrew Cask](https://caskroom.github.io), simply `brew install --cask asset-catalog-tinkerer`!
 

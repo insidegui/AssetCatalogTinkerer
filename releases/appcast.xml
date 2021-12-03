@@ -7,6 +7,23 @@
         <language>en</language>
 		
         <item>
+            <title>Version 2.7</title>
+			<description><![CDATA[
+							<ul>
+								<li>New icon</li>
+								<li>Universal build for Apple Silicon and Intel</li>
+								<li>Adds the ability to copy multiple images to the clipboard at the same time</li>
+								<li>Dragging images out now uses the new drag and drop system on macOS, faster and compatible with a greater number of apps</li>
+								<li>Fixed a bug that prevented the QuickLook window from updating with the current selection when navigating with the arrow keys</li>
+								<li>Fixed a bug where the QuickLook window would stay visible after closing the current document</li>
+							</ul>
+						]]></description>
+            <pubDate>Fri, 3 Dec 2021 12:00:00 -0300</pubDate>
+            <enclosure url="https://github.com/insidegui/AssetCatalogTinkerer/releases/download/2.7/AssetCatalogTinkerer_v2.7.dmg" sparkle:version="270" sparkle:shortVersionString="2.7" length="4686138" type="application/octet-stream" />
+            <sparkle:minimumSystemVersion>10.11</sparkle:minimumSystemVersion>
+        </item>
+		
+        <item>
             <title>Version 2.5.1</title>
 			<description><![CDATA[
 							<ul>

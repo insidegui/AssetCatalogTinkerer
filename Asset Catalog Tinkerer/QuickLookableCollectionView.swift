@@ -11,6 +11,10 @@ import Quartz
 
 class QuickLookableCollectionView: NSCollectionView {
     
+    typealias PasteboardWriterProvidingBlock = (Set<IndexPath>) -> [NSPasteboardWriting]
+    
+    var provideQuickLookPasteboardWriters: PasteboardWriterProvidingBlock?
+
     override func keyDown(with theEvent: NSEvent) {
         // spacebar
         if theEvent.keyCode == 49 {
@@ -19,15 +23,6 @@ class QuickLookableCollectionView: NSCollectionView {
         }
         
         super.keyDown(with: theEvent)
-    }
-    
-    func collectionView(_ collectionView: NSCollectionView, didSelectItemsAtIndexPaths indexPaths: Set<IndexPath>) {
-        delegate?.collectionView?(self, didSelectItemsAt: indexPaths)
-        
-        guard QLPreviewPanel.sharedPreviewPanelExists() && QLPreviewPanel.shared().isVisible else { return }
-        
-        writeSelectionToQuickLookPasteboard()
-        QLPreviewPanel.shared().reloadData()
     }
     
     fileprivate lazy var quickLookHandler = QuickLookableCollectionViewPreviewHandler()
@@ -65,8 +60,40 @@ class QuickLookableCollectionView: NSCollectionView {
     }
     
     fileprivate func writeSelectionToQuickLookPasteboard() {
+        guard let items = provideQuickLookPasteboardWriters?(selectionIndexPaths) else { return }
+        
         quickLookHandler.pasteboard.clearContents()
-        _ = delegate?.collectionView?(self, writeItemsAt: selectionIndexPaths, to: quickLookHandler.pasteboard)
+        quickLookHandler.pasteboard.writeObjects(items)
+    }
+    
+    private var selectionObservation: NSKeyValueObservation?
+    
+    fileprivate var isWindowClosing = false
+    
+    override func viewWillMove(toWindow newWindow: NSWindow?) {
+        super.viewWillMove(toWindow: newWindow)
+        
+        guard newWindow != nil else { return }
+        
+        NotificationCenter.default.addObserver(forName: NSWindow.willCloseNotification, object: newWindow, queue: .main) { [weak self] _ in
+            self?.isWindowClosing = true
+            
+            QLPreviewPanel.shared().close()
+        }
+        
+        // Handles updating the QuickLook panel when selection changes.
+        selectionObservation = observe(\.selectionIndexPaths) { [weak self] _, _ in
+            guard let self = self else { return }
+            
+            self.updateQuickLookWithNewSelectionIfNeeded()
+        }
+    }
+    
+    private func updateQuickLookWithNewSelectionIfNeeded() {
+        guard QLPreviewPanel.sharedPreviewPanelExists() && QLPreviewPanel.shared().isVisible else { return }
+        
+        writeSelectionToQuickLookPasteboard()
+        QLPreviewPanel.shared().reloadData()
     }
     
 }
@@ -77,9 +104,7 @@ class QuickLookableCollectionView: NSCollectionView {
     var collectionView: QuickLookableCollectionView!
     
     var previewItems: [URL] {
-        guard let items = pasteboard.filenamesPropertyList() else { return [] }
-        
-        return items.map { URL(fileURLWithPath: $0) }
+        pasteboard.readObjects(forClasses: [NSURL.self], options: nil)?.compactMap { $0 as? URL } ?? []
     }
     
     @objc fileprivate func numberOfPreviewItems(in panel: QLPreviewPanel!) -> Int {
@@ -102,13 +127,20 @@ class QuickLookableCollectionView: NSCollectionView {
     }
     
     @objc fileprivate func previewPanel(_ panel: QLPreviewPanel!, sourceFrameOnScreenFor item: QLPreviewItem!) -> NSRect {
+        guard let window = collectionView.window else { return .zero }
+        guard !collectionView.isWindowClosing else { return .zero }
+        
         let combinedRect = collectionView.selectionIndexes.map { return collectionView.frameForItem(at: $0) }.reduce(NSZeroRect) { NSUnionRect($0, $1) }
         
         var preliminaryRect = collectionView.enclosingScrollView!.convert(combinedRect, to: nil)
         preliminaryRect.origin.y += collectionView.enclosingScrollView!.contentView.bounds.origin.y
-        let rect = collectionView.window?.convertToScreen(preliminaryRect)
+        let rect = window.convertToScreen(preliminaryRect)
         
-        return rect ?? NSZeroRect
+        // Prevent ludicrously tall rect from causing glitchy panel open,
+        // should probably fix the rect calculation instead but I'm lazy.
+        guard rect.height < window.frame.height else { return .zero }
+        
+        return rect
     }
     
 }

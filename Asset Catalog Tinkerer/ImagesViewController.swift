@@ -108,6 +108,11 @@ class ImagesViewController: NSViewController, NSMenuItemValidation {
         
         c.isSelectable = true
         c.allowsMultipleSelection = true
+        c.provideQuickLookPasteboardWriters = { [weak self] indexPaths in
+            guard let self = self else { return [] }
+            
+            return indexPaths.compactMap { self.dataProvider.generalPasteboardWriter(at: $0) }
+        }
         
         return c
     }()
@@ -248,10 +253,13 @@ class ImagesViewController: NSViewController, NSMenuItemValidation {
     
     // MARK: - Export
     
-    func copy(_ sender: AnyObject) {
+    @IBAction func copy(_ sender: Any?) {
         guard collectionView.selectionIndexPaths.count > 0 else { return }
 
-        _ = dataProvider.collectionView(collectionView, writeItemsAt: collectionView.selectionIndexPaths, to: .general)
+        let writers = collectionView.selectionIndexPaths.compactMap { dataProvider.generalPasteboardWriter(at: $0) }
+        
+        NSPasteboard.general.clearContents()
+        NSPasteboard.general.writeObjects(writers)
     }
     
     @IBAction func exportAllImages(_ sender: NSMenuItem) {

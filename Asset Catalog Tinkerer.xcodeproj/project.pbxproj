@@ -39,6 +39,7 @@
 		DDDDE5C91CA96EF400B353D3 /* DocumentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDDE5C81CA96EF400B353D3 /* DocumentController.swift */; };
 		DDDDE5CB1CA97C0300B353D3 /* QuickLookableCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDDE5CA1CA97C0300B353D3 /* QuickLookableCollectionView.swift */; };
 		DDF7E41F22CC0AB600EF1965 /* NSPasteboard+Filenames.m in Sources */ = {isa = PBXBuildFile; fileRef = DDF7E41E22CC0AB600EF1965 /* NSPasteboard+Filenames.m */; };
+		F450A901275A46E700C5DB9B /* UniformTypeIdentifiers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F450A900275A46E700C5DB9B /* UniformTypeIdentifiers.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -129,6 +130,7 @@
 		DDDDE5CA1CA97C0300B353D3 /* QuickLookableCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuickLookableCollectionView.swift; sourceTree = "<group>"; };
 		DDF7E41D22CC0AB600EF1965 /* NSPasteboard+Filenames.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSPasteboard+Filenames.h"; sourceTree = "<group>"; };
 		DDF7E41E22CC0AB600EF1965 /* NSPasteboard+Filenames.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSPasteboard+Filenames.m"; sourceTree = "<group>"; };
+		F450A900275A46E700C5DB9B /* UniformTypeIdentifiers.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UniformTypeIdentifiers.framework; path = System/Library/Frameworks/UniformTypeIdentifiers.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -152,6 +154,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F450A901275A46E700C5DB9B /* UniformTypeIdentifiers.framework in Frameworks */,
 				DDAF8ACF1E1B113400A8A235 /* ACS.framework in Frameworks */,
 				32A9FFF225D5CCEF00921AD7 /* Sparkle in Frameworks */,
 			);
@@ -211,6 +214,7 @@
 		DDAF8AE81E1B11DB00A8A235 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F450A900275A46E700C5DB9B /* UniformTypeIdentifiers.framework */,
 				DDAF8AEB1E1B11DF00A8A235 /* ProKit.framework */,
 				DDAF8AE91E1B11DB00A8A235 /* CoreUI.framework */,
 			);
@@ -806,7 +810,7 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 260;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 8C7439RJLG;
 				ENABLE_HARDENED_RUNTIME = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -836,7 +840,7 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 260;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 8C7439RJLG;
 				ENABLE_HARDENED_RUNTIME = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

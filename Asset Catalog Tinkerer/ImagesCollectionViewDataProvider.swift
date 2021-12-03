@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import UniformTypeIdentifiers
 
 extension NSUserInterfaceItemIdentifier {
     static let imageItemIdentifier = NSUserInterfaceItemIdentifier("ImageItemIdentifier")
@@ -72,26 +73,94 @@ class ImagesCollectionViewDataProvider: NSObject, NSCollectionViewDataSource, NS
         return filteredImages.count
     }
     
-    func collectionView(_ collectionView: NSCollectionView, writeItemsAt indexPaths: Set<IndexPath>, to pasteboard: NSPasteboard) -> Bool {
-        pasteboard.clearContents()
+    private func canPerformPasteboardOperation(at indexPath: IndexPath) -> Bool {
+        assert(indexPath.section == 0, "Only a single section is supported for now")
+        assert(indexPath.item < filteredImages.count, "Invalid item index")
         
-        let images: [String?] = indexPaths.map { indexPath in
-            let index = (indexPath as NSIndexPath).item
-            
-            guard let filename = self.filteredImages[index]["filename"] as? String else { return nil }
-            guard let data = self.filteredImages[index]["png"] as? Data else { return nil }
-            let tempURL = URL(fileURLWithPath: "\(NSTemporaryDirectory())\(filename)")
-            
-            guard (try? data.write(to: tempURL, options: [.atomic])) != nil else { return nil }
-            
-            return tempURL.path
+        return indexPath.item < filteredImages.count
+    }
+    
+    func collectionView(_ collectionView: NSCollectionView, pasteboardWriterForItemAt indexPath: IndexPath) -> NSPasteboardWriting? {
+        guard canPerformPasteboardOperation(at: indexPath) else { return nil }
+        
+        // TODO: Use correct file type/extension instead of hardcoding png.
+        let fileExtension = "png"
+        
+        let provider: NSFilePromiseProvider
+        
+        if #available(macOS 11.0, *) {
+            let typeIdentifier = UTType(filenameExtension: fileExtension)
+            provider = NSFilePromiseProvider(fileType: typeIdentifier!.identifier, delegate: self)
+        } else {
+            let typeIdentifier =
+            UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, fileExtension as CFString, nil)
+            provider = NSFilePromiseProvider(fileType: typeIdentifier!.takeRetainedValue() as String, delegate: self)
         }
         
-        let validImages: [String] = images.filter { $0 != nil }.map { $0! }
+        provider.userInfo = self.filteredImages[indexPath.item]
         
-        pasteboard.setFilenamesPropertyListWithFilenames(validImages)
+        return provider
+    }
+    
+    private lazy var filePromiseQueue = OperationQueue()
+    
+    private let copyQueue = DispatchQueue(label: "Copy", qos: .userInteractive)
+    
+    func generalPasteboardWriter(at indexPath: IndexPath) -> NSPasteboardWriting? {
+        guard canPerformPasteboardOperation(at: indexPath) else { return nil }
         
-        return true
+        let image = filteredImages[indexPath.item]
+
+        guard let filename = image["filename"] as? String else { return nil }
+        guard let data = image["png"] as? Data else { return nil }
+        
+        let tempURL = URL(fileURLWithPath: NSTemporaryDirectory())
+            .appendingPathComponent(filename)
+
+        do {
+            try data.write(to: tempURL, options: .atomic)
+            
+            return tempURL as NSURL
+        } catch {
+            assertionFailure("Failed to write temporary URL for pasteboard: \(String(describing: error))")
+            return nil
+        }
+    }
+    
+}
+
+extension ImagesCollectionViewDataProvider: NSFilePromiseProviderDelegate {
+    
+    func filePromiseProvider(_ filePromiseProvider: NSFilePromiseProvider, fileNameForType fileType: String) -> String {
+        guard let image = filePromiseProvider.userInfo as? [String: NSObject] else {
+            return ""
+        }
+        
+        guard let filename = image["filename"] as? String else { return "" }
+        
+        return filename
+    }
+    
+    func operationQueue(for filePromiseProvider: NSFilePromiseProvider) -> OperationQueue { filePromiseQueue }
+    
+    func filePromiseProvider(_ filePromiseProvider: NSFilePromiseProvider, writePromiseTo url: URL, completionHandler: @escaping (Error?) -> Void) {
+        guard let image = filePromiseProvider.userInfo as? [String: NSObject] else {
+            completionHandler(nil)
+            return
+        }
+        
+        guard let data = image["png"] as? Data else {
+            completionHandler(nil)
+            return
+        }
+        
+        do {
+            try data.write(to: url)
+            
+            completionHandler(nil)
+        } catch let error {
+            completionHandler(error)
+        }
     }
     
 }

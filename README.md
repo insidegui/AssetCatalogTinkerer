@@ -1,14 +1,18 @@
 ## Asset Catalog Tinkerer
 
-**Important: if you want to open asset catalogs from iOS 12, macOS Mojave, watchOS 5 or tvOS 12 you need to run the app in macOS Mojave. Apple introduced a new compression to asset catalogs so it's not possible to extract them with previous versions. An update for macOS Mojave will be released in the future with Dark Mode support.**
+Asset Catalog Tinkerer lets you open asset catalog files (`.car`) and view the images that they contain. You can also copy and export individual images out or export all images from an asset catalog.
 
-An app that lets you open `.car` files and browse/extract their images, or preview them on Finder with QuickLook.
+[⬇ Download and contribute with any amount on Gumroad](https://insidegui.gumroad.com/l/AssetCatalogTinkerer)
 
 [⬇ Download Latest Release](https://github.com/insidegui/AssetCatalogTinkerer/raw/main/releases/AssetCatalogTinkerer_latest.zip)
 
-You can also install it using [Homebrew Cask](https://caskroom.github.io), simply `brew install --cask asset-catalog-tinkerer`!
+You can also install it with [Homebrew](https://brew.sh) by running `brew install asset-catalog-tinkerer`!
 
 ![screenshot](https://raw.github.com/insidegui/AssetCatalogTinkerer/master/screenshot.png)
+
+### Unsupported Asset Types
+
+Asset Catalog Tinkerer was designed with images in mind, so it doesn't support some of the more modern asset catalog features, such as PDFs, SVGs, or colors. It may or may not be updated in the future to support those.
 
 ### QuickLook PlugIn
 

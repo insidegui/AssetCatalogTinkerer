@@ -24,9 +24,9 @@
 	<key>CFBundleName</key>
 	<string>$(PRODUCT_NAME)</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0</string>
+	<string>2.7</string>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>270</string>
 	<key>CFPlugInDynamicRegisterFunction</key>
 	<string></string>
 	<key>CFPlugInDynamicRegistration</key>
@@ -57,25 +57,25 @@
 	<false/>
 	<key>QLThumbnailMinimumSize</key>
 	<real>17</real>
-    <key>UTImportedTypeDeclarations</key>
-    <array>
-        <dict>
-            <key>UTTypeConformsTo</key>
-            <array>
-                <string>public.data</string>
-            </array>
-            <key>UTTypeDescription</key>
-            <string>Asset Catalog</string>
-            <key>UTTypeIdentifier</key>
-            <string>com.apple.assetcatalog</string>
-            <key>UTTypeTagSpecification</key>
-            <dict>
-                <key>public.filename-extension</key>
-                <array>
-                    <string>car</string>
-                </array>
-            </dict>
-        </dict>
-    </array>
+	<key>UTImportedTypeDeclarations</key>
+	<array>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.data</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>Asset Catalog</string>
+			<key>UTTypeIdentifier</key>
+			<string>com.apple.assetcatalog</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>car</string>
+				</array>
+			</dict>
+		</dict>
+	</array>
 </dict>
 </plist>

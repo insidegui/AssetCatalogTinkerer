@@ -305,9 +305,11 @@ class ImagesViewController: NSViewController, NSMenuItemValidation {
                 
                 guard let pngData = image["png"] as? Data else { return }
                 
-                let path = NSString.path(withComponents: pathComponents) as String
-                if !((try? pngData.write(to: URL(fileURLWithPath: path), options: [.atomic])) != nil) {
-                    NSLog("ERROR: Unable to write \(filename) to \(path)")
+                let path = self.nextAvailablePath(filePath: NSString.path(withComponents: pathComponents) as String)
+                do {
+                    try pngData.write(to: URL(fileURLWithPath: path), options: .atomic)
+                } catch {
+                    NSLog("ERROR: Unable to write \(filename) to \(path); \(error)")
                 }
             }
             
@@ -317,6 +319,23 @@ class ImagesViewController: NSViewController, NSMenuItemValidation {
         }
     }
     
+    private func nextAvailablePath(filePath: String) -> String {
+        let fileManager = FileManager.default
+        let originalURL = URL(fileURLWithPath: filePath)
+        let directory = originalURL.deletingLastPathComponent()
+        let baseFilename = originalURL.deletingPathExtension().lastPathComponent
+        let fileExtension = originalURL.pathExtension
+        
+        var counter = 1
+        var newFilename = baseFilename
+        
+        while fileManager.fileExists(atPath: directory.appendingPathComponent(newFilename).appendingPathExtension(fileExtension).path) && counter < 100 {
+            newFilename = "\(baseFilename)_\(counter)"
+            counter += 1
+        }
+        
+        return directory.appendingPathComponent(newFilename).appendingPathExtension(fileExtension).path
+    }
     fileprivate enum MenuItemTags: Int {
         case exportAllImages = 1001
         case exportSelectedImages = 1002

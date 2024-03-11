@@ -45,7 +45,7 @@
     
     if (!ctx) return -1;
     
-    NSGraphicsContext *graphicsContext = [NSGraphicsContext graphicsContextWithGraphicsPort:(void *)ctx flipped:NO];
+    NSGraphicsContext *graphicsContext = [NSGraphicsContext graphicsContextWithCGContext:(void *)ctx flipped:NO];
     [NSGraphicsContext setCurrentContext:graphicsContext];
     
     [generator drawPreview];

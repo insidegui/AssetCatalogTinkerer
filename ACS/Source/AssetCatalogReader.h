@@ -6,7 +6,7 @@
 //  Copyright © 2016 Guilherme Rambo. All rights reserved.
 //
 
-@import Cocoa;
+#import <Cocoa/Cocoa.h>
 
 /// The name of the asset
 extern NSString *__nonnull const kACSNameKey;

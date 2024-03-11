@@ -359,7 +359,7 @@ NSString * const kAssetCatalogReaderErrorDomain = @"br.com.guilhermerambo.AssetC
                  kACSImageRepKey: imageRep
                  };
     } else {
-        NSData *pngData = [imageRep representationUsingType:NSPNGFileType properties:@{NSImageInterlaced:@(NO)}];
+        NSData *pngData = [imageRep representationUsingType:NSBitmapImageFileTypePNG properties:@{NSImageInterlaced:@(NO)}];
         
         if (!pngData.length) {
             NSLog(@"Unable to get PNG data from rendition named %@", name);

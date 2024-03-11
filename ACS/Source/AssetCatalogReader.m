@@ -310,12 +310,10 @@ NSString * const kAssetCatalogReaderErrorDomain = @"br.com.guilhermerambo.AssetC
         newHeight = size.height;
     }
     
-    NSImage *newImage = [[NSImage alloc] initWithSize:NSMakeSize(newWidth, newHeight)];
-    [newImage lockFocus];
-    [image drawInRect:NSMakeRect(0, 0, newWidth, newHeight) fromRect:NSZeroRect operation:NSCompositingOperationSourceOver fraction:1.0];
-    [newImage unlockFocus];
-    
-    return newImage;
+    return [NSImage imageWithSize:NSMakeSize(newWidth, newHeight) flipped:NO drawingHandler:^BOOL(NSRect dstRect) {
+        [image drawInRect:NSMakeRect(0, 0, newWidth, newHeight) fromRect:NSZeroRect operation:NSCompositingOperationSourceOver fraction:1.0];
+        return YES;
+    }];
 }
 
 - (BOOL)isProThemeStoreAtPath:(NSString *)path

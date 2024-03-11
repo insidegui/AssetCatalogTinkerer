@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -40,6 +40,12 @@
 		DDDDE5CB1CA97C0300B353D3 /* QuickLookableCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDDE5CA1CA97C0300B353D3 /* QuickLookableCollectionView.swift */; };
 		DDF7E41F22CC0AB600EF1965 /* NSPasteboard+Filenames.m in Sources */ = {isa = PBXBuildFile; fileRef = DDF7E41E22CC0AB600EF1965 /* NSPasteboard+Filenames.m */; };
 		F450A901275A46E700C5DB9B /* UniformTypeIdentifiers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F450A900275A46E700C5DB9B /* UniformTypeIdentifiers.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		F45DB91C2B9FAF6700A1A4BD /* AssetCatalogTinkererCLI.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45DB91B2B9FAF6700A1A4BD /* AssetCatalogTinkererCLI.swift */; };
+		F45DB9232B9FAF8B00A1A4BD /* act in Copy CLI Executable */ = {isa = PBXBuildFile; fileRef = F45DB9192B9FAF6700A1A4BD /* act */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		F45DB9262B9FAFBC00A1A4BD /* ArgumentParser in Frameworks */ = {isa = PBXBuildFile; productRef = F45DB9252B9FAFBC00A1A4BD /* ArgumentParser */; };
+		F45DB92E2B9FB07D00A1A4BD /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45DB92D2B9FB07D00A1A4BD /* Helpers.swift */; };
+		F45DB92F2B9FB0BC00A1A4BD /* ACS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDAF8AC81E1B113300A8A235 /* ACS.framework */; };
+		F45DB9352B9FB31200A1A4BD /* ImageExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45DB9342B9FB31200A1A4BD /* ImageExporter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +70,20 @@
 			remoteGlobalIDString = DDAF8AF11E1B12F300A8A235;
 			remoteInfo = AssetCatalog;
 		};
+		F45DB9202B9FAF7500A1A4BD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DDC06B6A1CA8BCF300B6A9F3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F45DB9182B9FAF6700A1A4BD;
+			remoteInfo = act;
+		};
+		F45DB9312B9FB0BC00A1A4BD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DDC06B6A1CA8BCF300B6A9F3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DDAF8AC71E1B113300A8A235;
+			remoteInfo = ACS;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -87,6 +107,26 @@
 				DDAF8B091E1B1F4D00A8A235 /* AssetCatalog.qlgenerator in QuickLook PlugIn */,
 			);
 			name = "QuickLook PlugIn";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F45DB9172B9FAF6700A1A4BD /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+		F45DB9222B9FAF7A00A1A4BD /* Copy CLI Executable */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 6;
+			files = (
+				F45DB9232B9FAF8B00A1A4BD /* act in Copy CLI Executable */,
+			);
+			name = "Copy CLI Executable";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -131,6 +171,11 @@
 		DDF7E41D22CC0AB600EF1965 /* NSPasteboard+Filenames.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSPasteboard+Filenames.h"; sourceTree = "<group>"; };
 		DDF7E41E22CC0AB600EF1965 /* NSPasteboard+Filenames.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSPasteboard+Filenames.m"; sourceTree = "<group>"; };
 		F450A900275A46E700C5DB9B /* UniformTypeIdentifiers.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UniformTypeIdentifiers.framework; path = System/Library/Frameworks/UniformTypeIdentifiers.framework; sourceTree = SDKROOT; };
+		F45DB9192B9FAF6700A1A4BD /* act */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = act; sourceTree = BUILT_PRODUCTS_DIR; };
+		F45DB91B2B9FAF6700A1A4BD /* AssetCatalogTinkererCLI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetCatalogTinkererCLI.swift; sourceTree = "<group>"; };
+		F45DB92D2B9FB07D00A1A4BD /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
+		F45DB9342B9FB31200A1A4BD /* ImageExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageExporter.swift; sourceTree = "<group>"; };
+		F45DB9362B9FB53100A1A4BD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -157,6 +202,15 @@
 				F450A901275A46E700C5DB9B /* UniformTypeIdentifiers.framework in Frameworks */,
 				DDAF8ACF1E1B113400A8A235 /* ACS.framework in Frameworks */,
 				32A9FFF225D5CCEF00921AD7 /* Sparkle in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F45DB9162B9FAF6700A1A4BD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F45DB92F2B9FB0BC00A1A4BD /* ACS.framework in Frameworks */,
+				F45DB9262B9FAFBC00A1A4BD /* ArgumentParser in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -190,6 +244,7 @@
 			children = (
 				DDAF8ADB1E1B117600A8A235 /* AssetCatalogReader.h */,
 				DDAF8ADC1E1B117600A8A235 /* AssetCatalogReader.m */,
+				F45DB9342B9FB31200A1A4BD /* ImageExporter.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -249,6 +304,7 @@
 				DDC06B741CA8BCF300B6A9F3 /* Asset Catalog Tinkerer */,
 				DDAF8AC91E1B113300A8A235 /* ACS */,
 				DDAF8AF31E1B12F300A8A235 /* QuickLook PlugIn */,
+				F45DB91A2B9FAF6700A1A4BD /* act */,
 				DDC06B731CA8BCF300B6A9F3 /* Products */,
 				DDAF8AE81E1B11DB00A8A235 /* Frameworks */,
 			);
@@ -260,6 +316,7 @@
 				DDC06B721CA8BCF300B6A9F3 /* Asset Catalog Tinkerer.app */,
 				DDAF8AC81E1B113300A8A235 /* ACS.framework */,
 				DDAF8AF21E1B12F300A8A235 /* AssetCatalog.qlgenerator */,
+				F45DB9192B9FAF6700A1A4BD /* act */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -337,6 +394,16 @@
 			name = Resources;
 			sourceTree = "<group>";
 		};
+		F45DB91A2B9FAF6700A1A4BD /* act */ = {
+			isa = PBXGroup;
+			children = (
+				F45DB91B2B9FAF6700A1A4BD /* AssetCatalogTinkererCLI.swift */,
+				F45DB92D2B9FB07D00A1A4BD /* Helpers.swift */,
+				F45DB9362B9FB53100A1A4BD /* Info.plist */,
+			);
+			path = act;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -407,12 +474,14 @@
 				DDC06B6F1CA8BCF300B6A9F3 /* Frameworks */,
 				DDC06B701CA8BCF300B6A9F3 /* Resources */,
 				DDAF8AD41E1B113400A8A235 /* Embed Frameworks */,
+				F45DB9222B9FAF7A00A1A4BD /* Copy CLI Executable */,
 				DDAF8B081E1B1F2B00A8A235 /* QuickLook PlugIn */,
 				DDAF8B141E1C175300A8A235 /* Reset quicklookd */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				F45DB9212B9FAF7500A1A4BD /* PBXTargetDependency */,
 				DDAF8B071E1B1F2600A8A235 /* PBXTargetDependency */,
 				DDAF8ACE1E1B113400A8A235 /* PBXTargetDependency */,
 			);
@@ -424,18 +493,40 @@
 			productReference = DDC06B721CA8BCF300B6A9F3 /* Asset Catalog Tinkerer.app */;
 			productType = "com.apple.product-type.application";
 		};
+		F45DB9182B9FAF6700A1A4BD /* act */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F45DB91F2B9FAF6700A1A4BD /* Build configuration list for PBXNativeTarget "act" */;
+			buildPhases = (
+				F45DB9152B9FAF6700A1A4BD /* Sources */,
+				F45DB9162B9FAF6700A1A4BD /* Frameworks */,
+				F45DB9172B9FAF6700A1A4BD /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F45DB9322B9FB0BC00A1A4BD /* PBXTargetDependency */,
+			);
+			name = act;
+			packageProductDependencies = (
+				F45DB9252B9FAFBC00A1A4BD /* ArgumentParser */,
+			);
+			productName = act;
+			productReference = F45DB9192B9FAF6700A1A4BD /* act */;
+			productType = "com.apple.product-type.tool";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		DDC06B6A1CA8BCF300B6A9F3 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0730;
+				LastSwiftUpdateCheck = 1530;
 				LastUpgradeCheck = 1240;
 				ORGANIZATIONNAME = "Guilherme Rambo";
 				TargetAttributes = {
 					DDAF8AC71E1B113300A8A235 = {
 						CreatedOnToolsVersion = 8.2.1;
+						LastSwiftMigration = 1530;
 						ProvisioningStyle = Automatic;
 					};
 					DDAF8AF11E1B12F300A8A235 = {
@@ -446,6 +537,9 @@
 						CreatedOnToolsVersion = 7.3;
 						LastSwiftMigration = 0800;
 						ProvisioningStyle = Automatic;
+					};
+					F45DB9182B9FAF6700A1A4BD = {
+						CreatedOnToolsVersion = 15.3;
 					};
 				};
 			};
@@ -460,12 +554,14 @@
 			mainGroup = DDC06B691CA8BCF300B6A9F3;
 			packageReferences = (
 				32A9FFF025D5CCEF00921AD7 /* XCRemoteSwiftPackageReference "Sparkle" */,
+				F45DB9242B9FAFBC00A1A4BD /* XCRemoteSwiftPackageReference "swift-argument-parser" */,
 			);
 			productRefGroup = DDC06B731CA8BCF300B6A9F3 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				DDC06B711CA8BCF300B6A9F3 /* Asset Catalog Tinkerer */,
+				F45DB9182B9FAF6700A1A4BD /* act */,
 				DDAF8AC71E1B113300A8A235 /* ACS */,
 				DDAF8AF11E1B12F300A8A235 /* AssetCatalog */,
 			);
@@ -523,6 +619,7 @@
 			files = (
 				DDAF8B051E1B183D00A8A235 /* QuickLookHelper.m in Sources */,
 				DDAF8ADE1E1B117600A8A235 /* AssetCatalogReader.m in Sources */,
+				F45DB9352B9FB31200A1A4BD /* ImageExporter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -556,6 +653,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		F45DB9152B9FAF6700A1A4BD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F45DB91C2B9FAF6700A1A4BD /* AssetCatalogTinkererCLI.swift in Sources */,
+				F45DB92E2B9FB07D00A1A4BD /* Helpers.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -574,6 +680,16 @@
 			target = DDAF8AF11E1B12F300A8A235 /* AssetCatalog */;
 			targetProxy = DDAF8B061E1B1F2600A8A235 /* PBXContainerItemProxy */;
 		};
+		F45DB9212B9FAF7500A1A4BD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F45DB9182B9FAF6700A1A4BD /* act */;
+			targetProxy = F45DB9202B9FAF7500A1A4BD /* PBXContainerItemProxy */;
+		};
+		F45DB9322B9FB0BC00A1A4BD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DDAF8AC71E1B113300A8A235 /* ACS */;
+			targetProxy = F45DB9312B9FB0BC00A1A4BD /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
@@ -591,10 +707,11 @@
 		DDAF8AD11E1B113400A8A235 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 270;
+				CURRENT_PROJECT_VERSION = 280;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -613,12 +730,12 @@
 					"@loader_path/Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
-				MARKETING_VERSION = 2.7;
+				MARKETING_VERSION = 2.8;
 				PRODUCT_BUNDLE_IDENTIFIER = br.com.guilhermerambo.ACS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_VERSION = 3.0;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -627,10 +744,11 @@
 		DDAF8AD21E1B113400A8A235 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 270;
+				CURRENT_PROJECT_VERSION = 280;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -649,11 +767,10 @@
 					"@loader_path/Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
-				MARKETING_VERSION = 2.7;
+				MARKETING_VERSION = 2.8;
 				PRODUCT_BUNDLE_IDENTIFIER = br.com.guilhermerambo.ACS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -664,14 +781,14 @@
 			buildSettings = {
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 270;
+				CURRENT_PROJECT_VERSION = 280;
 				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = AssetCatalog/Info.plist;
 				INSTALL_PATH = "";
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../../../../../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
-				MARKETING_VERSION = 2.7;
+				MARKETING_VERSION = 2.8;
 				PRODUCT_BUNDLE_IDENTIFIER = br.com.guilhermerambo.AssetCatalog;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = qlgenerator;
@@ -683,14 +800,14 @@
 			buildSettings = {
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 270;
+				CURRENT_PROJECT_VERSION = 280;
 				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = AssetCatalog/Info.plist;
 				INSTALL_PATH = "";
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../../../../../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
-				MARKETING_VERSION = 2.7;
+				MARKETING_VERSION = 2.8;
 				PRODUCT_BUNDLE_IDENTIFIER = br.com.guilhermerambo.AssetCatalog;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = qlgenerator;
@@ -810,12 +927,13 @@
 		DDC06B841CA8BCF300B6A9F3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "Asset Catalog Tinkerer/Asset Catalog Tinkerer.entitlements";
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 270;
+				CURRENT_PROJECT_VERSION = 280;
 				DEVELOPMENT_TEAM = 8C7439RJLG;
 				ENABLE_HARDENED_RUNTIME = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -828,7 +946,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
-				MARKETING_VERSION = 2.7;
+				MARKETING_VERSION = 2.8;
 				PRODUCT_BUNDLE_IDENTIFIER = "br.com.guilhermerambo.Asset-Catalog-Tinkerer";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Asset Catalog Tinkerer/Asset Catalog Tinkerer-Bridging-Header.h";
@@ -840,12 +958,13 @@
 		DDC06B851CA8BCF300B6A9F3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "Asset Catalog Tinkerer/Asset Catalog Tinkerer.entitlements";
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 270;
+				CURRENT_PROJECT_VERSION = 280;
 				DEVELOPMENT_TEAM = 8C7439RJLG;
 				ENABLE_HARDENED_RUNTIME = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -858,10 +977,76 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
-				MARKETING_VERSION = 2.7;
+				MARKETING_VERSION = 2.8;
 				PRODUCT_BUNDLE_IDENTIFIER = "br.com.guilhermerambo.Asset-Catalog-Tinkerer";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Asset Catalog Tinkerer/Asset Catalog Tinkerer-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		F45DB91D2B9FAF6700A1A4BD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				CREATE_INFOPLIST_SECTION_IN_BINARY = YES;
+				CURRENT_PROJECT_VERSION = 280;
+				DEVELOPMENT_TEAM = 8C7439RJLG;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				INFOPLIST_FILE = act/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 2.8;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = codes.rambo.AssetCatalogTinkerer.act;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		F45DB91E2B9FAF6700A1A4BD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				CREATE_INFOPLIST_SECTION_IN_BINARY = YES;
+				CURRENT_PROJECT_VERSION = 280;
+				DEVELOPMENT_TEAM = 8C7439RJLG;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				INFOPLIST_FILE = act/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 2.8;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = codes.rambo.AssetCatalogTinkerer.act;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
@@ -905,6 +1090,15 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		F45DB91F2B9FAF6700A1A4BD /* Build configuration list for PBXNativeTarget "act" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F45DB91D2B9FAF6700A1A4BD /* Debug */,
+				F45DB91E2B9FAF6700A1A4BD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
@@ -916,6 +1110,14 @@
 				kind = branch;
 			};
 		};
+		F45DB9242B9FAFBC00A1A4BD /* XCRemoteSwiftPackageReference "swift-argument-parser" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-argument-parser.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.3.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -923,6 +1125,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 32A9FFF025D5CCEF00921AD7 /* XCRemoteSwiftPackageReference "Sparkle" */;
 			productName = Sparkle;
+		};
+		F45DB9252B9FAFBC00A1A4BD /* ArgumentParser */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F45DB9242B9FAFBC00A1A4BD /* XCRemoteSwiftPackageReference "swift-argument-parser" */;
+			productName = ArgumentParser;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

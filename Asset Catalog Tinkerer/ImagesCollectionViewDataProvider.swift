@@ -112,7 +112,7 @@ class ImagesCollectionViewDataProvider: NSObject, NSCollectionViewDataSource, NS
         let image = filteredImages[indexPath.item]
 
         guard let filename = image["filename"] as? String else { return nil }
-        guard let data = image["png"] as? Data else { return nil }
+        guard let data = image["data"] as? Data else { return nil }
         
         let tempURL = URL(fileURLWithPath: NSTemporaryDirectory())
             .appendingPathComponent(filename)
@@ -149,7 +149,7 @@ extension ImagesCollectionViewDataProvider: NSFilePromiseProviderDelegate {
             return
         }
         
-        guard let data = image["png"] as? Data else {
+        guard let data = image["data"] as? Data else {
             completionHandler(nil)
             return
         }

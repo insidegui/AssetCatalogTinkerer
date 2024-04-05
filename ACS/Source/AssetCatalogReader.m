@@ -15,7 +15,7 @@ NSString * const kACSNameKey = @"name";
 NSString * const kACSImageKey = @"image";
 NSString * const kACSThumbnailKey = @"thumbnail";
 NSString * const kACSFilenameKey = @"filename";
-NSString * const kACSPNGDataKey = @"png";
+NSString * const kACSContentsDataKey = @"data";
 NSString * const kACSImageRepKey = @"imagerep";
 
 NSString * const kAssetCatalogReaderErrorDomain = @"br.com.guilhermerambo.AssetCatalogReader";
@@ -195,7 +195,9 @@ NSString * const kAssetCatalogReaderErrorDomain = @"br.com.guilhermerambo.AssetC
                     NSBitmapImageRep *imageRep = [[NSBitmapImageRep alloc] initWithCGImage:image];
                     imageRep.size = namedImage.size;
                     
-                    NSDictionary *desc = [self imageDescriptionWithName:namedImage.name filename:filename representation:imageRep];
+                    NSDictionary *desc = [self imageDescriptionWithName:namedImage.name filename:filename representation:imageRep contentsData:^NSData *{
+                        return [imageRep representationUsingType:NSPNGFileType properties:@{NSImageInterlaced:@(NO)}];
+                    }];
                     if (!desc) {
                         loadedItemCount++;
                         return;
@@ -252,19 +254,37 @@ NSString * const kAssetCatalogReaderErrorDomain = @"br.com.guilhermerambo.AssetC
         
         @try {
             CUIThemeRendition *rendition = [[self.catalog _themeStore] renditionWithKey:key.keyList];
-            
             // when resource constrained and the catalog contains retina images, only load retina images
             if ([self catalogHasRetinaContent] && weakSelf.resourceConstrained && rendition.scale < 2) {
                 return;
             }
-            
-            NSString *filename = [self filenameForAssetNamed:[self cleanupRenditionName:rendition.name] scale:rendition.scale presentationState:key.themeState];
-            
-            if (rendition.unslicedImage) {
+                
+            const BOOL isSVG = rendition.isVectorBased && rendition.svgDocument;
+            if (isSVG) {
+                NSCustomImageRep *imageRep = [[NSCustomImageRep alloc] initWithSize:CGSVGDocumentGetCanvasSize(rendition.svgDocument) flipped:YES drawingHandler:^BOOL(NSRect dstRect) {
+                    CGContextRef context = NSGraphicsContext.currentContext.CGContext;
+                    if (context && rendition.svgDocument) {
+                        CGContextDrawSVGDocument(context, rendition.svgDocument);
+                    }
+                    return YES;
+                }];
+                NSString *const filename = [self filenameForVectorAssetNamed:[self cleanupRenditionName:rendition.name] renderingMode:rendition.vectorGlyphRenderingMode weight:key.themeGlyphWeight size:key.themeGlyphSize];
+                NSDictionary *desc = [self imageDescriptionWithName:rendition.name filename:filename representation:imageRep contentsData:^NSData *{
+                    NSMutableData *data = [NSMutableData new];
+                    CGSVGDocumentWriteToData(rendition.svgDocument, (__bridge CFMutableDataRef)data, NULL);
+                    return data;
+                }];
+                if (self.cancelled) return;
+                [self.mutableImages addObject:desc];
+            } else if (rendition.unslicedImage) {
+                NSString *const filename = [self filenameForAssetNamed:[self cleanupRenditionName:rendition.name] scale:rendition.scale presentationState:key.themeState];
                 NSBitmapImageRep *imageRep = [[NSBitmapImageRep alloc] initWithCGImage:rendition.unslicedImage];
                 imageRep.size = NSMakeSize(CGImageGetWidth(rendition.unslicedImage), CGImageGetHeight(rendition.unslicedImage));
                 
-                NSDictionary *desc = [self imageDescriptionWithName:rendition.name filename:filename representation:imageRep];
+                
+                NSDictionary *desc = [self imageDescriptionWithName:rendition.name filename:filename representation:imageRep contentsData:^NSData *{
+                    return [imageRep representationUsingType:NSPNGFileType properties:@{NSImageInterlaced:@(NO)}];
+                }];
                 
                 BOOL ignore = [filename containsString:@"ZZPackedAsset"] && self.ignorePackedAssets;
                 
@@ -352,7 +372,7 @@ NSString * const kAssetCatalogReaderErrorDomain = @"br.com.guilhermerambo.AssetC
     return images;
 }
 
-- (NSDictionary *)imageDescriptionWithName:(NSString *)name filename:(NSString *)filename representation:(NSBitmapImageRep *)imageRep
+- (NSDictionary *)imageDescriptionWithName:(NSString *)name filename:(NSString *)filename representation:(NSImageRep *)imageRep contentsData:(NSData *(^)(void))contentsData
 {
     if (_resourceConstrained) {
         return @{
@@ -361,7 +381,7 @@ NSString * const kAssetCatalogReaderErrorDomain = @"br.com.guilhermerambo.AssetC
                  kACSImageRepKey: imageRep
                  };
     } else {
-        NSData *pngData = [imageRep representationUsingType:NSPNGFileType properties:@{NSImageInterlaced:@(NO)}];
+        NSData *pngData = contentsData();
         
         if (!pngData.length) {
             NSLog(@"Unable to get PNG data from rendition named %@", name);
@@ -376,7 +396,7 @@ NSString * const kAssetCatalogReaderErrorDomain = @"br.com.guilhermerambo.AssetC
                  kACSImageKey : originalImage,
                  kACSThumbnailKey: thumbnail,
                  kACSFilenameKey: filename,
-                 kACSPNGDataKey: pngData
+                 kACSContentsDataKey: pngData
                  };
     }
 }
@@ -403,6 +423,78 @@ NSString * const kAssetCatalogReaderErrorDomain = @"br.com.guilhermerambo.AssetC
             return [NSString stringWithFormat:@"%@.png", name];
         }
     }
+}
+
+- (NSString *)filenameForVectorAssetNamed:(NSString *)name renderingMode:(UIImageSymbolRenderingMode)renderingMode weight:(UIImageSymbolWeight)weight size:(UIImageSymbolScale)size {
+    NSString *weightName;
+    switch (weight) {
+        case UIImageSymbolWeightUnspecified:
+            weightName = @"unspecified";
+            break;
+        case UIImageSymbolWeightUltraLight:
+            weightName = @"ultraLight";
+            break;
+        case UIImageSymbolWeightThin:
+            weightName = @"thin";
+            break;
+        case UIImageSymbolWeightLight:
+            weightName = @"light";
+            break;
+        case UIImageSymbolWeightRegular:
+            weightName = @"regular";
+            break;
+        case UIImageSymbolWeightMedium:
+            weightName = @"medium";
+            break;
+        case UIImageSymbolWeightSemibold:
+            weightName = @"semibold";
+            break;
+        case UIImageSymbolWeightBold:
+            weightName = @"bold";
+            break;
+        case UIImageSymbolWeightHeavy:
+            weightName = @"heavy";
+            break;
+        case UIImageSymbolWeightBlack:
+            weightName = @"black";
+            break;
+    }
+    
+    NSString *sizeName;
+    switch (size) {
+        case UIImageSymbolScaleDefault:
+            sizeName = @"default";
+            break;
+        case UIImageSymbolScaleUnspecified:
+            sizeName = @"unspecified";
+            break;
+        case UIImageSymbolScaleSmall:
+            sizeName = @"small";
+            break;
+        case UIImageSymbolScaleMedium:
+            sizeName = @"medium";
+            break;
+        case UIImageSymbolScaleLarge:
+            sizeName = @"large";
+            break;
+    }
+    
+    NSString *renderingModeName;
+    switch (renderingMode) {
+        case UIImageSymbolRenderingModeAutomatic:
+            renderingModeName = @"automatic";
+            break;
+        case UIImageSymbolRenderingModeTemplate:
+            renderingModeName = @"template";
+            break;
+        case UIImageSymbolRenderingModeMulticolor:
+            renderingModeName = @"multicolor";
+            break;
+        case UIImageSymbolRenderingModeHierarchical:
+            renderingModeName = @"hierarchical";
+            break;
+    }
+    return  [NSString stringWithFormat:@"%@_%@_%@_%@.svg", name, weightName, sizeName, renderingModeName];
 }
 
 - (BOOL)catalogHasRetinaContent

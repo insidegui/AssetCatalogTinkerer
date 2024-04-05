@@ -283,11 +283,9 @@ class ImagesViewController: NSViewController, NSMenuItemValidation {
         panel.canChooseFiles = false
         panel.canChooseDirectories = true
         panel.canCreateDirectories = true
-        
         panel.beginSheetModal(for: view.window!) { result in
             guard result == .OK else { return }
             guard panel.url != nil else { return }
-            
             self.exportImages(imagesToExport, toDirectoryAt: panel.url!)
         }
     }
@@ -303,11 +301,11 @@ class ImagesViewController: NSViewController, NSMenuItemValidation {
                 
                 pathComponents.append(filename)
                 
-                guard let pngData = image["png"] as? Data else { return }
+                guard let contents = image["data"] as? Data else { return }
                 
                 let path = self.nextAvailablePath(filePath: NSString.path(withComponents: pathComponents) as String)
                 do {
-                    try pngData.write(to: URL(fileURLWithPath: path), options: .atomic)
+                    try contents.write(to: URL(fileURLWithPath: path), options: .atomic)
                 } catch {
                     NSLog("ERROR: Unable to write \(filename) to \(path); \(error)")
                 }

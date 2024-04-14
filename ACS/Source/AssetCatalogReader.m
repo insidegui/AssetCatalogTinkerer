@@ -258,8 +258,8 @@ NSString * const kAssetCatalogReaderErrorDomain = @"br.com.guilhermerambo.AssetC
             if ([self catalogHasRetinaContent] && weakSelf.resourceConstrained && rendition.scale < 2) {
                 return;
             }
-                
-            const BOOL isSVG = rendition.isVectorBased && rendition.svgDocument;
+            const BOOL coreSVGPresent = CGSVGDocumentGetCanvasSize != NULL && CGContextDrawSVGDocument != NULL && CGSVGDocumentWriteToData != NULL;
+            const BOOL isSVG = coreSVGPresent && rendition.isVectorBased && rendition.svgDocument;
             if (isSVG) {
                 NSCustomImageRep *imageRep = [[NSCustomImageRep alloc] initWithSize:CGSVGDocumentGetCanvasSize(rendition.svgDocument) flipped:YES drawingHandler:^BOOL(NSRect dstRect) {
                     CGContextRef context = NSGraphicsContext.currentContext.CGContext;

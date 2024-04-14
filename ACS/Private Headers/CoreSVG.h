@@ -7,8 +7,7 @@ struct CGSVGDocument;
 
 typedef struct CGSVGDocument *CGSVGDocumentRef;
 
-int CGSVGDocumentWriteToURL(CGSVGDocumentRef, CFURLRef, CFDictionaryRef);
-int CGSVGDocumentWriteToData(CGSVGDocumentRef, CFDataRef, CFDictionaryRef);
-void CGContextDrawSVGDocument(CGContextRef, CGSVGDocumentRef);
-CGSize CGSVGDocumentGetCanvasSize(CGSVGDocumentRef);
+int CGSVGDocumentWriteToData(CGSVGDocumentRef, CFDataRef, CFDictionaryRef) __attribute__((weak_import));;
+void CGContextDrawSVGDocument(CGContextRef, CGSVGDocumentRef) __attribute__((weak_import));;
+CGSize CGSVGDocumentGetCanvasSize(CGSVGDocumentRef) __attribute__((weak_import));;
 #endif /* CoreSVG_h */

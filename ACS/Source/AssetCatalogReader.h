@@ -17,7 +17,7 @@ extern NSString *__nonnull const kACSThumbnailKey;
 /// An NSString with the suggested filename for the asset
 extern NSString *__nonnull const kACSFilenameKey;
 /// An NSData containing PNG image data for the asset
-extern NSString *__nonnull const kACSPNGDataKey;
+extern NSString *__nonnull const kACSContentsDataKey;
 /// An NSBitmapImageRep containing a bitmap representation of the asset
 extern NSString *__nonnull const kACSImageRepKey;
 

@@ -7,6 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "CoreSVG.h"
 
 @interface CUINamedData : NSObject
 
@@ -73,6 +74,8 @@ struct _renditionkeytoken {
 @property (readonly) long long themeSize;
 @property (readonly) long long themeElement;
 @property (readonly) long long themePart;
+@property (readonly) long long themeGlyphWeight;
+@property (readonly) long long themeGlyphSize;
 
 @end
 
@@ -82,6 +85,9 @@ struct _renditionkeytoken {
 @property (nonatomic, readonly) NSString *name;
 @property (nonatomic, readonly) NSData *data;
 @property (nonatomic, readonly) CGImageRef unslicedImage;
+@property (nonatomic, readonly) BOOL isVectorBased;
+@property (nonatomic, readonly) struct CGSVGDocument *svgDocument;
+@property (nonatomic, readonly) long long vectorGlyphRenderingMode;
 
 @end
 
@@ -132,3 +138,32 @@ struct _renditionkeytoken {
 - (CUIStructuredThemeStore *)_themeStore;
 
 @end
+
+typedef NS_ENUM(NSInteger, UIImageSymbolScale) {
+    UIImageSymbolScaleDefault = -1,      // use the system default size
+    UIImageSymbolScaleUnspecified = 0,   // allow the system to pick a size based on the context
+    UIImageSymbolScaleSmall = 1,
+    UIImageSymbolScaleMedium,
+    UIImageSymbolScaleLarge,
+};
+
+typedef NS_ENUM(NSInteger, UIImageSymbolWeight) {
+    UIImageSymbolWeightUnspecified = 0,
+    UIImageSymbolWeightUltraLight = 1,
+    UIImageSymbolWeightThin,
+    UIImageSymbolWeightLight,
+    UIImageSymbolWeightRegular,
+    UIImageSymbolWeightMedium,
+    UIImageSymbolWeightSemibold,
+    UIImageSymbolWeightBold,
+    UIImageSymbolWeightHeavy,
+    UIImageSymbolWeightBlack
+};
+
+// This is a made up enum
+typedef NS_ENUM(NSInteger, UIImageSymbolRenderingMode) {
+    UIImageSymbolRenderingModeAutomatic,
+    UIImageSymbolRenderingModeTemplate,
+    UIImageSymbolRenderingModeMulticolor,
+    UIImageSymbolRenderingModeHierarchical,
+};

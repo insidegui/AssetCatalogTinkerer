@@ -78,6 +78,8 @@
 	<true/>
 	<key>SUFeedURL</key>
 	<string>https://raw.githubusercontent.com/insidegui/AssetCatalogTinkerer/main/releases/appcast.xml</string>
+	<key>SUPublicEDKey</key>
+	<string>$(ACT_SPARKLE_PUBLIC_ED_KEY)</string>
 	<key>SUScheduledCheckInterval</key>
 	<integer>86400</integer>
 	<key>UTExportedTypeDeclarations</key>

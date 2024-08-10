@@ -50,16 +50,6 @@
             ReferencedContainer = "container:Asset Catalog Tinkerer.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
-      <CommandLineArguments>
-         <CommandLineArgument
-            argument = "-OverrideSUFeedURL &quot;https://ac8fdc685572.ngrok.io/appcast.xml&quot;"
-            isEnabled = "NO">
-         </CommandLineArgument>
-         <CommandLineArgument
-            argument = "-SimulateOutdatedVersion YES"
-            isEnabled = "NO">
-         </CommandLineArgument>
-      </CommandLineArguments>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"

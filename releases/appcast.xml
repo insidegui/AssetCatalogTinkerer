@@ -1,52 +1,16 @@
-<?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0" xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle" xmlns:dc="http://purl.org/dc/elements/1.1/">
+<?xml version="1.0" standalone="yes"?>
+<rss xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle" version="2.0">
     <channel>
-        <title>Asset Catalog Tinkerer Changelog</title>
-        <link>https://raw.githubusercontent.com/insidegui/AssetCatalogTinkerer/main/releases/appcast.xml</link>
-        <description>Most recent changes with links to updates.</description>
-        <language>en</language>
-		
+        <title>Asset Catalog Tinkerer</title>
         <item>
-            <title>Version 2.7</title>
-			<description><![CDATA[
-							<ul>
-								<li>New icon</li>
-								<li>Universal build for Apple Silicon and Intel</li>
-								<li>Adds the ability to copy multiple images to the clipboard at the same time</li>
-								<li>Dragging images out now uses the new drag and drop system on macOS, faster and compatible with a greater number of apps</li>
-								<li>Fixed a bug that prevented the QuickLook window from updating with the current selection when navigating with the arrow keys</li>
-								<li>Fixed a bug where the QuickLook window would stay visible after closing the current document</li>
-							</ul>
-						]]></description>
-            <pubDate>Fri, 3 Dec 2021 12:00:00 -0300</pubDate>
-            <enclosure url="https://github.com/insidegui/AssetCatalogTinkerer/releases/download/2.7/AssetCatalogTinkerer_v2.7.dmg" sparkle:version="270" sparkle:shortVersionString="2.7" length="4686138" type="application/octet-stream" />
-            <sparkle:minimumSystemVersion>10.11</sparkle:minimumSystemVersion>
-        </item>
-		
-        <item>
-            <title>Version 2.5.1</title>
-			<description><![CDATA[
-							<ul>
-								<li>The app will now launch correctly on High Sierra</li>
-							</ul>
-						]]></description>
-            <pubDate>Thu, 5 Oct 2017 18:20:00 -0300</pubDate>
-            <enclosure url="https://github.com/insidegui/AssetCatalogTinkerer/releases/download/2.5.1/AssetCatalogTinkerer_v2.5.1.zip" sparkle:version="251" sparkle:shortVersionString="2.5.1" length="5906601" type="application/octet-stream" />
-            <sparkle:minimumSystemVersion>10.11</sparkle:minimumSystemVersion>
-        </item>
-
-		<item>
-            <title>Version 2.5</title>
-			<description><![CDATA[
-							<ul>
-								<li>Finally added an auto-update feature (thanks, Sparkle)</li>
-								<li>Improved handling of ProKit's theme stores</li>
-								<li>The app now comes with a QuickLook PlugIn so you can preview the contents of asset catalogs using QuickLook</li>
-							</ul>
-						]]></description>
-            <pubDate>Tue, 3 Jan 2017 22:40:00 -0200</pubDate>
-            <enclosure url="https://github.com/insidegui/AssetCatalogTinkerer/releases/download/2.5/AssetCatalogTinkerer_v2.5.zip" sparkle:version="250" sparkle:shortVersionString="2.5" length="4336460" type="application/octet-stream" />
-            <sparkle:minimumSystemVersion>10.11</sparkle:minimumSystemVersion>
+            <title>2.9</title>
+            <pubDate>Sat, 10 Aug 2024 11:58:51 -0300</pubDate>
+            <link>https://github.com/insidegui/AssetCatalogTinkerer</link>
+            <sparkle:version>290</sparkle:version>
+            <sparkle:shortVersionString>2.9</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>11.0</sparkle:minimumSystemVersion>
+            <enclosure url="https://raw.githubusercontent.com/insidegui/AssetCatalogTinkerer/main/releases/AssetCatalogTinkerer_latest.zip" length="2490902" type="application/octet-stream" sparkle:edSignature="8mGTPb/WXfeSVbbPON/+ESst/3hxzAJyXt4Xfi6zThSq4CbbMe8XV8bzAHrVudaFwqe52gKU4WlhYvA3DDQlBQ=="/>
+            <sparkle:releaseNotesLink>https://raw.githubusercontent.com/insidegui/AssetCatalogTinkerer/main/releases/releasenotes.html</sparkle:releaseNotesLink>
         </item>
     </channel>
 </rss>

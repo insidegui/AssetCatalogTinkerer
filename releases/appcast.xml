@@ -10,7 +10,7 @@
             <sparkle:shortVersionString>2.9</sparkle:shortVersionString>
             <sparkle:minimumSystemVersion>11.0</sparkle:minimumSystemVersion>
             <enclosure url="https://raw.githubusercontent.com/insidegui/AssetCatalogTinkerer/main/releases/AssetCatalogTinkerer_latest.zip" length="2490902" type="application/octet-stream" sparkle:edSignature="8mGTPb/WXfeSVbbPON/+ESst/3hxzAJyXt4Xfi6zThSq4CbbMe8XV8bzAHrVudaFwqe52gKU4WlhYvA3DDQlBQ=="/>
-            <sparkle:releaseNotesLink>https://raw.githubusercontent.com/insidegui/AssetCatalogTinkerer/main/releases/releasenotes.html</sparkle:releaseNotesLink>
+            <sparkle:releaseNotesLink>https://assetcatalogtinkerer.rambo.workers.dev/releasenotes.html</sparkle:releaseNotesLink>
         </item>
     </channel>
 </rss>

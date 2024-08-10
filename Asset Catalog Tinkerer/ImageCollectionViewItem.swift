@@ -131,10 +131,10 @@ class ImageCollectionViewItem: NSCollectionViewItem {
     
     fileprivate func updateUI() {
         guard let imageData = image , isViewLoaded else { return }
-        guard let image = imageData["thumbnail"] as? NSImage else { return }
-        let name = imageData["name"] as! String
-        let filename = imageData["filename"] as! String
-        
+        guard let image = imageData[kACSThumbnailKey] as? NSImage else { return }
+        let name = imageData[kACSNameKey] as! String
+        let filename = imageData[kACSFilenameKey] as! String
+
         let brightness = image.averageBrightness()
         
         catalogImageView.image = image

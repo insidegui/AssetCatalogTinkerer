@@ -45,7 +45,7 @@
     
     if (!ctx) return -1;
     
-    NSGraphicsContext *graphicsContext = [NSGraphicsContext graphicsContextWithGraphicsPort:(void *)ctx flipped:NO];
+    NSGraphicsContext *graphicsContext = [NSGraphicsContext graphicsContextWithCGContext:(void *)ctx flipped:NO];
     [NSGraphicsContext setCurrentContext:graphicsContext];
     
     [generator drawPreview];
@@ -127,7 +127,6 @@
     
     for (NSDictionary *asset in self.reader.images) {
         NSImageRep *rep = asset[kACSImageRepKey];
-        
         NSSize size = [self fitSize:rep.size inSize:referenceSize];
         
         if (size.height > lastRowHeight) {

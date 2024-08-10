@@ -6,7 +6,7 @@
 //  Copyright © 2016 Guilherme Rambo. All rights reserved.
 //
 
-@import Cocoa;
+#import <Cocoa/Cocoa.h>
 
 /// The name of the asset
 extern NSString *__nonnull const kACSNameKey;
@@ -16,7 +16,7 @@ extern NSString *__nonnull const kACSImageKey;
 extern NSString *__nonnull const kACSThumbnailKey;
 /// An NSString with the suggested filename for the asset
 extern NSString *__nonnull const kACSFilenameKey;
-/// An NSData containing PNG image data for the asset
+/// An NSData containing "image" data for the asset (PNG, SVG, etc)
 extern NSString *__nonnull const kACSContentsDataKey;
 /// An NSBitmapImageRep containing a bitmap representation of the asset
 extern NSString *__nonnull const kACSImageRepKey;

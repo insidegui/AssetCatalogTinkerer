@@ -53,7 +53,7 @@ struct InfoCommand: AsyncParsableCommand {
         let images = try await AssetCatalogReader.images(from: inputURL)
 
         for image in images {
-            guard let filename = image["filename"] as? String else { continue }
+            guard let filename = image[kACSFilenameKey] as? String else { continue }
             print(filename)
         }
     }

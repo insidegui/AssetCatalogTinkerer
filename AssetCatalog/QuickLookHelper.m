@@ -126,8 +126,8 @@
     CGFloat lastRowHeight = 0;
     
     for (NSDictionary *asset in self.reader.images) {
-        NSBitmapImageRep *rep = asset[kACSImageRepKey];
-        
+        NSImageRep *rep = asset[kACSImageRepKey];
+
         NSSize size = [self fitSize:rep.size inSize:referenceSize];
         
         if (size.height > lastRowHeight) {
@@ -235,7 +235,7 @@
     NSMutableArray <NSNumber *> *heights = [[NSMutableArray alloc] initWithCapacity:self.reader.images.count];
     
     [self.reader.images enumerateObjectsUsingBlock:^(NSDictionary* asset, NSUInteger idx, BOOL *stop) {
-        NSBitmapImageRep *rep = asset[kACSImageRepKey];
+        NSImageRep *rep = asset[kACSImageRepKey];
         [widths addObject:@(rep.size.width)];
         [heights addObject:@(rep.size.height)];
     }];

@@ -39,6 +39,8 @@
 		DDDDE5C91CA96EF400B353D3 /* DocumentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDDE5C81CA96EF400B353D3 /* DocumentController.swift */; };
 		DDDDE5CB1CA97C0300B353D3 /* QuickLookableCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDDE5CA1CA97C0300B353D3 /* QuickLookableCollectionView.swift */; };
 		DDF7E41F22CC0AB600EF1965 /* NSPasteboard+Filenames.m in Sources */ = {isa = PBXBuildFile; fileRef = DDF7E41E22CC0AB600EF1965 /* NSPasteboard+Filenames.m */; };
+		F44011EE2C67AD1A00E47EC9 /* CoreSVG.h in Headers */ = {isa = PBXBuildFile; fileRef = F44011ED2C67AD1A00E47EC9 /* CoreSVG.h */; };
+		F44011F02C67AFD600E47EC9 /* CoreSVG.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F44011EF2C67AFD600E47EC9 /* CoreSVG.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		F450A901275A46E700C5DB9B /* UniformTypeIdentifiers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F450A900275A46E700C5DB9B /* UniformTypeIdentifiers.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		F45DB91C2B9FAF6700A1A4BD /* AssetCatalogTinkererCLI.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45DB91B2B9FAF6700A1A4BD /* AssetCatalogTinkererCLI.swift */; };
 		F45DB9232B9FAF8B00A1A4BD /* act in Copy CLI Executable */ = {isa = PBXBuildFile; fileRef = F45DB9192B9FAF6700A1A4BD /* act */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
@@ -170,6 +172,8 @@
 		DDDDE5CA1CA97C0300B353D3 /* QuickLookableCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuickLookableCollectionView.swift; sourceTree = "<group>"; };
 		DDF7E41D22CC0AB600EF1965 /* NSPasteboard+Filenames.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSPasteboard+Filenames.h"; sourceTree = "<group>"; };
 		DDF7E41E22CC0AB600EF1965 /* NSPasteboard+Filenames.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSPasteboard+Filenames.m"; sourceTree = "<group>"; };
+		F44011ED2C67AD1A00E47EC9 /* CoreSVG.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoreSVG.h; sourceTree = "<group>"; };
+		F44011EF2C67AFD600E47EC9 /* CoreSVG.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreSVG.framework; path = ../../../../../System/Library/PrivateFrameworks/CoreSVG.framework; sourceTree = "<group>"; };
 		F450A900275A46E700C5DB9B /* UniformTypeIdentifiers.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UniformTypeIdentifiers.framework; path = System/Library/Frameworks/UniformTypeIdentifiers.framework; sourceTree = SDKROOT; };
 		F45DB9192B9FAF6700A1A4BD /* act */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = act; sourceTree = BUILT_PRODUCTS_DIR; };
 		F45DB91B2B9FAF6700A1A4BD /* AssetCatalogTinkererCLI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetCatalogTinkererCLI.swift; sourceTree = "<group>"; };
@@ -184,6 +188,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F44011F02C67AFD600E47EC9 /* CoreSVG.framework in Frameworks */,
 				DDAF8AEA1E1B11DB00A8A235 /* CoreUI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -261,6 +266,7 @@
 		DDAF8ADF1E1B119A00A8A235 /* Private Headers */ = {
 			isa = PBXGroup;
 			children = (
+				F44011ED2C67AD1A00E47EC9 /* CoreSVG.h */,
 				DDAF8AE01E1B119A00A8A235 /* CoreUI+TV.h */,
 				DDAF8AE11E1B119A00A8A235 /* CoreUI.h */,
 			);
@@ -270,6 +276,7 @@
 		DDAF8AE81E1B11DB00A8A235 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F44011EF2C67AFD600E47EC9 /* CoreSVG.framework */,
 				F450A900275A46E700C5DB9B /* UniformTypeIdentifiers.framework */,
 				DDAF8AEB1E1B11DF00A8A235 /* ProKit.framework */,
 				DDAF8AE91E1B11DB00A8A235 /* CoreUI.framework */,
@@ -424,6 +431,7 @@
 				DDAF8AE31E1B119A00A8A235 /* CoreUI+TV.h in Headers */,
 				DDAF8AE41E1B119A00A8A235 /* CoreUI.h in Headers */,
 				DDAF8ADD1E1B117600A8A235 /* AssetCatalogReader.h in Headers */,
+				F44011EE2C67AD1A00E47EC9 /* CoreSVG.h in Headers */,
 				DDAF8ACC1E1B113400A8A235 /* ACS.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

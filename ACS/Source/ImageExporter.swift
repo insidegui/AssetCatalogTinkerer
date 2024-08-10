@@ -19,13 +19,13 @@ public struct ImageExporter {
     public func export(toDirectoryAt url: URL, completionHandler: (() -> Void)? = nil) {
         DispatchQueue.global(qos: DispatchQoS.QoSClass.userInitiated).async {
             images.forEach { image in
-                guard let filename = image["filename"] as? String else { return }
+                guard let filename = image[kACSFilenameKey] as? String else { return }
 
                 var pathComponents = url.pathComponents
 
                 pathComponents.append(filename)
 
-                guard let pngData = image["png"] as? Data else { return }
+                guard let pngData = image[kACSContentsDataKey] as? Data else { return }
 
                 let path = self.nextAvailablePath(filePath: NSString.path(withComponents: pathComponents) as String)
                 do {

@@ -12,7 +12,7 @@ You can also install it with [Homebrew](https://brew.sh) by running `brew instal
 
 ### Unsupported Asset Types
 
-Asset Catalog Tinkerer was designed with images in mind, so it doesn't support some of the more modern asset catalog features, such as PDFs, SVGs, or colors. It may or may not be updated in the future to support those.
+Asset Catalog Tinkerer was designed with images in mind, so it doesn't support some of the more modern asset catalog features, such as colors. It may or may not be updated in the future to support those.
 
 ### QuickLook PlugIn
 

@@ -27,7 +27,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
-    UserDefaults.standard.bool(forKey: "TerminateAfterLastWindowClosed")
+        UserDefaults.standard.bool(forKey: "TerminateAfterLastWindowClosed")
     }
 
 }

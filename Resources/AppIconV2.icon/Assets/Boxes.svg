@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="612px" height="612px" viewBox="0 0 612 612" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Boxes</title>
+    <g id="macOS-Tahoe" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g transform="translate(-106, -106)" fill="#FFFFFF" id="Boxes">
+            <g transform="translate(412, 412) rotate(-45) translate(-412, -412)translate(196, 196)">
+                <rect id="Rectangle-path" x="0" y="0" width="86.4" height="302.4"></rect>
+                <rect id="Rectangle-path" x="345.6" y="129.6" width="86.4" height="302.4"></rect>
+                <rect id="Rectangle-path" x="0" y="345.6" width="302.4" height="86.4"></rect>
+                <rect id="Rectangle-path" x="129.6" y="0" width="302.4" height="86.4"></rect>
+                <rect id="Rectangle-path" x="129.6" y="129.6" width="172.8" height="64.8"></rect>
+                <rect id="Rectangle-path" x="129.6" y="237.6" width="172.8" height="64.8"></rect>
+            </g>
+        </g>
+    </g>
+</svg>

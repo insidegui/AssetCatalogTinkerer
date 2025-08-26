@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="622px" height="622px" viewBox="0 0 622 622" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>circle-dark</title>
+    <g id="macOS-Tahoe" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-opacity="0.2">
+        <g id="TahoeIcon-Dark" transform="translate(-101, -101)" stroke="#0081FF" stroke-width="5">
+            <path d="M412,103.5 C497.189923,103.5 574.314923,138.030039 630.142442,193.857558 C685.969961,249.685077 720.5,326.810077 720.5,412 C720.5,497.189923 685.969961,574.314923 630.142442,630.142442 C574.314923,685.969961 497.189923,720.5 412,720.5 C326.810077,720.5 249.685077,685.969961 193.857558,630.142442 C138.030039,574.314923 103.5,497.189923 103.5,412 C103.5,326.810077 138.030039,249.685077 193.857558,193.857558 C249.685077,138.030039 326.810077,103.5 412,103.5 Z" id="circle-dark"></path>
+        </g>
+    </g>
+</svg>

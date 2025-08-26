@@ -48,6 +48,7 @@
 		F45DB92E2B9FB07D00A1A4BD /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45DB92D2B9FB07D00A1A4BD /* Helpers.swift */; };
 		F45DB92F2B9FB0BC00A1A4BD /* ACS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDAF8AC81E1B113300A8A235 /* ACS.framework */; };
 		F45DB9352B9FB31200A1A4BD /* ImageExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45DB9342B9FB31200A1A4BD /* ImageExporter.swift */; };
+		F4D366C62E5DF499008CEC0E /* AppIcon.icon in Resources */ = {isa = PBXBuildFile; fileRef = F4D366C52E5DF499008CEC0E /* AppIcon.icon */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -182,6 +183,7 @@
 		F45DB9342B9FB31200A1A4BD /* ImageExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageExporter.swift; sourceTree = "<group>"; };
 		F45DB9362B9FB53100A1A4BD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F45DB9382B9FB75000A1A4BD /* Main.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Main.xcconfig; sourceTree = "<group>"; };
+		F4D366C52E5DF499008CEC0E /* AppIcon.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = AppIcon.icon; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -397,6 +399,7 @@
 		DDC06BB31CA8DC0C00B6A9F3 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				F4D366C52E5DF499008CEC0E /* AppIcon.icon */,
 				DDC06B801CA8BCF300B6A9F3 /* Info.plist */,
 				DDC06B7D1CA8BCF300B6A9F3 /* Main.storyboard */,
 				DDC06BAF1CA8CFB900B6A9F3 /* ImageCollectionViewItem.xib */,
@@ -608,6 +611,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F4D366C62E5DF499008CEC0E /* AppIcon.icon in Resources */,
 				DDC06BB11CA8CFB900B6A9F3 /* ImageCollectionViewItem.xib in Resources */,
 				DDC06B7C1CA8BCF300B6A9F3 /* Assets.xcassets in Resources */,
 				DDC06B7F1CA8BCF300B6A9F3 /* Main.storyboard in Resources */,
@@ -949,6 +953,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "Asset Catalog Tinkerer/Asset Catalog Tinkerer.entitlements";
 				CODE_SIGN_IDENTITY = "Mac Developer";
@@ -979,6 +984,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "Asset Catalog Tinkerer/Asset Catalog Tinkerer.entitlements";
 				CODE_SIGN_IDENTITY = "Mac Developer";

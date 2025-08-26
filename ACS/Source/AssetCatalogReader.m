@@ -340,7 +340,7 @@ NSString * const kAssetCatalogReaderErrorDomain = @"br.com.guilhermerambo.AssetC
 
 - (BOOL)isProThemeStoreAtPath:(NSString *)path
 {
-    static const int proThemeTokenLength = 18;
+    #define proThemeTokenLength 18
     static const char proThemeToken[proThemeTokenLength] = { 0x50,0x72,0x6F,0x54,0x68,0x65,0x6D,0x65,0x44,0x65,0x66,0x69,0x6E,0x69,0x74,0x69,0x6F,0x6E };
     
     @try {

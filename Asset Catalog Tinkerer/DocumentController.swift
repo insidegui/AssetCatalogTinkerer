@@ -17,6 +17,14 @@ class DocumentController: NSDocumentController {
     override func saveAllDocuments(_ sender: Any?) {
         // the app doesn't support saving documents
     }
+
+    override func typeForContents(of url: URL) throws -> String {
+        if url.pathExtension.lowercased() == "car" {
+            return "com.apple.assetcatalog"
+        }
+
+        return try super.typeForContents(of: url)
+    }
     
     private func makeSettingsView() -> NSView? {
         let storyboard = NSStoryboard(name: "Main", bundle: nil)

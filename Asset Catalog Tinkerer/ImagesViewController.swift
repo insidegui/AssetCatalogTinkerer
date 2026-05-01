@@ -48,7 +48,7 @@ class ImagesViewController: NSViewController, NSMenuItemValidation {
 
         view.layer?.backgroundColor = NSColor.white.cgColor
         buildUI()
-        showStatus("Extracting Images...")
+        showStatus("Extracting Assets...")
     }
     
     // MARK: - UI
@@ -237,7 +237,7 @@ class ImagesViewController: NSViewController, NSMenuItemValidation {
         dataProvider.searchTerm = sender.stringValue
         
         if dataProvider.filteredImages.count == 0 {
-            showStatus("No images found for \"\(dataProvider.searchTerm)\"")
+            showStatus("No assets found for \"\(dataProvider.searchTerm)\"")
         } else {
             hideStatus()
         }

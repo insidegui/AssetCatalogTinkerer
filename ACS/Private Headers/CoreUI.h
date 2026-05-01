@@ -88,6 +88,7 @@ struct _renditionkeytoken {
 @property (nonatomic, readonly) BOOL isVectorBased;
 @property (nonatomic, readonly) struct CGSVGDocument *svgDocument;
 @property (nonatomic, readonly) long long vectorGlyphRenderingMode;
+@property (nonatomic, readonly) CGColorRef cgColor;
 
 @end
 

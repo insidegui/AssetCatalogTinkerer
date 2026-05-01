@@ -17,6 +17,8 @@ NSString * const kACSThumbnailKey = @"thumbnail";
 NSString * const kACSFilenameKey = @"filename";
 NSString * const kACSContentsDataKey = @"data";
 NSString * const kACSImageRepKey = @"imagerep";
+NSString * const kACSTypeKey = @"type";
+NSString * const kACSColorKey = @"color";
 
 NSString * const kAssetCatalogReaderErrorDomain = @"br.com.guilhermerambo.AssetCatalogReader";
 
@@ -215,10 +217,10 @@ NSString * const kAssetCatalogReaderErrorDomain = @"br.com.guilhermerambo.AssetC
             }
         }
         
-        // we've got no images for some reason (the console will usually contain some information from CoreUI as to why)
+        // we've got no assets for some reason (the console will usually contain some information from CoreUI as to why)
         if (!self.images.count) {
             dispatch_async(dispatch_get_main_queue(), ^{
-                self.error = [NSError errorWithDomain:kAssetCatalogReaderErrorDomain code:0 userInfo:@{NSLocalizedDescriptionKey: @"Failed to load images"}];
+                self.error = [NSError errorWithDomain:kAssetCatalogReaderErrorDomain code:0 userInfo:@{NSLocalizedDescriptionKey: @"Failed to load assets"}];
                 callback();
             });
             
@@ -298,6 +300,19 @@ NSString * const kAssetCatalogReaderErrorDomain = @"br.com.guilhermerambo.AssetC
                 if (self.cancelled) return;
 
                 [self.mutableImages addObject:desc];
+            } else if (rendition.cgColor) {
+                // This is a color rendition - cast to the color type
+                CGColorRef cgColor = rendition.cgColor;
+                NSColor *nsColor = [NSColor colorWithCGColor:cgColor];
+                NSString *filename = [NSString stringWithFormat:@"%@.json", [self cleanupRenditionName:rendition.name]];
+                
+                NSDictionary *desc = [self colorDescriptionWithName:rendition.name filename:filename color:nsColor];
+                
+                if (!desc) {
+                    return;
+                }
+                if (self.cancelled) return;
+                [self.mutableImages addObject:desc];
             } else {
                 NSLog(@"The rendition %@ doesn't have an image, It is probably an effect or material.", rendition.name);
             }
@@ -340,7 +355,7 @@ NSString * const kAssetCatalogReaderErrorDomain = @"br.com.guilhermerambo.AssetC
 
 - (BOOL)isProThemeStoreAtPath:(NSString *)path
 {
-    #define proThemeTokenLength 18
+    static const int proThemeTokenLength = 18;
     static const char proThemeToken[proThemeTokenLength] = { 0x50,0x72,0x6F,0x54,0x68,0x65,0x6D,0x65,0x44,0x65,0x66,0x69,0x6E,0x69,0x74,0x69,0x6F,0x6E };
     
     @try {
@@ -378,7 +393,8 @@ NSString * const kAssetCatalogReaderErrorDomain = @"br.com.guilhermerambo.AssetC
         return @{
                  kACSNameKey : name,
                  kACSFilenameKey: filename,
-                 kACSImageRepKey: imageRep
+                 kACSImageRepKey: imageRep,
+                 kACSTypeKey: @"image"
                  };
     } else {
         NSData *pngData = contentsData();
@@ -395,7 +411,111 @@ NSString * const kAssetCatalogReaderErrorDomain = @"br.com.guilhermerambo.AssetC
                  kACSImageKey : originalImage,
                  kACSThumbnailKey: thumbnail,
                  kACSFilenameKey: filename,
-                 kACSContentsDataKey: pngData
+                 kACSContentsDataKey: pngData,
+                 kACSTypeKey: @"image"
+                 };
+    }
+}
+
+- (NSDictionary *)colorDescriptionWithName:(NSString *)name filename:(NSString *)filename color:(NSColor *)color
+{
+    // Convert color to RGB color space for consistent representation
+    NSColor *rgbColor = [color colorUsingColorSpace:[NSColorSpace sRGBColorSpace]];
+    if (!rgbColor) {
+        rgbColor = color;
+    }
+    
+    // Create a visual representation of the color (a solid color bitmap)
+    NSSize colorSize = _resourceConstrained ? NSMakeSize(64, 64) : NSMakeSize(128, 128);
+    
+    // Create full-size bitmap directly to avoid graphics context issues
+    NSBitmapImageRep *bitmapRep = [[NSBitmapImageRep alloc]
+                                   initWithBitmapDataPlanes:NULL
+                                   pixelsWide:colorSize.width
+                                   pixelsHigh:colorSize.height
+                                   bitsPerSample:8
+                                   samplesPerPixel:4
+                                   hasAlpha:YES
+                                   isPlanar:NO
+                                   colorSpaceName:NSCalibratedRGBColorSpace
+                                   bytesPerRow:0
+                                   bitsPerPixel:0];
+    
+    [NSGraphicsContext saveGraphicsState];
+    NSGraphicsContext *context = [NSGraphicsContext graphicsContextWithBitmapImageRep:bitmapRep];
+    [NSGraphicsContext setCurrentContext:context];
+    
+    [rgbColor setFill];
+    NSRectFill(NSMakeRect(0, 0, colorSize.width, colorSize.height));
+    
+    [NSGraphicsContext restoreGraphicsState];
+    
+    // Create full-size image from bitmap
+    NSImage *colorImage = [[NSImage alloc] initWithSize:colorSize];
+    [colorImage addRepresentation:bitmapRep];
+    
+    // Create thumbnail bitmap directly at the right size (avoid using constrainImage which has drawing handlers)
+    NSBitmapImageRep *thumbnailRep = [[NSBitmapImageRep alloc]
+                                      initWithBitmapDataPlanes:NULL
+                                      pixelsWide:self.thumbnailSize.width
+                                      pixelsHigh:self.thumbnailSize.height
+                                      bitsPerSample:8
+                                      samplesPerPixel:4
+                                      hasAlpha:YES
+                                      isPlanar:NO
+                                      colorSpaceName:NSCalibratedRGBColorSpace
+                                      bytesPerRow:0
+                                      bitsPerPixel:0];
+    
+    [NSGraphicsContext saveGraphicsState];
+    NSGraphicsContext *thumbContext = [NSGraphicsContext graphicsContextWithBitmapImageRep:thumbnailRep];
+    [NSGraphicsContext setCurrentContext:thumbContext];
+    
+    [rgbColor setFill];
+    NSRectFill(NSMakeRect(0, 0, self.thumbnailSize.width, self.thumbnailSize.height));
+    
+    [NSGraphicsContext restoreGraphicsState];
+    
+    NSImage *thumbnail = [[NSImage alloc] initWithSize:self.thumbnailSize];
+    [thumbnail addRepresentation:thumbnailRep];
+    
+    // Create JSON representation of the color
+    CGFloat red = 0, green = 0, blue = 0, alpha = 0;
+    [rgbColor getRed:&red green:&green blue:&blue alpha:&alpha];
+    
+    NSDictionary *colorInfo = @{
+        @"red": @(red),
+        @"green": @(green),
+        @"blue": @(blue),
+        @"alpha": @(alpha),
+        @"hex": [NSString stringWithFormat:@"#%02X%02X%02X", (int)(red * 255), (int)(green * 255), (int)(blue * 255)]
+    };
+    
+    NSError *jsonError = nil;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:colorInfo options:NSJSONWritingPrettyPrinted error:&jsonError];
+    
+    if (jsonError) {
+        NSLog(@"Unable to create JSON data for color named %@: %@", name, jsonError);
+        return nil;
+    }
+    
+    if (_resourceConstrained) {
+        return @{
+                 kACSNameKey: name,
+                 kACSFilenameKey: filename,
+                 kACSColorKey: rgbColor,
+                 kACSThumbnailKey: thumbnail,  // Include thumbnail for pasteboard
+                 kACSTypeKey: @"color"
+                 };
+    } else {
+        return @{
+                 kACSNameKey: name,
+                 kACSImageKey: colorImage,
+                 kACSThumbnailKey: thumbnail,
+                 kACSFilenameKey: filename,
+                 kACSContentsDataKey: jsonData,
+                 kACSColorKey: rgbColor,
+                 kACSTypeKey: @"color"
                  };
     }
 }
@@ -403,8 +523,12 @@ NSString * const kAssetCatalogReaderErrorDomain = @"br.com.guilhermerambo.AssetC
 - (NSString *)cleanupRenditionName:(NSString *)name
 {
     NSArray *components = [name.stringByDeletingPathExtension componentsSeparatedByString:@"@"];
+    NSString *cleanedName = components.firstObject;
     
-    return components.firstObject;
+    // Replace slashes with underscores to avoid directory issues
+    cleanedName = [cleanedName stringByReplacingOccurrencesOfString:@"/" withString:@"_"];
+    
+    return cleanedName;
 }
 
 - (NSString *)filenameForAssetNamed:(NSString *)name scale:(CGFloat)scale presentationState:(NSInteger)presentationState

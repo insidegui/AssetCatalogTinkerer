@@ -14,6 +14,99 @@ extension NSUserInterfaceItemIdentifier {
     static let imageItemIdentifier = NSUserInterfaceItemIdentifier("ImageItemIdentifier")
 }
 
+// Custom pasteboard writer for colors that provides multiple representations
+class ColorPasteboardWriter: NSObject, NSPasteboardWriting {
+    let color: NSColor
+    let image: NSImage
+    let colorName: String
+    
+    init(color: NSColor, image: NSImage, name: String) {
+        self.color = color
+        self.image = image
+        self.colorName = name
+        super.init()
+    }
+    
+    func writableTypes(for pasteboard: NSPasteboard) -> [NSPasteboard.PasteboardType] {
+        return [.fileURL, .color, .string, .tiff]
+    }
+    
+    func pasteboardPropertyList(forType type: NSPasteboard.PasteboardType) -> Any? {
+        switch type {
+        case .fileURL:
+            // Write image to temp file for QuickLook
+            return temporaryFileURL()?.absoluteString
+            
+        case .color:
+            // Write the actual NSColor object
+            return try? NSKeyedArchiver.archivedData(withRootObject: color, requiringSecureCoding: false)
+            
+        case .string:
+            // Write text representation (hex for sRGB, CSS color() for P3)
+            return textRepresentation(for: color)
+            
+        case .tiff:
+            // Write image representation for inline paste
+            return image.tiffRepresentation
+            
+        default:
+            return nil
+        }
+    }
+    
+    private func temporaryFileURL() -> URL? {
+        // Create a safe filename
+        let safeFilename = colorName
+            .replacingOccurrences(of: "/", with: "_")
+            .replacingOccurrences(of: ":", with: "_")
+        
+        let tempURL = URL(fileURLWithPath: NSTemporaryDirectory())
+            .appendingPathComponent("\(safeFilename).png")
+        
+        // Write PNG to temp file
+        guard let tiffData = image.tiffRepresentation,
+              let bitmapRep = NSBitmapImageRep(data: tiffData),
+              let pngData = bitmapRep.representation(using: .png, properties: [:]) else {
+            return nil
+        }
+        
+        try? pngData.write(to: tempURL, options: .atomic)
+        return tempURL
+    }
+    
+    private func textRepresentation(for color: NSColor) -> String {
+        // Try to convert to sRGB first
+        if let srgbColor = color.usingColorSpace(.sRGB) {
+            var red: CGFloat = 0, green: CGFloat = 0, blue: CGFloat = 0, alpha: CGFloat = 0
+            srgbColor.getRed(&red, green: &green, blue: &blue, alpha: &alpha)
+            
+            // If it's in sRGB and not transparent, use hex
+            if alpha >= 0.999 {
+                return String(format: "#%02X%02X%02X", Int(red * 255), Int(green * 255), Int(blue * 255))
+            } else {
+                return String(format: "#%02X%02X%02X%02X", Int(red * 255), Int(green * 255), Int(blue * 255), Int(alpha * 255))
+            }
+        }
+        
+        // Try Display P3
+        if let p3Color = color.usingColorSpace(NSColorSpace.displayP3) {
+            var red: CGFloat = 0, green: CGFloat = 0, blue: CGFloat = 0, alpha: CGFloat = 0
+            p3Color.getRed(&red, green: &green, blue: &blue, alpha: &alpha)
+            
+            if alpha >= 0.999 {
+                return String(format: "color(display-p3 %.3f %.3f %.3f)", red, green, blue)
+            } else {
+                return String(format: "color(display-p3 %.3f %.3f %.3f / %.3f)", red, green, blue, alpha)
+            }
+        }
+        
+        // Fallback to generic RGB
+        var red: CGFloat = 0, green: CGFloat = 0, blue: CGFloat = 0, alpha: CGFloat = 0
+        color.getRed(&red, green: &green, blue: &blue, alpha: &alpha)
+        return String(format: "rgb(%.0f, %.0f, %.0f, %.2f)", red * 255, green * 255, blue * 255, alpha)
+    }
+}
+
 class ImagesCollectionViewDataProvider: NSObject, NSCollectionViewDataSource, NSCollectionViewDelegate {
     
     fileprivate struct Constants {
@@ -111,7 +204,17 @@ class ImagesCollectionViewDataProvider: NSObject, NSCollectionViewDataSource, NS
         guard canPerformPasteboardOperation(at: indexPath) else { return nil }
         
         let image = filteredImages[indexPath.item]
+        
+        // Check if this is a color asset
+        if let assetType = image[kACSTypeKey] as? String, assetType == "color",
+           let color = image[kACSColorKey] as? NSColor,
+           let thumbnail = image[kACSThumbnailKey] as? NSImage,
+           let name = image[kACSNameKey] as? String {
+            // For colors, use custom pasteboard writer with multiple representations
+            return ColorPasteboardWriter(color: color, image: thumbnail, name: name)
+        }
 
+        // For images, write as file
         guard let filename = image[kACSFilenameKey] as? String else { return nil }
         guard let data = image[kACSContentsDataKey] as? Data else { return nil }
 

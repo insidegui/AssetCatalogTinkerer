@@ -1,6 +1,6 @@
 ## Asset Catalog Tinkerer
 
-Asset Catalog Tinkerer lets you open asset catalog files (`.car`) and view the images that they contain. You can also copy and export individual images out or export all images from an asset catalog.
+Asset Catalog Tinkerer lets you open asset catalog files (`.car`) and view the images and colors that they contain. You can also copy and export individual assets out or export all assets from an asset catalog.
 
 [⬇ Download and contribute with any amount on Gumroad](https://insidegui.gumroad.com/l/AssetCatalogTinkerer)
 
@@ -10,9 +10,11 @@ You can also install it with [Homebrew](https://brew.sh) by running `brew instal
 
 ![screenshot](https://raw.github.com/insidegui/AssetCatalogTinkerer/master/screenshot.png)
 
-### Unsupported Asset Types
+### Supported Asset Types
 
-Asset Catalog Tinkerer was designed with images in mind, so it doesn't support some of the more modern asset catalog features, such as colors. It may or may not be updated in the future to support those.
+Asset Catalog Tinkerer supports:
+- **Images**: PNG, SVG, and other image formats including @2x/@3x retina variants
+- **Colors**: Named colors are displayed as color swatches and can be exported as JSON files containing RGB/hex values
 
 ### QuickLook PlugIn
 

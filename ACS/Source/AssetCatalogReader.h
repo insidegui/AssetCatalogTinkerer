@@ -20,6 +20,10 @@ extern NSString *__nonnull const kACSFilenameKey;
 extern NSString *__nonnull const kACSContentsDataKey;
 /// An NSBitmapImageRep containing a bitmap representation of the asset
 extern NSString *__nonnull const kACSImageRepKey;
+/// An NSString indicating the type of asset ("image" or "color")
+extern NSString *__nonnull const kACSTypeKey;
+/// An NSColor representing the color asset
+extern NSString *__nonnull const kACSColorKey;
 
 @interface AssetCatalogReader : NSObject
 

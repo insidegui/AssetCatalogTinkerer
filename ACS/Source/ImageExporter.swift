@@ -25,11 +25,11 @@ public struct ImageExporter {
 
                 pathComponents.append(filename)
 
-                guard let pngData = image[kACSContentsDataKey] as? Data else { return }
+                guard let contentsData = image[kACSContentsDataKey] as? Data else { return }
 
                 let path = self.nextAvailablePath(filePath: NSString.path(withComponents: pathComponents) as String)
                 do {
-                    try pngData.write(to: URL(fileURLWithPath: path), options: .atomic)
+                    try contentsData.write(to: URL(fileURLWithPath: path), options: .atomic)
                 } catch {
                     NSLog("ERROR: Unable to write \(filename) to \(path); \(error)")
                 }
